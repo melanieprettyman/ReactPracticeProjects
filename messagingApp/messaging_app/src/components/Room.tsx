@@ -22,10 +22,10 @@ const Room: React.FunctionComponent<{}> = () => {
             content: newMessage,
             room: context?.enteredRoom
         }
-        context?.setMessages((prevMessages)=>[...prevMessages, newMsg]);
+        context?.addMessage(newMsg);
+        context?.sendMessage("new-message", newMsg)
         setNewMessage('');
     }
-
     return (
         <>
             <div className="header">Room: {context?.enteredRoom}</div>
