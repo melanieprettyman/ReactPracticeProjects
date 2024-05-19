@@ -1,23 +1,24 @@
-import React, {useContext, useState} from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../store/context";
 
 const Login: React.FunctionComponent<{}> = () => {
     const [userNameValid, setUserNameValid] = useState(true);
     const [roomNameValid, setRoomNameValid] = useState(true);
 
-   const context = useContext(Context);
+    const context = useContext(Context);
     if (!context) {
         // Handle the case where context is undefined
-        // This could be displaying an error, or a loading spinner, etc.
         return <div>Context not available</div>;
     }
 
     const {
+      appState,
       setAppState,
       enteredUserName,
       setEnteredUserName,
       enteredRoom,
-      setEnteredRoom
+      setEnteredRoom,
+      socket  // Now correctly included
     } = context;
 
     function isValid(userInput: string): boolean {
@@ -31,6 +32,7 @@ const Login: React.FunctionComponent<{}> = () => {
         setRoomNameValid(isRoomNameValid);
 
         if (isUserNameValid && isRoomNameValid) {
+            socket && socket.emit('join_room', { username: enteredUserName, room: enteredRoom });
             setAppState('room');
         } else {
             alert('Please enter valid values for both your name and the room name.');
@@ -45,20 +47,14 @@ const Login: React.FunctionComponent<{}> = () => {
                 className={`inputField ${!userNameValid ? "invalid" : ""}`}
                 placeholder="Enter name"
                 value={enteredUserName}
-                onChange={(event) => {
-                    setEnteredUserName(event.target.value);
-                    if (!userNameValid) setUserNameValid(true);
-                }}
+                onChange={(event) => setEnteredUserName(event.target.value)}
             />
             <input
                 type="text"
                 className={`inputField ${!roomNameValid ? "invalid" : ""}`}
                 placeholder="Enter room name"
                 value={enteredRoom}
-                onChange={(event) => {
-                    setEnteredRoom(event.target.value);
-                    if (!roomNameValid) setRoomNameValid(true);
-                }}
+                onChange={(event) => setEnteredRoom(event.target.value)}
             />
             <button className="button" onClick={handleJoinRoom}>
                 JOIN

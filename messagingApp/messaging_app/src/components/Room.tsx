@@ -1,12 +1,20 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useRef, useState} from "react";
 import {Context, Message} from "../store/context";
+import { List, ListItem } from '@mui/material';
+import ChatBubble from "./ChatBubble";
 
 
 const Room: React.FunctionComponent<{}> = () => {
     const context = useContext(Context);
     const [newMessage, setNewMessage] = useState<string>('');
+    const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const sendButtonDisabled = !newMessage;
+
+    // Effect to scroll to the bottom on message update
+     useEffect(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [context?.messages]);
 
     function sendMessage() {
         const newMsg: Message = {
@@ -22,13 +30,14 @@ const Room: React.FunctionComponent<{}> = () => {
         <>
             <div className="header">Room: {context?.enteredRoom}</div>
                 <div className="messagesContainer">
-                    <div className="messageList">
-                        {context?.messages.map((message, index)=>(
-                            <p key={index}>
-                                <span className='bold'>{message.username}:</span> {message.content}
-                            </p>
+                    <List sx={{maxHeight: 795, overflow: 'auto'}}>
+                        {context?.messages.map((message, index) => (
+                            <ListItem key={index} >
+                                <ChatBubble message={message}/>
+                            </ListItem>
                         ))}
-                    </div>
+                        <div ref={messagesEndRef}/>
+                    </List>
                 </div>
             <div className="inputArea">
                 <input
