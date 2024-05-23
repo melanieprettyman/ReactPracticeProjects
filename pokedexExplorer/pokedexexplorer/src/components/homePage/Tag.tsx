@@ -28,8 +28,16 @@ const Tag: React.FC<TagProps> = ({ label, type }) => {
     <Chip
       label={label}
       size="small"
-      sx={{ backgroundColor: getTypeColor(type), color: '#070707' }}
+      sx={{
+        backgroundColor: getTypeColor(type),
+        color: '#070707',
+        fontSize: '0.875rem',
+        height: 24,
+        maxWidth:100,
+        borderRadius: '4px'
+      }}
     />
+
   );
 }
 

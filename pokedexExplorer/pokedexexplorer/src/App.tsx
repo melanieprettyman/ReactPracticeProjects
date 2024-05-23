@@ -9,8 +9,6 @@ function App() {
   return (
       <div>
         <ThemeProvider theme={theme}>
-        <NavBar/>
-        <HomePage/>
         <DetailPage />
         </ThemeProvider>,
       </div>

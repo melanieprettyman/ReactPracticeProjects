@@ -3,7 +3,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import { useState } from "react";
 import logo from './title.png';
-import { rainbowTextStyle, tabsStyle } from "../styles/styles";
+import { rainbowTextStyle, tabsStyle } from "./styles/styles";
 
 const NavBar: React.FC = () => {
     const theme = useTheme();

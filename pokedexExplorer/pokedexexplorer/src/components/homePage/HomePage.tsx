@@ -1,14 +1,17 @@
 import React from 'react';
 import NavBar from "./NavBar";
 import PokemonContainer from "./PokemonContainer";
-import SearchFeild from "./SearchFeild";
+import SearchField from "./SearchField";
 
 
 const HomePage: React.FC = () => {
   return (
       <div className='homePage'>
-        <SearchFeild />
-        <PokemonContainer />
+          <NavBar/>
+          <div style={{marginTop: '100px'}}>
+              <SearchField/>
+              <PokemonContainer/>
+          </div>
       </div>
   );
 };
