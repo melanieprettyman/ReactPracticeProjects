@@ -19,7 +19,6 @@ const Tag: React.FC<TagProps> = ({ label, type }) => {
       Dark: '#705848',
       Fairy: '#EE99AC',
       Normal: '#A8A878',
-      // Add more types as needed
     };
     return typeColors[type] || '#A0A0A0';  // Default color if type is not found
   };

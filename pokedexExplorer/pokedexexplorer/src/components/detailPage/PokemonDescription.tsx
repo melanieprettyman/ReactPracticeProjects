@@ -1,5 +1,6 @@
 import React from 'react';
 import { Paper, Typography, Grid } from '@mui/material';
+import styles from "./styles/styles";
 
 // Define an interface for the component props
 interface PokemonDescriptionProps {
@@ -12,7 +13,7 @@ interface PokemonDescriptionProps {
 const PokemonDescription: React.FC<PokemonDescriptionProps> = ({ height, weight, category, abilities }) => {
   return (
       <div style={{paddingBottom:'50px'}}>
-    <Paper elevation={2} sx={{ padding: 2, width: 'fit-content', margin: 'auto', backgroundColor: '#e82525', color:'white' }}>
+    <Paper elevation={2} sx={styles.description}>
       <Grid container spacing={1}>
         <Grid item xs={6}>
           <Typography variant="h6" color="white">Height</Typography>

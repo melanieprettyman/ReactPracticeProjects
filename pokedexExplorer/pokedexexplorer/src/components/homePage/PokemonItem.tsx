@@ -1,17 +1,38 @@
 import React, {useState} from 'react';
-import {Typography, Card, CardMedia, CardContent, Grid, IconButton} from '@mui/material';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import {Typography, Card, CardMedia, CardContent, Grid} from '@mui/material';
 import img from './test.png';
 import Tag from "./Tag";
+import FavoriteToggle from "./FavoriteToggle";
+import CompareToggle from "../comparePage/CompareToggle";
+import {useLocation} from "react-router-dom";
 
-const PokemonItem: React.FC = () => {
+type Props = {
+  toggleType: 'favorite' | 'compare';
+  onToggleSelection?: (isSelected: boolean) => void;
+  selectionCount?: number;
+};
+const PokemonItem: React.FC<Props> = ({toggleType, onToggleSelection, selectionCount}) => {
 
-  const [isFavorite, setIsFavorite] = useState(false);
+  const location = useLocation();
+ const isFavoritesPage = location.pathname === '/favorites';
 
-  const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
-  };
+ const [isSelected, setSelected] = useState(false);
+ const [isFavorite, setFavorite] = useState(isFavoritesPage);
+
+
+    const toggleSelection = () => {
+        // @ts-ignore
+      if (isSelected || (onToggleSelection && selectionCount < 5)) {
+            setSelected(!isSelected);  // Direct toggle
+            // @ts-ignore
+        onToggleSelection(!isSelected);  // Assuming this is intended to manage an external state or counter
+        }
+    };
+
+    const toggleFavorite = ()=>{
+        setFavorite(prevState => !prevState);
+    };
+
 
   return (
       <Grid item xs={12} sm={6} md={4} lg={3}>
@@ -23,13 +44,11 @@ const PokemonItem: React.FC = () => {
                 image={img}
                 alt="Pikachu"
             />
-            <IconButton
-                onClick={toggleFavorite}
-                style={{position: 'absolute', right: 0, top: 0, color: isFavorite ? 'red' : 'gray'}}
-                aria-label="add to favorites"
-            >
-              {isFavorite ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
-            </IconButton>
+            {toggleType === 'favorite' ? (
+                <FavoriteToggle isSelected={isFavorite} toggleSelection={toggleFavorite}/>
+            ):(
+                <CompareToggle isSelected={isSelected} toggleSelection={toggleSelection} />
+            )}
           </div>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">

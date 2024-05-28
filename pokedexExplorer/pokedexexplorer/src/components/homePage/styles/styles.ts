@@ -1,15 +1,38 @@
-// Style for the rainbow text effect
- export const rainbowTextStyle = {
-        background: 'linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent'
-    };
+import theme from "../../styles/Theme";
 
-
-// Style for the indicator and the icons to have a rainbow gradient
-export const tabsStyle = {
-        '& .MuiTabs-indicator': {
-            backgroundColor: 'transparent',
-            backgroundImage: 'linear-gradient(to right, violet, indigo, blue, green, yellow, orange, red)'
+const styles = {
+    searchFieldContainer:{
+      display: 'flex',
+      alignItems: 'center',
+      margin: '20px auto',
+      width: '80%',
+      maxWidth: '600px',
+      backgroundColor: 'transparent',
+      borderRadius: '4px',
+    },
+    searchField:{
+        flex: 1,
+        height: '40px',
+        mr: 1,
+        borderRadius: '4px',
+        backgroundColor: 'white',
+        '& .MuiOutlinedInput-notchedOutline': {
+        borderColor: 'black',
+        borderWidth: '2px'
         },
-    };
+        '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        borderWidth: '2px',
+        borderColor: 'black'
+        }
+    },
+    button:{
+        backgroundColor: theme.palette.error.main,
+        width: '40px',
+        minWidth: '40px',
+        padding: '8px 12px',
+        '&:hover': {
+            backgroundColor: '#8b0000',
+        },
+    }
+};
+export default styles;

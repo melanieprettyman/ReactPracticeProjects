@@ -19,7 +19,6 @@ const sampleStats: Stat[] = [
 const PokemonStats: React.FC = () => {
     return (
         <div>
-            <h2>Stats</h2>
             <ul>
                 {sampleStats.map((stat) => (
                     <li key={stat.name}>

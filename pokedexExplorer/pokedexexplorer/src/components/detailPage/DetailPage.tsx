@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from "../homePage/NavBar";
+import NavBar from "../NavBar";
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
 import styles from './styles/styles';
 import img from './test.png';
@@ -38,12 +38,13 @@ const DetailPage: React.FC = () => {
             <Grid sx={styles.leftSideColumn}>
               <Stack spacing={2}>
                 <img src={img} alt="Pichu" className='img'/>
-                <PokemonStatsChart />
+                <h2>Stats</h2>
+                <PokemonStatsChart/>
               </Stack>
             </Grid>
 
             <Grid sx={styles.rightSideColumn}>
-              <Grid direction='row'>
+              <Grid direction='row' >
                 <Typography sx={{ paddingBottom: '50px' }}>
                   It is unskilled at storing electric power. Any kind of shock causes it to discharge energy spontaneously.
                 </Typography>

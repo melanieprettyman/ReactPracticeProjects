@@ -26,6 +26,12 @@ const styles = {
   rightSideColumn:{
     width:'40%',
   },
+  description:{
+    padding: 2,
+    width: 'fit-content',
+    margin: 'auto',
+    backgroundColor: '#e82525',
+    color:'white' }
 };
 
 export default styles;

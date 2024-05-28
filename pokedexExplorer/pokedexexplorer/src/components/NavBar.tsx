@@ -1,46 +1,48 @@
+import React from 'react';
 import { AppBar, Tab, Tabs, Toolbar, useTheme } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
-import { useState } from "react";
-import logo from './title.png';
+import { Link, useLocation } from 'react-router-dom'; // Import useLocation
+import logo from './homePage/title.png';
 import { rainbowTextStyle, tabsStyle } from "./styles/styles";
 
 const NavBar: React.FC = () => {
     const theme = useTheme();
-    const [value, setValue] = useState('one');
+    const location = useLocation();
 
-    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
-        setValue(newValue);
-    };
+    const currentPath = location.pathname;
 
     return (
         <AppBar position="fixed" sx={{ backgroundColor: theme.palette.primary.main }}>
             <Toolbar sx={{ justifyContent: 'space-between' }}>
-                <img src={logo} alt="Pokémon Explorer Logo" style={{ height: '50px' }}/>
+                <img src={logo} alt="Pokémon Explorer Logo" style={{ height: '50px' }} />
                 <Tabs
-                    value={value}
-                    onChange={handleChange}
+                    value={currentPath}
                     textColor="secondary"
                     indicatorColor="secondary"
                     aria-label="secondary tabs example"
                     sx={tabsStyle}
                 >
                     <Tab
-                        value="one"
+                        component={Link}
+                        to="/"
+                        value="/"
                         label="Pokédex"
-                        icon={<CatchingPokemonIcon/>}
+                        icon={<CatchingPokemonIcon />}
                         aria-label="pokedex"
                         sx={{
-                            ...(value === 'one' ? rainbowTextStyle : {})
+                            ...(currentPath === "/" ? rainbowTextStyle : {})
                         }}
                     />
                     <Tab
-                        value="two"
-                        label="Saved"
-                        icon={<FavoriteIcon/>}
+                        component={Link}
+                        to="/favorites"
+                        value="/favorites"
+                        label="Favorites"
+                        icon={<FavoriteIcon />}
                         aria-label="saved"
                         sx={{
-                            ...(value === 'two' ? rainbowTextStyle : {})
+                            ...(currentPath === "/favorites" ? rainbowTextStyle : {})
                         }}
                     />
                 </Tabs>
