@@ -33,6 +33,13 @@ const styles = {
         '&:hover': {
             backgroundColor: '#8b0000',
         },
+    },
+    card:{
+        cursor: 'pointer',
+        transition: 'box-shadow 0.3s',
+        '&:hover': {
+            boxShadow: '0 0 8px 8px #ffffff',
+        }
     }
 };
 export default styles;

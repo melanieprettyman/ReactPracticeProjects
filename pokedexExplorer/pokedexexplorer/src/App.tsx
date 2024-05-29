@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar";
 import FavoritesPage from "./components/favoritesPage/FavoritesPage";
 import Layout from "./components/Layout";
 import ComparePage from "./components/comparePage/ComparePage";
+import DetailPage from "./components/detailPage/DetailPage";
 
 function App() {
 
@@ -29,6 +30,10 @@ function App() {
     {
         path:'/compare',
         element:<ComparePage />
+    },
+    {
+        path:'/detail',
+        element:<DetailPage />
     }
   ]);
 
