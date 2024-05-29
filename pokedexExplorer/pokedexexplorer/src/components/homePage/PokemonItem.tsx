@@ -19,6 +19,8 @@ const PokemonItem: React.FC<Props> = ({toggleType, onToggleSelection, selectionC
   const navigate = useNavigate();
 
   const isFavoritesPage = location.pathname === '/favorites';
+  const isHomePage = location.pathname === '/';
+
 
   const [isSelected, setSelected] = useState(false);
   const [isFavorite, setFavorite] = useState(isFavoritesPage);
@@ -38,14 +40,14 @@ const PokemonItem: React.FC<Props> = ({toggleType, onToggleSelection, selectionC
     };
 
     const handleCardClick = () => {
-    if (!isFavoritesPage) {
+    if (isHomePage) {
       navigate('/detail');
     }
   };
 
   return (
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <Card sx={!isFavoritesPage? styles.card : {}}>
+        <Card sx={isHomePage? styles.card : {}}>
           <div style={{position: 'relative'}}>
             <CardMedia
                 component="img"
