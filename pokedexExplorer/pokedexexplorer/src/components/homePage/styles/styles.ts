@@ -40,6 +40,16 @@ const styles = {
         '&:hover': {
             boxShadow: '0 0 8px 8px #ffffff',
         }
+    },
+    chip:{
+        color: '#070707',
+        fontSize: '0.875rem',
+        height: 24,
+        maxWidth:100,
+        borderRadius: '4px'
+    },
+    flying:{
+       background: 'linear-gradient(to right, #0033bd 50%, #808080 50%)'
     }
 };
 export default styles;

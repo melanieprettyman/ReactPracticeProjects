@@ -1,28 +1,40 @@
 import React from 'react';
 import NavBar from "../NavBar";
-import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
+import {Box, CircularProgress, Grid, Paper, Stack, Typography} from "@mui/material";
 import styles from './styles/styles';
 import img from './test.png';
 import PokemonStatsChart from "./PokemonStatsChart";
 import Tag from "../homePage/Tag";
 import PokemonDescription from "./PokemonDescription";
+import {useQuery} from "@tanstack/react-query";
+import { fetchPokemonDetails} from "../utils/http";
+import {useParams} from "react-router";
 
-// Define the interface outside of the component
-interface PokemonDescriptionProps {
-  height: string;
-  weight: string;
-  category: string;
-  abilities: string;
-}
 
 const DetailPage: React.FC = () => {
-  const description: PokemonDescriptionProps = {
-    height: "1'00\"",
-    weight: "4.4 lbs",
-    category: "Tiny Mouse",
-    abilities: "Static"
-  };
 
+  const { pokemonName } = useParams();
+
+  const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
+
+  const { data, isPending, isError, error } = useQuery({
+    queryKey: [`details-${pokemonName}`],
+    queryFn: () => fetchPokemonDetails(url)
+  });
+
+  if (isPending ) return <div><CircularProgress color="secondary"/></div>;
+  if (isError) return <div>Error: {error.message}</div>;
+
+const [
+  pokemonTypes,
+  imageURL,
+  stats,
+  height,
+  weight,
+  abilities,
+  description,
+  nature
+] = data;
   return (
     <div className='detailPage'>
       <NavBar />
@@ -30,34 +42,31 @@ const DetailPage: React.FC = () => {
         <Paper sx={styles.paper}>
           <Grid container alignItems="center" justifyContent="center" sx={{ height: '30%' }}>
             <Typography variant="h3">
-              Pichu
+              {pokemonName}
             </Typography>
           </Grid>
 
           <Grid container direction='row' sx={{ paddingTop: "50px" }}>
             <Grid sx={styles.leftSideColumn}>
               <Stack spacing={2}>
-                <img src={img} alt="Pichu" className='img'/>
+                <img src={imageURL || img} className='img'/>
                 <h2>Stats</h2>
-                <PokemonStatsChart/>
+                <PokemonStatsChart stats={stats}/>
               </Stack>
             </Grid>
 
             <Grid sx={styles.rightSideColumn}>
               <Grid direction='row' >
-                <Typography sx={{ paddingBottom: '50px' }}>
-                  It is unskilled at storing electric power. Any kind of shock causes it to discharge energy spontaneously.
-                </Typography>
-                  <PokemonDescription
-                  height={description.height}
-                  weight={description.weight}
-                  category={description.category}
-                  abilities={description.abilities}
-                />
+                <Typography sx={{ paddingBottom: '50px' }}>{description}</Typography>
+
+                <PokemonDescription height={height} weight={weight} abilities={abilities} nature={nature}/>
+
                 <Typography variant='h5' sx={{ paddingBottom: '10px' }}>
                   Type
                 </Typography>
-                <Tag label="Electric" type="Electric" />
+                {pokemonTypes.map(type => (
+                        <Tag key={type} label={type} type={type} />
+                ))}
                 <Typography variant='h5' sx={{ paddingTop: '20px', paddingBottom: '10px' }}>
                   Weaknesses
                 </Typography>

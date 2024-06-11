@@ -18,19 +18,7 @@ const FavoritesPage: React.FC = () => {
                   <b>Compare</b>
               </Button>
               <Grid container spacing={2} sx={{paddingTop:'20px'}}>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
-                  <PokemonItem toggleType="favorite"/>
+
              </Grid>
           </Stack>
       </Grid>

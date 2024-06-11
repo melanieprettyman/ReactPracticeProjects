@@ -2,12 +2,19 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import React, {useState} from "react";
 import {AppBar, Box, Button, Grid, IconButton, Toolbar, Typography} from "@mui/material";
 import styles from './styles/styles'
-
+import {Pokemon} from "../homePage/PokemonContainer";
 import PokemonItem from "../homePage/PokemonItem";
 import FullScreenDialog from "./CompareDiaglog";
-import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
+
+
+
 const ComparePage:React.FC=()=>{
+
+    const pokemon: Pokemon = {
+        name: 'pikachu',
+        url: 'https://pokeapi.co/api/v2/pokemon/pikachu'
+    };
     const [selectionCount, setSelectionCount] = useState(0);
     const handleSelectionCount= (isSelected:boolean) =>{
       setSelectionCount(prevCount => isSelected ? prevCount +1 : prevCount -1);
@@ -55,6 +62,7 @@ const ComparePage:React.FC=()=>{
                   toggleType="compare"
                   onToggleSelection={handleSelectionCount}
                   selectionCount={selectionCount}
+                  pokemon={pokemon}
               />
           ))}
 

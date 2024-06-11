@@ -7,6 +7,7 @@ import Tag from "../homePage/Tag";
 import styles from "./styles/styles";
 
 const ComparisonItem:React.FC = () => {
+    const stats:number[]=[1,2,3,4,5,6];
     return(
       <Box
             sx={styles.comparisonItem}
@@ -16,7 +17,7 @@ const ComparisonItem:React.FC = () => {
             <Divider sx={{ width: '100%', my: 2 }} />
 
             <Typography variant="body1" sx={{ textAlign: 'center' }}><b>Stats</b></Typography>
-            <PokemonStatsChart />
+            <PokemonStatsChart stats={stats}/>
             <Divider sx={{ width: '100%', my: 2 }} />
 
             <Typography variant="body1" sx={{ textAlign: 'center' }}><b>Type</b></Typography>

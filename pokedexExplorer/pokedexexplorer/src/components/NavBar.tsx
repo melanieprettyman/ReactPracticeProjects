@@ -3,7 +3,7 @@ import { AppBar, Tab, Tabs, Toolbar, useTheme } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import { Link, useLocation } from 'react-router-dom'; // Import useLocation
-import logo from './homePage/title.png';
+import logo from './utils/title.png';
 import { rainbowTextStyle, tabsStyle } from "./styles/styles";
 
 const NavBar: React.FC = () => {

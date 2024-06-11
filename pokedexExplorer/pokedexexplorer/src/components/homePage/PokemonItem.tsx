@@ -1,19 +1,36 @@
 import React, {useState} from 'react';
-import {Typography, Card, CardMedia, CardContent, Grid} from '@mui/material';
-import img from './test.png';
+import {Typography, Card, CardMedia, CardContent, Grid, CircularProgress} from '@mui/material';
+import img from '../utils/unkown.png';
 import Tag from "./Tag";
 import FavoriteToggle from "./FavoriteToggle";
 import CompareToggle from "../comparePage/CompareToggle";
 import {useLocation} from "react-router-dom";
-import {useNavigate} from "react-router";
+import {useNavigate, useParams} from "react-router";
 import styles from "./styles/styles";
+import {Pokemon} from "./PokemonContainer";
+import {fetchPokemonDetails} from "../utils/http";
+import {useQuery} from "@tanstack/react-query";
 
 type Props = {
   toggleType: 'favorite' | 'compare';
   onToggleSelection?: (isSelected: boolean) => void;
-  selectionCount?: number;
+  selectionCount?: number,
+  pokemon: Pokemon;
 };
-const PokemonItem: React.FC<Props> = ({toggleType, onToggleSelection, selectionCount}) => {
+
+type PokemonType = {
+    type: {
+        name: string;
+        url: string;
+    };
+};
+
+const PokemonItem: React.FC<Props> = ({
+                                          toggleType,
+                                          onToggleSelection,
+                                          selectionCount,
+                                          pokemon
+}) => {
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,12 +43,13 @@ const PokemonItem: React.FC<Props> = ({toggleType, onToggleSelection, selectionC
   const [isFavorite, setFavorite] = useState(isFavoritesPage);
 
 
+
     const toggleSelection = () => {
         // @ts-ignore
       if (isSelected || (onToggleSelection && selectionCount < 5)) {
-            setSelected(!isSelected);  // Direct toggle
+            setSelected(!isSelected);
             // @ts-ignore
-        onToggleSelection(!isSelected);  // Assuming this is intended to manage an external state or counter
+        onToggleSelection(!isSelected);
         }
     };
 
@@ -40,19 +58,30 @@ const PokemonItem: React.FC<Props> = ({toggleType, onToggleSelection, selectionC
     };
 
     const handleCardClick = () => {
-    if (isHomePage) {
-      navigate('/detail');
-    }
-  };
+        if (isHomePage) {
+          navigate(`/detail/${pokemon.name}`);
+        }
+    };
 
-  return (
+    const {data, isPending, isError, error} = useQuery({
+            queryKey:[`details${pokemon.name}`],
+            queryFn:()=>fetchPokemonDetails(pokemon.url)
+    });
+
+    if (isPending) return <div><CircularProgress  color="secondary"/></div>;
+    if (isError) return <div>Error: {error.message}</div>;
+    if (!data) return <div>No data available</div>;
+
+    const [pokemonTypes, imageURL] = data;
+
+    return (
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card sx={isHomePage? styles.card : {}}>
           <div style={{position: 'relative'}}>
             <CardMedia
                 component="img"
                 height="auto"
-                image={img}
+                image= {imageURL || img}
                 alt="Pikachu"
                 onClick={handleCardClick} style={{ cursor: 'pointer' }}
             />
@@ -64,9 +93,11 @@ const PokemonItem: React.FC<Props> = ({toggleType, onToggleSelection, selectionC
           </div>
           <CardContent onClick={handleCardClick} style={{ cursor: 'pointer' }}>
             <Typography gutterBottom variant="h5" component="div">
-              Pikachu
+              {pokemon.name}
             </Typography>
-            <Tag label="Electric" type="Electric"/>
+              {pokemonTypes.map(type => (
+                        <Tag key={type} label={type} type={type} />
+                ))}
           </CardContent>
         </Card>
       </Grid>
