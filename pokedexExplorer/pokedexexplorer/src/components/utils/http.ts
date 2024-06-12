@@ -76,7 +76,7 @@ export const fetchPokemons = async (page: number ): Promise<Pokemon[]> => {
     return data.results;
 };
 
-export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number,number, Ability[], string, Nature]> => {
+export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number,number, Ability[], number, string, ]> => {
   const response = await fetch(url);
   if(!response.ok){
       const error =  new Error("[ERROR]: could not fetch pokemon details");
@@ -91,24 +91,23 @@ export const fetchPokemonDetails = async (url: string): Promise<[string[], strin
   const abilities = details.abilities;
 
   const description = await fetchPokemonDescription(id);
-  const nature = await fetchPokemonNature(id);
 
-  return [types, imageURL, stats, details.height, details.weight, abilities, description.description, nature ];
+  return [types, imageURL, stats, details.height, details.weight, abilities, id, description];
 };
 
-const fetchPokemonDescription = async (id: number): Promise<Description> => {
+export const fetchPokemonDescription = async (id: number): Promise<string> => {
   const response = await fetch(`https://pokeapi.co/api/v2/characteristic/${id}/`);
   if(!response.ok){
-      const error =  new Error("[ERROR]: could not fetch pokemon details");
+      const error =  new Error("[ERROR]: could not fetch pokemon description");
       error.message = await response.json();
       throw error;
   }
   const descriptionResponse: DescriptionResponse = await response.json();
   const englishDescription =  descriptionResponse.descriptions.filter(filterLanguage);
-  return englishDescription[0];
+  return englishDescription[0].description;
 };
 
-const fetchPokemonNature  = async (id: number): Promise<Nature> => {
+export const fetchPokemonNature  = async (id: number): Promise<Nature> => {
 
 const response = await fetch(`https://pokeapi.co/api/v2/nature/${id}/`);
   if(!response.ok){
@@ -117,10 +116,9 @@ const response = await fetch(`https://pokeapi.co/api/v2/nature/${id}/`);
       throw error;
   }
   const natureResponse: NatureResponse = await response.json();
-  console.log(natureResponse);
   const nature:Nature = {
-      likes:natureResponse.likes_flavor ? natureResponse.likes_flavor.name : 'Too young to have strong opinions',
-      hates: natureResponse.hates_flavor ? natureResponse.hates_flavor.name : 'Too young to have strong opinions'
+      likes:natureResponse.likes_flavor ? natureResponse.likes_flavor.name : '',
+      hates: natureResponse.hates_flavor ? natureResponse.hates_flavor.name : ''
   }
 
   return nature;

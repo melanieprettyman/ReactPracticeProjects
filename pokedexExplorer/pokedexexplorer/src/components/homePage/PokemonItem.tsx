@@ -68,12 +68,14 @@ const PokemonItem: React.FC<Props> = ({
             queryFn:()=>fetchPokemonDetails(pokemon.url)
     });
 
-    if (isPending) return <div><CircularProgress  color="secondary"/></div>;
     if (isError) return <div>Error: {error.message}</div>;
     if (!data) return <div>No data available</div>;
 
-    const [pokemonTypes, imageURL] = data;
-
+const [
+  pokemonTypes,
+  imageURL
+] = data;
+console.log(`${pokemon.name} POKEMON ITEM: `, JSON.stringify(data));
     return (
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card sx={isHomePage? styles.card : {}}>

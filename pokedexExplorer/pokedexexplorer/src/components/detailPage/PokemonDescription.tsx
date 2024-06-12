@@ -1,16 +1,26 @@
 import React from 'react';
 import {Paper, Typography, Grid, CircularProgress} from '@mui/material';
 import styles from "./styles/styles";
-import {Ability, Nature} from "../utils/http";
+import {Ability, fetchPokemonDetails, fetchPokemonNature, Nature} from "../utils/http";
+import {useQuery} from "@tanstack/react-query";
 
 type Props ={
  height: number,
  weight:number,
+ id:number,
  abilities: Ability[],
- nature: Nature
 };
 
-const PokemonDescription: React.FC<Props> = ({height,weight, abilities, nature} ) => {
+const PokemonDescription: React.FC<Props> = ({height,weight, abilities, id} ) => {
+    const {
+          data:nature,
+          isPending,
+          isError,
+          error
+        } = useQuery({
+        queryKey: [`nature${id}`],
+        queryFn: () => fetchPokemonNature(id)
+  });
 
   return (
       <div style={{paddingBottom:'50px'}}>
@@ -26,13 +36,13 @@ const PokemonDescription: React.FC<Props> = ({height,weight, abilities, nature} 
               </Grid>
               <Grid item xs={6}>
                 <Typography variant="h6" color="white">Likes</Typography>
-                <Typography variant="body1" color="black">{nature.likes }</Typography>
+                  {nature && <Typography variant="body1" color="black">{nature.likes }</Typography>}
 
               </Grid>
 
               <Grid item xs={6}>
                 <Typography variant="h6" color="white">Hates</Typography>
-                 <Typography variant="body1" color="black">{nature.hates }</Typography>
+                  {nature && <Typography variant="body1" color="black">{nature.hates }</Typography>}
               </Grid>
 
               <Grid item xs={6}>

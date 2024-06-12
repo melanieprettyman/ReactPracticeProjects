@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import NavBar from "../NavBar";
 import {Box, CircularProgress, Grid, Paper, Stack, Typography} from "@mui/material";
 import styles from './styles/styles';
@@ -7,34 +7,40 @@ import PokemonStatsChart from "./PokemonStatsChart";
 import Tag from "../homePage/Tag";
 import PokemonDescription from "./PokemonDescription";
 import {useQuery} from "@tanstack/react-query";
-import { fetchPokemonDetails} from "../utils/http";
+import {fetchPokemonDescription, fetchPokemonDetails} from "../utils/http";
 import {useParams} from "react-router";
 
 
 const DetailPage: React.FC = () => {
+const { pokemonName } = useParams();
+const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
-  const { pokemonName } = useParams();
 
-  const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
-
-  const { data, isPending, isError, error } = useQuery({
-    queryKey: [`details-${pokemonName}`],
+  const {
+    data:pokemonDetails,
+    isPending,
+    isError,
+    error
+  } = useQuery({
+    queryKey: [`details${pokemonName}`],
     queryFn: () => fetchPokemonDetails(url)
   });
 
-  if (isPending ) return <div><CircularProgress color="secondary"/></div>;
+  if (isPending) return <div><CircularProgress color="secondary"/></div>;
   if (isError) return <div>Error: {error.message}</div>;
 
-const [
-  pokemonTypes,
-  imageURL,
-  stats,
-  height,
-  weight,
-  abilities,
-  description,
-  nature
-] = data;
+  const [
+    pokemonTypes,
+    imageURL,
+    stats,
+    height,
+    weight,
+    abilities,
+    id,
+    description
+  ] = pokemonDetails;
+
+
   return (
     <div className='detailPage'>
       <NavBar />
@@ -59,7 +65,7 @@ const [
               <Grid direction='row' >
                 <Typography sx={{ paddingBottom: '50px' }}>{description}</Typography>
 
-                <PokemonDescription height={height} weight={weight} abilities={abilities} nature={nature}/>
+                <PokemonDescription height={height} weight={weight} id={id} abilities={abilities} />
 
                 <Typography variant='h5' sx={{ paddingBottom: '10px' }}>
                   Type
