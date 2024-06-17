@@ -37,7 +37,8 @@ const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
     weight,
     abilities,
     id,
-    description
+    description,
+    moves
   ] = pokemonDetails;
 
 
@@ -48,7 +49,7 @@ const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
         <Paper sx={styles.paper}>
           <Grid container alignItems="center" justifyContent="center" sx={{ height: '30%' }}>
             <Typography variant="h3">
-              {pokemonName}
+              {pokemonName?.toUpperCase()}
             </Typography>
           </Grid>
 
@@ -65,7 +66,7 @@ const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
               <Grid direction='row' >
                 <Typography sx={{ paddingBottom: '50px' }}>{description}</Typography>
 
-                <PokemonDescription height={height} weight={weight} id={id} abilities={abilities} />
+                <PokemonDescription height={height} weight={weight} id={id} abilities={abilities} moves={moves} />
 
                 <Typography variant='h5' sx={{ paddingBottom: '10px' }}>
                   Type
@@ -73,10 +74,6 @@ const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
                 {pokemonTypes.map(type => (
                         <Tag key={type} label={type} type={type} />
                 ))}
-                <Typography variant='h5' sx={{ paddingTop: '20px', paddingBottom: '10px' }}>
-                  Weaknesses
-                </Typography>
-                <Tag label="Ground" type="Ground" />
               </Grid>
             </Grid>
 

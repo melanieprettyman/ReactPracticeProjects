@@ -11,6 +11,9 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import ComparisonItem from "./ComparisonItem";
 import {Box, Stack} from "@mui/material";
 import styles from "./styles/styles";
+import {useEffect, useState} from "react";
+import {Pokemon} from "../homePage/PokemonContainer";
+import PokemonItem from "../homePage/PokemonItem";
 
 const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
@@ -24,8 +27,9 @@ const Transition = React.forwardRef(function Transition(
 type Props = {
   open: boolean,
   handleClose: () => void;
+  selected: Pokemon[];
 }
-const FullScreenDialog:React.FC<Props>= ({open,handleClose }) => {
+const CompareDialog:React.FC<Props>= ({open,handleClose , selected}) => {
 
   return (
     <React.Fragment>
@@ -59,15 +63,17 @@ const FullScreenDialog:React.FC<Props>= ({open,handleClose }) => {
             divider={<Divider orientation="vertical" flexItem />}
             sx={{paddingTop:'20px'}}
         >
-          <ComparisonItem />
-          <ComparisonItem />
-          <ComparisonItem />
-          <ComparisonItem />
-          <ComparisonItem />
+          {selected?.map((pokemon: Pokemon) => (
+            <ComparisonItem
+                key={pokemon.name}
+                pokemon={pokemon}
+            />
+          ))}
+
         </Stack>
       </Dialog>
     </React.Fragment>
   );
 }
 
-export default FullScreenDialog;
+export default CompareDialog;

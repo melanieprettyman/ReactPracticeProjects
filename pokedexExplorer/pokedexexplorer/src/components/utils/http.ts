@@ -33,9 +33,15 @@ type PokemonDetailsResponse = {
     height: number,
     weight: number,
     abilities: Ability[],
+    moves: Move[],
 
 };
 
+export type Move = {
+    move:{
+        name:string
+    }
+}
 export type Ability ={
     ability:{
         name:string,
@@ -76,7 +82,7 @@ export const fetchPokemons = async (page: number ): Promise<Pokemon[]> => {
     return data.results;
 };
 
-export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number,number, Ability[], number, string, ]> => {
+export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number,number, Ability[], number, string, Move[] ]> => {
   const response = await fetch(url);
   if(!response.ok){
       const error =  new Error("[ERROR]: could not fetch pokemon details");
@@ -89,10 +95,11 @@ export const fetchPokemonDetails = async (url: string): Promise<[string[], strin
   const stats = details.stats.map((stat: Stat) => stat.base_stat);
   const id = details.id;
   const abilities = details.abilities;
+  const moves = details.moves;
 
   const description = await fetchPokemonDescription(id);
 
-  return [types, imageURL, stats, details.height, details.weight, abilities, id, description];
+  return [types, imageURL, stats, details.height, details.weight, abilities, id, description, moves];
 };
 
 export const fetchPokemonDescription = async (id: number): Promise<string> => {

@@ -13,34 +13,32 @@ import {useQuery} from "@tanstack/react-query";
 
 type Props = {
   toggleType: 'favorite' | 'compare';
-  onToggleSelection?: (isSelected: boolean) => void;
+  onToggleSelection?: (isSelected: boolean, pokemon: Pokemon) => void;
   selectionCount?: number,
   pokemon: Pokemon;
+  handleToggleFavoritePokemon?: (pokemon:Pokemon)=>void,
+  isInitiallyFavorite?: boolean
 };
 
-type PokemonType = {
-    type: {
-        name: string;
-        url: string;
-    };
-};
+
 
 const PokemonItem: React.FC<Props> = ({
                                           toggleType,
                                           onToggleSelection,
                                           selectionCount,
-                                          pokemon
+                                          pokemon,
+                                          handleToggleFavoritePokemon,
+                                          isInitiallyFavorite = false
 }) => {
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const isFavoritesPage = location.pathname === '/favorites';
   const isHomePage = location.pathname === '/';
 
 
   const [isSelected, setSelected] = useState(false);
-  const [isFavorite, setFavorite] = useState(isFavoritesPage);
+  const [isFavorite, setFavorite] = useState(isInitiallyFavorite);
 
 
 
@@ -49,12 +47,15 @@ const PokemonItem: React.FC<Props> = ({
       if (isSelected || (onToggleSelection && selectionCount < 5)) {
             setSelected(!isSelected);
             // @ts-ignore
-        onToggleSelection(!isSelected);
+        onToggleSelection(!isSelected, pokemon);
         }
     };
 
     const toggleFavorite = ()=>{
         setFavorite(prevState => !prevState);
+        if (handleToggleFavoritePokemon) {
+            handleToggleFavoritePokemon(pokemon);
+        }
     };
 
     const handleCardClick = () => {
@@ -75,7 +76,6 @@ const [
   pokemonTypes,
   imageURL
 ] = data;
-console.log(`${pokemon.name} POKEMON ITEM: `, JSON.stringify(data));
     return (
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card sx={isHomePage? styles.card : {}}>
@@ -95,7 +95,7 @@ console.log(`${pokemon.name} POKEMON ITEM: `, JSON.stringify(data));
           </div>
           <CardContent onClick={handleCardClick} style={{ cursor: 'pointer' }}>
             <Typography gutterBottom variant="h5" component="div">
-              {pokemon.name}
+              {pokemon.name.toUpperCase()}
             </Typography>
               {pokemonTypes.map(type => (
                         <Tag key={type} label={type} type={type} />

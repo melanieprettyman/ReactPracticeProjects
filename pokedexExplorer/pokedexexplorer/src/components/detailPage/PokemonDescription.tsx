@@ -1,7 +1,7 @@
 import React from 'react';
-import {Paper, Typography, Grid, CircularProgress} from '@mui/material';
+import {Paper, Typography, Grid} from '@mui/material';
 import styles from "./styles/styles";
-import {Ability, fetchPokemonDetails, fetchPokemonNature, Nature} from "../utils/http";
+import {Ability, fetchPokemonDetails, fetchPokemonNature, Move, Nature} from "../utils/http";
 import {useQuery} from "@tanstack/react-query";
 
 type Props ={
@@ -9,9 +9,10 @@ type Props ={
  weight:number,
  id:number,
  abilities: Ability[],
+ moves: Move[],
 };
 
-const PokemonDescription: React.FC<Props> = ({height,weight, abilities, id} ) => {
+const PokemonDescription: React.FC<Props> = ({height,weight, abilities, id, moves} ) => {
     const {
           data:nature,
           isPending,
@@ -21,6 +22,8 @@ const PokemonDescription: React.FC<Props> = ({height,weight, abilities, id} ) =>
         queryKey: [`nature${id}`],
         queryFn: () => fetchPokemonNature(id)
   });
+
+    const topMoves = moves.slice(0,5);
 
   return (
       <div style={{paddingBottom:'50px'}}>
@@ -50,6 +53,12 @@ const PokemonDescription: React.FC<Props> = ({height,weight, abilities, id} ) =>
                   {abilities.map( (ability)=>
                       <Typography variant="body1" color="black">{ability.ability.name}</Typography>
                   )}
+              </Grid>
+             <Grid item xs={6}>
+             <Typography variant="h6" color="white">Moves</Typography>
+               {topMoves.map( (move)=>
+                  <Typography variant="body1" color="black">{move.move.name}</Typography>
+              )}
               </Grid>
             </Grid>
           </Paper>

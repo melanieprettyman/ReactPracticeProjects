@@ -3,6 +3,7 @@ const styles = {
         color:'white',
         backgroundColor:'red',
         width:'8%',
+        minWidth: '120px',
         alignSelf: 'flex-end',
         '&:hover': {
             backgroundColor: '#8b0000',
