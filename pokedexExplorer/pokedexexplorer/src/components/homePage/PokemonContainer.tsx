@@ -1,15 +1,19 @@
 import React, {useEffect, useState} from 'react';
-import {Box, CircularProgress, Grid, Pagination} from '@mui/material';
+import {Box, Grid, Pagination} from '@mui/material';
 import PokemonItem from "./PokemonItem";
 import { useQuery } from "@tanstack/react-query";
-import { fetchPokemons } from "../utils/http";
+import { fetchPokemons} from "../utils/http";
 
 export type Pokemon = {
     name: string;
     url: string;
 };
 
-const PokemonContainer: React.FC = () => {
+type Props = {
+    searchQuery: string
+}
+
+const PokemonContainer: React.FC<Props> = ({searchQuery}) => {
     const [page, setPage] = useState(1);
     const [favorited, setFavorited] = useState<Pokemon[]>(() => {
         const localData = localStorage.getItem('favorites');
@@ -43,24 +47,40 @@ const PokemonContainer: React.FC = () => {
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value);
+        console.log("page", value);
     };
 
     if (isError) return <div>Error: {error instanceof Error ? error.message : "Unknown error"}</div>;
 
-    console.log("Favorites", JSON.stringify(favorited));
+    const searchPokemon: Pokemon = {
+        name: searchQuery,
+        url: `https://pokeapi.co/api/v2/pokemon/${searchQuery}`
+    }
+
     return (
         <Box sx={{ flexGrow: 1, padding: 10 }}>
             <Grid container spacing={2}>
-                {data?.map((pokemon: Pokemon) => (
+                {searchQuery &&
                     <PokemonItem
-                        key={pokemon.name}
+                        key={searchQuery}
                         toggleType="favorite"
-                        pokemon={pokemon}
+                        pokemon={searchPokemon}
                         handleToggleFavoritePokemon={handleToggleFavoritePokemon}
-                        isInitiallyFavorite={favorited.some(fav => fav.name === pokemon.name)}
+                        isInitiallyFavorite={favorited.some(fav => fav.name === searchQuery)}
                     />
-                ))}
-            </Grid>
+                }
+                {
+                  !searchQuery && data?.map((pokemon: Pokemon) => (
+                        <PokemonItem
+                            key={pokemon.name}
+                            toggleType="favorite"
+                            pokemon={pokemon}
+                            handleToggleFavoritePokemon={handleToggleFavoritePokemon}
+                            isInitiallyFavorite={favorited.some(fav => fav.name === pokemon.name)}
+                        />
+                    ))
+                }
+               </Grid>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 , width:'100%'}}>
                 <Box sx={{backgroundColor:'white', width:'22%', opacity:'.9', boxShadow: '0 0 8px 8px #ffffff'}}>
                     <Pagination

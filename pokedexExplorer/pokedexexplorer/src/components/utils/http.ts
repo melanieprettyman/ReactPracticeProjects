@@ -20,6 +20,7 @@ type Stat = {
 };
 
 type PokemonDetailsResponse = {
+    name:string
     id:number,
     types: PokemonType[],
     stats: Stat[],
@@ -72,9 +73,18 @@ export type Nature = {
     hates:string | null
 }
 
+// export const fetchPokemons = async (): Promise<Pokemon[]> => {
+//     const response = await fetch(`https://pokeapi.co/api/v2/pokemon?`);
+//     if (!response.ok) {
+//         throw new Error('Failed to fetch pokemons');
+//     }
+//     const data = await response.json();
+//     return data.results;
+// };
+
 export const fetchPokemons = async (page: number ): Promise<Pokemon[]> => {
-    const offset = (page - 1) * 25;
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=25&offset=${offset}`);
+    const offset = page === 1 ? 0 : (page - 1) * 25;
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=25`);
     if (!response.ok) {
         throw new Error('Failed to fetch pokemons');
     }
@@ -82,7 +92,8 @@ export const fetchPokemons = async (page: number ): Promise<Pokemon[]> => {
     return data.results;
 };
 
-export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number,number, Ability[], number, string, Move[] ]> => {
+
+export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number,number, Ability[], number, Move[] ]> => {
   const response = await fetch(url);
   if(!response.ok){
       const error =  new Error("[ERROR]: could not fetch pokemon details");
@@ -97,9 +108,7 @@ export const fetchPokemonDetails = async (url: string): Promise<[string[], strin
   const abilities = details.abilities;
   const moves = details.moves;
 
-  const description = await fetchPokemonDescription(id);
-
-  return [types, imageURL, stats, details.height, details.weight, abilities, id, description, moves];
+  return [types, imageURL, stats, details.height, details.weight, abilities, id, moves];
 };
 
 export const fetchPokemonDescription = async (id: number): Promise<string> => {

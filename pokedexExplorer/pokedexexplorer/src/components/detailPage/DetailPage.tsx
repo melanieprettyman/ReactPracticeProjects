@@ -37,7 +37,6 @@ const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
     weight,
     abilities,
     id,
-    description,
     moves
   ] = pokemonDetails;
 
@@ -64,7 +63,7 @@ const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
 
             <Grid sx={styles.rightSideColumn}>
               <Grid direction='row' >
-                <Typography sx={{ paddingBottom: '50px' }}>{description}</Typography>
+                <Typography sx={{ paddingBottom: '50px' }}></Typography>
 
                 <PokemonDescription height={height} weight={weight} id={id} abilities={abilities} moves={moves} />
 

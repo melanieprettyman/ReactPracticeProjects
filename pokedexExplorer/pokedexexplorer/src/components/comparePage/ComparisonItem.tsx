@@ -36,7 +36,6 @@ const ComparisonItem:React.FC<Props> = ({pokemon}) => {
     weight,
     abilities,
     id,
-    description,
     moves
   ] = pokemonDetails;
 
@@ -51,14 +50,15 @@ const ComparisonItem:React.FC<Props> = ({pokemon}) => {
             <Typography variant="body1" sx={{ textAlign: 'center' }}><b>Stats</b></Typography>
             <PokemonStatsChart stats={stats}/>
             <Divider sx={{ width: '100%', my: 2 }} />
-
-            <Typography variant="body1" sx={{ textAlign: 'center' }}><b>Type</b></Typography>
+            <div >
+                <Typography variant="body1" sx={{ textAlign: 'center' }}><b>Type</b></Typography>
             {pokemonTypes.map(type => (
                 <span style={{marginTop: '5px'}}> {/* Adjust margin as needed */}
                     <Tag key={type} label={type} type={type}/>
                 </span>
             ))}
-          <Divider sx={{width: '100%', my: 2}}/>
+            </div>
+            <Divider sx={{width: '100%', my: 2}}/>
 
           <Typography variant="body1" sx={{textAlign: 'center'}}><b>Moves</b></Typography>
             {topMoves.map( (move)=>

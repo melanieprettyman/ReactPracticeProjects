@@ -76,6 +76,7 @@ const [
   pokemonTypes,
   imageURL
 ] = data;
+
     return (
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <Card sx={isHomePage? styles.card : {}}>
@@ -83,7 +84,7 @@ const [
             <CardMedia
                 component="img"
                 height="auto"
-                image= {imageURL || img}
+                image= {imageURL? imageURL: img}
                 alt="Pikachu"
                 onClick={handleCardClick} style={{ cursor: 'pointer' }}
             />
@@ -97,7 +98,7 @@ const [
             <Typography gutterBottom variant="h5" component="div">
               {pokemon.name.toUpperCase()}
             </Typography>
-              {pokemonTypes.map(type => (
+              {pokemonTypes?.map(type => (
                         <Tag key={type} label={type} type={type} />
                 ))}
           </CardContent>
