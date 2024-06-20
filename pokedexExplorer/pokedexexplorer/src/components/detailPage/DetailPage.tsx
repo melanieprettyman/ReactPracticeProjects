@@ -7,7 +7,7 @@ import PokemonStatsChart from "./PokemonStatsChart";
 import Tag from "../homePage/Tag";
 import PokemonDescription from "./PokemonDescription";
 import {useQuery} from "@tanstack/react-query";
-import {fetchPokemonDescription, fetchPokemonDetails} from "../utils/http";
+import {fetchPokemonDetails} from "../utils/http";
 import {useParams} from "react-router";
 
 
@@ -49,6 +49,7 @@ const url = `https://pokeapi.co/api/v2/pokemon/${pokemonName}`;
           <Grid container alignItems="center" justifyContent="center" sx={{ height: '30%' }}>
             <Typography variant="h3">
               {pokemonName?.toUpperCase()}
+
             </Typography>
           </Grid>
 

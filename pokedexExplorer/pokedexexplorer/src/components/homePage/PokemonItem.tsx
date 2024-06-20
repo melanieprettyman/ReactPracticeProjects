@@ -19,9 +19,6 @@ type Props = {
   handleToggleFavoritePokemon?: (pokemon:Pokemon)=>void,
   isInitiallyFavorite?: boolean
 };
-
-
-
 const PokemonItem: React.FC<Props> = ({
                                           toggleType,
                                           onToggleSelection,
@@ -29,6 +26,7 @@ const PokemonItem: React.FC<Props> = ({
                                           pokemon,
                                           handleToggleFavoritePokemon,
                                           isInitiallyFavorite = false
+
 }) => {
 
   const location = useLocation();
@@ -39,6 +37,7 @@ const PokemonItem: React.FC<Props> = ({
 
   const [isSelected, setSelected] = useState(false);
   const [isFavorite, setFavorite] = useState(isInitiallyFavorite);
+
 
 
 
@@ -76,6 +75,7 @@ const [
   pokemonTypes,
   imageURL
 ] = data;
+
 
     return (
       <Grid item xs={12} sm={6} md={4} lg={3}>

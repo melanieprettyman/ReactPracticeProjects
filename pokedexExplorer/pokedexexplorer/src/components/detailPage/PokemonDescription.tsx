@@ -1,7 +1,7 @@
 import React from 'react';
 import {Paper, Typography, Grid} from '@mui/material';
 import styles from "./styles/styles";
-import {Ability, fetchPokemonDetails, fetchPokemonNature, Move, Nature} from "../utils/http";
+import {Ability, fetchPokemonNature, Move} from "../utils/http";
 import {useQuery} from "@tanstack/react-query";
 
 type Props ={

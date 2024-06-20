@@ -1,19 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Box, Grid, Pagination} from '@mui/material';
 import PokemonItem from "./PokemonItem";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPokemons} from "../utils/http";
+import {Context} from "../store/context";
 
 export type Pokemon = {
     name: string;
     url: string;
 };
 
-type Props = {
-    searchQuery: string
-}
 
-const PokemonContainer: React.FC<Props> = ({searchQuery}) => {
+
+const PokemonContainer: React.FC = () => {
+    const context = useContext(Context);
     const [page, setPage] = useState(1);
     const [favorited, setFavorited] = useState<Pokemon[]>(() => {
         const localData = localStorage.getItem('favorites');
@@ -52,6 +52,12 @@ const PokemonContainer: React.FC<Props> = ({searchQuery}) => {
 
     if (isError) return <div>Error: {error instanceof Error ? error.message : "Unknown error"}</div>;
 
+    const searchQuery = context?.searchQuery ? context?.searchQuery : '';
+
+    if(searchQuery !== ''){
+        context?.setIsSearchQuery(true);
+    }
+
     const searchPokemon: Pokemon = {
         name: searchQuery,
         url: `https://pokeapi.co/api/v2/pokemon/${searchQuery}`
@@ -60,7 +66,7 @@ const PokemonContainer: React.FC<Props> = ({searchQuery}) => {
     return (
         <Box sx={{ flexGrow: 1, padding: 10 }}>
             <Grid container spacing={2}>
-                {searchQuery &&
+                {context?.isSearchQuery &&
                     <PokemonItem
                         key={searchQuery}
                         toggleType="favorite"
@@ -70,7 +76,7 @@ const PokemonContainer: React.FC<Props> = ({searchQuery}) => {
                     />
                 }
                 {
-                  !searchQuery && data?.map((pokemon: Pokemon) => (
+                  !context?.isSearchQuery && data?.map((pokemon: Pokemon) => (
                         <PokemonItem
                             key={pokemon.name}
                             toggleType="favorite"

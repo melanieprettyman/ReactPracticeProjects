@@ -9,6 +9,7 @@ import Layout from "./components/Layout";
 import ComparePage from "./components/comparePage/ComparePage";
 import DetailPage from "./components/detailPage/DetailPage";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {SearchContextProvider} from "./components/store/context";
 
 function App() {
 
@@ -41,7 +42,9 @@ function App() {
   return (
       <ThemeProvider theme={theme}>
          <QueryClientProvider client={queryClient}>
+             <SearchContextProvider>
              <RouterProvider router={router}/>
+             </SearchContextProvider>
          </QueryClientProvider>
       </ThemeProvider>
   );

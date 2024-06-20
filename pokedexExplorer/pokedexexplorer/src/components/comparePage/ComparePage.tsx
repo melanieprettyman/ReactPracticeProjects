@@ -10,7 +10,6 @@ import {useNavigate} from "react-router";
 
 
 const ComparePage:React.FC=()=>{
-
     const [favorited, setFavorited] = useState(() => {
         const localData = localStorage.getItem('favorites');
         return localData ? JSON.parse(localData) : [];

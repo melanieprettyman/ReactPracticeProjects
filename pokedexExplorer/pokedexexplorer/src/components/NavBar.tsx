@@ -1,16 +1,21 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { AppBar, Tab, Tabs, Toolbar, useTheme } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CatchingPokemonIcon from '@mui/icons-material/CatchingPokemon';
 import { Link, useLocation } from 'react-router-dom'; // Import useLocation
 import logo from './utils/title.png';
 import { rainbowTextStyle, tabsStyle } from "./styles/styles";
+import {Context} from "./store/context";
 
 const NavBar: React.FC = () => {
     const theme = useTheme();
     const location = useLocation();
 
     const currentPath = location.pathname;
+    const context = useContext(Context);
+    const resetSearch = () =>{
+        context?.setIsSearchQuery(false)
+    };
 
     return (
         <AppBar position="fixed" sx={{ backgroundColor: theme.palette.primary.main }}>
@@ -33,6 +38,7 @@ const NavBar: React.FC = () => {
                         sx={{
                             ...(currentPath === "/" ? rainbowTextStyle : {})
                         }}
+                        onClick={resetSearch}
                     />
                     <Tab
                         component={Link}

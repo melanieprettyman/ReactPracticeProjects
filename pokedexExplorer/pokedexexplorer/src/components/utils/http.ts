@@ -19,9 +19,21 @@ type Stat = {
     };
 };
 
-type PokemonDetailsResponse = {
-    name:string
-    id:number,
+
+
+type Genus = {
+    genus: string;
+    language: {
+        name: string;
+        url: string;
+    };
+};
+
+type SpeciesData = {
+    genera: Genus[];
+};
+
+type PokemonDetails = {
     types: PokemonType[],
     stats: Stat[],
     sprites: {
@@ -35,6 +47,7 @@ type PokemonDetailsResponse = {
     weight: number,
     abilities: Ability[],
     moves: Move[],
+    id:number
 
 };
 
@@ -82,9 +95,12 @@ export type Nature = {
 //     return data.results;
 // };
 
+
+
+
 export const fetchPokemons = async (page: number ): Promise<Pokemon[]> => {
-    const offset = page === 1 ? 0 : (page - 1) * 25;
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=25`);
+    const offset = (page - 1) * 25;
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=25&offset=${offset}`);
     if (!response.ok) {
         throw new Error('Failed to fetch pokemons');
     }
@@ -100,7 +116,7 @@ export const fetchPokemonDetails = async (url: string): Promise<[string[], strin
       error.message = await response.json();
       throw error;
   }
-  const details: PokemonDetailsResponse = await response.json();
+  const details: PokemonDetails = await response.json();
   const types = details.types.map((type: PokemonType) => type.type.name);
   const imageURL = details.sprites.other["official-artwork"].front_default;
   const stats = details.stats.map((stat: Stat) => stat.base_stat);
@@ -111,17 +127,7 @@ export const fetchPokemonDetails = async (url: string): Promise<[string[], strin
   return [types, imageURL, stats, details.height, details.weight, abilities, id, moves];
 };
 
-export const fetchPokemonDescription = async (id: number): Promise<string> => {
-  const response = await fetch(`https://pokeapi.co/api/v2/characteristic/${id}/`);
-  if(!response.ok){
-      const error =  new Error("[ERROR]: could not fetch pokemon description");
-      error.message = await response.json();
-      throw error;
-  }
-  const descriptionResponse: DescriptionResponse = await response.json();
-  const englishDescription =  descriptionResponse.descriptions.filter(filterLanguage);
-  return englishDescription[0].description;
-};
+
 
 export const fetchPokemonNature  = async (id: number): Promise<Nature> => {
 
@@ -140,7 +146,6 @@ const response = await fetch(`https://pokeapi.co/api/v2/nature/${id}/`);
   return nature;
 };
 
-const filterLanguage= (description:Description)=>{
-   return description.language.name === "en";
-};
+
+
 
