@@ -64,14 +64,24 @@ const PokemonItem: React.FC<Props> = ({
         }
     };
 
-    const {data, isPending, isError, error} = useQuery({
+    const {data, isLoading, isError} = useQuery({
             queryKey:[`details${pokemon.name}`],
             queryFn:()=>fetchPokemonDetails(pokemon.url)
     });
 
-    if (isError || !data) return (
-        <ErrorField />
+    if (isLoading) {
+    return (
+      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        <CircularProgress />
+      </Box>
     );
+  }
+    if (isError || !data) {
+       return (
+            <ErrorField />
+        );
+    }
+
 
 
     const [
