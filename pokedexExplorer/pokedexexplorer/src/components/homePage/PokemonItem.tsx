@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
-import {Typography, Card, CardMedia, CardContent, Grid, CircularProgress} from '@mui/material';
+import {Typography, Card, CardMedia, CardContent, Grid, CircularProgress, Box} from '@mui/material';
 import img from '../utils/unkown.png';
 import Tag from "./Tag";
 import FavoriteToggle from "./FavoriteToggle";
 import CompareToggle from "../comparePage/CompareToggle";
 import {useLocation} from "react-router-dom";
-import {useNavigate, useParams} from "react-router";
+import {useNavigate} from "react-router";
 import styles from "./styles/styles";
 import {Pokemon} from "./PokemonContainer";
 import {fetchPokemonDetails} from "../utils/http";
 import {useQuery} from "@tanstack/react-query";
+import ErrorField from "../ErrorField";
 
 type Props = {
   toggleType: 'favorite' | 'compare';
@@ -17,7 +18,7 @@ type Props = {
   selectionCount?: number,
   pokemon: Pokemon;
   handleToggleFavoritePokemon?: (pokemon:Pokemon)=>void,
-  isInitiallyFavorite?: boolean
+  isInitiallyFavorite?: boolean,
 };
 const PokemonItem: React.FC<Props> = ({
                                           toggleType,
@@ -25,7 +26,7 @@ const PokemonItem: React.FC<Props> = ({
                                           selectionCount,
                                           pokemon,
                                           handleToggleFavoritePokemon,
-                                          isInitiallyFavorite = false
+                                          isInitiallyFavorite = false,
 
 }) => {
 
@@ -68,13 +69,15 @@ const PokemonItem: React.FC<Props> = ({
             queryFn:()=>fetchPokemonDetails(pokemon.url)
     });
 
-    if (isError) return <div>Error: {error.message}</div>;
-    if (!data) return <div>No data available</div>;
+    if (isError || !data) return (
+        <ErrorField />
+    );
 
-const [
-  pokemonTypes,
-  imageURL
-] = data;
+
+    const [
+      pokemonTypes,
+      imageURL
+    ] = data;
 
 
     return (

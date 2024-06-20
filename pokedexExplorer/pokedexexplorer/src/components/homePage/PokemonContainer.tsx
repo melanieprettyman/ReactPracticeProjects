@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {Box, Grid, Pagination} from '@mui/material';
+import {Box, Grid, Pagination, Typography} from '@mui/material';
 import PokemonItem from "./PokemonItem";
 import { useQuery } from "@tanstack/react-query";
 import { fetchPokemons} from "../utils/http";
@@ -54,10 +54,6 @@ const PokemonContainer: React.FC = () => {
 
     const searchQuery = context?.searchQuery ? context?.searchQuery : '';
 
-    if(searchQuery !== ''){
-        context?.setIsSearchQuery(true);
-    }
-
     const searchPokemon: Pokemon = {
         name: searchQuery,
         url: `https://pokeapi.co/api/v2/pokemon/${searchQuery}`
@@ -66,17 +62,18 @@ const PokemonContainer: React.FC = () => {
     return (
         <Box sx={{ flexGrow: 1, padding: 10 }}>
             <Grid container spacing={2}>
-                {context?.isSearchQuery &&
-                    <PokemonItem
-                        key={searchQuery}
-                        toggleType="favorite"
-                        pokemon={searchPokemon}
-                        handleToggleFavoritePokemon={handleToggleFavoritePokemon}
-                        isInitiallyFavorite={favorited.some(fav => fav.name === searchQuery)}
-                    />
-                }
-                {
-                  !context?.isSearchQuery && data?.map((pokemon: Pokemon) => (
+                {context?.isSearchQuery ? (
+                    (
+                        <PokemonItem
+                            key={searchQuery}
+                            toggleType="favorite"
+                            pokemon={searchPokemon}
+                            handleToggleFavoritePokemon={handleToggleFavoritePokemon}
+                            isInitiallyFavorite={favorited.some(fav => fav.name === searchQuery)}
+                        />
+                    )
+                ) : (
+                    data?.map((pokemon: Pokemon) => (
                         <PokemonItem
                             key={pokemon.name}
                             toggleType="favorite"
@@ -85,7 +82,7 @@ const PokemonContainer: React.FC = () => {
                             isInitiallyFavorite={favorited.some(fav => fav.name === pokemon.name)}
                         />
                     ))
-                }
+                )}
                </Grid>
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 , width:'100%'}}>
                 <Box sx={{backgroundColor:'white', width:'22%', opacity:'.9', boxShadow: '0 0 8px 8px #ffffff'}}>

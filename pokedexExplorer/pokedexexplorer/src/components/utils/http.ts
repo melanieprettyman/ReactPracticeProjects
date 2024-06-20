@@ -101,8 +101,10 @@ export type Nature = {
 export const fetchPokemons = async (page: number ): Promise<Pokemon[]> => {
     const offset = (page - 1) * 25;
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=25&offset=${offset}`);
+
     if (!response.ok) {
-        throw new Error('Failed to fetch pokemons');
+        const error = new Error('Failed to fetch pokemons');
+        throw error;
     }
     const data = await response.json();
     return data.results;
@@ -111,11 +113,11 @@ export const fetchPokemons = async (page: number ): Promise<Pokemon[]> => {
 
 export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number,number, Ability[], number, Move[] ]> => {
   const response = await fetch(url);
-  if(!response.ok){
-      const error =  new Error("[ERROR]: could not fetch pokemon details");
-      error.message = await response.json();
-      throw error;
-  }
+  if (!response.ok) {
+        const errorMessage = await response.text(); // Read response as text
+        const error = new Error(`[ERROR]: could not fetch pokemon details - ${errorMessage}`);
+        throw error;
+    }
   const details: PokemonDetails = await response.json();
   const types = details.types.map((type: PokemonType) => type.type.name);
   const imageURL = details.sprites.other["official-artwork"].front_default;

@@ -14,7 +14,8 @@ const NavBar: React.FC = () => {
     const currentPath = location.pathname;
     const context = useContext(Context);
     const resetSearch = () =>{
-        context?.setIsSearchQuery(false)
+        context?.setIsSearchQuery(false);
+        context?.setSearchQuery('');
     };
 
     return (

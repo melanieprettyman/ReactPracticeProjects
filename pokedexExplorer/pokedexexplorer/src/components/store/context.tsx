@@ -15,6 +15,7 @@ export const SearchContextProvider: React.FC<{children: ReactNode}> = ({ childre
   const [isSearchQuery, setIsSearchQuery] = useState(true);
   const handleSearch = (query: string) => {
         setSearchQuery(query);
+        setIsSearchQuery(true);
     };
 
 

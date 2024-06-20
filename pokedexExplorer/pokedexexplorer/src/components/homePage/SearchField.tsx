@@ -16,7 +16,8 @@ const SearchField: React.FC = ()=>{
     };
 
     const handleSearch = () => {
-        context?.handleSearch(searchQuery);
+        const formattedQuery = searchQuery?.toLowerCase().replace(/\s+/g, '');
+        context?.handleSearch(formattedQuery);
     };
     return(
         <Box sx={styles.searchFieldContainer}>
