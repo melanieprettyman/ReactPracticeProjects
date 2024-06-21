@@ -7,14 +7,14 @@ import {Pagination} from "@mui/material";
 
 
 const HomePage: React.FC = () => {
-  return (
-      <div className='homePage'>
-          <div style={{marginTop: '100px'}}>
-              <SearchField />
-              <PokemonContainer  />
-          </div>
-      </div>
-  );
+    return (
+        <div className='homePage'>
+            <div style={{marginTop: '100px'}}>
+                <SearchField/>
+                <PokemonContainer/>
+            </div>
+        </div>
+    );
 };
 
 export default HomePage;

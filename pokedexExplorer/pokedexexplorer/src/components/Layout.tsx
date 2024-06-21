@@ -3,12 +3,12 @@ import NavBar from "./NavBar";
 import {Outlet} from "react-router";
 
 const Layout: React.FC = () => {
-  return (
-    <>
-      <NavBar />
-      <Outlet />
-    </>
-  );
+    return (
+        <>
+            <NavBar/>
+            <Outlet/>
+        </>
+    );
 };
 
 export default Layout;
