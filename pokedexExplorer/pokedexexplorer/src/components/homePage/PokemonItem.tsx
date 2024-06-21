@@ -98,7 +98,9 @@ const PokemonItem: React.FC<Props> = ({
 
     if (isLoading) {
         return (
-                <CircularProgress/>
+            <Box sx={{display: 'flex', justifyContent: 'center', width: '100%', paddingBottom: 10}}>
+                <CircularProgress sx={{color:'black'}}/>
+            </Box>
         );
     }
     if (isError || !data) {
