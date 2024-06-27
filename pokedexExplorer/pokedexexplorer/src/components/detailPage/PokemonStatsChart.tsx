@@ -69,7 +69,7 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
                 <Tooltip/>
                 <Bar
                     dataKey="value"
-                    background={{fill: '#FFA5004C'}}
+                    background={{fill: '#eee'}}
                 >
                     {pokemonStats.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={colors[entry.name]}/>
