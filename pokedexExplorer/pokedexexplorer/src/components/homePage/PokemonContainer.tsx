@@ -65,6 +65,11 @@ const PokemonContainer: React.FC = () => {
         localStorage.setItem('favorites', JSON.stringify(favorited));
     }, [favorited]);
 
+    // Effect to update local storage when `favorited` changes
+    useEffect(() => {
+        context?.setIsSearchQuery(false);
+    }, []);
+
     //Fetch the list of Pokémon.
     const {data, isFetching, isError, error} = useQuery({
         queryKey: ['pokemons', page],

@@ -21,10 +21,12 @@ const styles = {
     width:'50%',
     display: 'flex',
     marginLeft: '50px',
-    alignItems: 'center'
+    alignItems: 'center',
   },
+
   rightSideColumn:{
     width:'40%',
+    marginTop: '100px',
   },
   description:{
     padding: 2,

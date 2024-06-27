@@ -134,6 +134,38 @@ export const fetchPokemonNature = async (id: number): Promise<Nature> => {
     return nature;
 };
 
+// Function to fetch a Pokémon's types.
+export const getPokemonTypes = async (pokemonName: string): Promise<string[]> => {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+    if (!response.ok) {
+        throw new Error('Failed to fetch Pokémon data');
+    }
+    const data = await response.json();
+    return data.types.map((typeInfo: { type: { url: string } }) => typeInfo.type.url);
+};
+
+// Function to fetch a type's weaknesses.
+export const getTypeWeaknesses = async (typeUrl: string): Promise<string[]> => {
+    const response = await fetch(typeUrl);
+    if (!response.ok) {
+        throw new Error('Failed to fetch type data');
+    }
+    const data = await response.json();
+    return data.damage_relations.double_damage_from.map((type: { name: string }) => type.name);
+};
+
+// Function to fetch a Pokémon's weaknesses.
+export const getPokemonWeaknesses = async (pokemonName: string): Promise<string[]> => {
+    const typeUrls = await getPokemonTypes(pokemonName);
+    const weaknesses = new Set<string>();
+
+    for (const url of typeUrls) {
+        const typeWeaknesses = await getTypeWeaknesses(url);
+        typeWeaknesses.forEach(weakness => weaknesses.add(weakness));
+    }
+
+    return Array.from(weaknesses);
+};
 
 
 

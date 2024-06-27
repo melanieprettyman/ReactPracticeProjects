@@ -1,15 +1,18 @@
 import React from 'react';
-/**
- * `PokemonStats` is a component that displays a list of Pokémon statistics.
- * It receives an array of stat values and maps them to their respective names, then renders this data in a list format.
- *
- * Props:
- * - `stats`: An array of numbers representing the Pokémon's statistics in the order of HP, Attack, Defense,
- *   Special Attack, Special Defense, and Speed.
- *
- * Example usage:
- * <PokemonStats stats={[45, 49, 49, 65, 65, 45]} />
- */
+import {
+    BarChart,
+    Bar,
+    XAxis,
+    YAxis,
+    CartesianGrid,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+    Cell,
+    LabelList
+} from 'recharts';
+import {Typography} from "@mui/material";
+
 type Stat = {
     name: string;
     value: number;
@@ -17,28 +20,62 @@ type Stat = {
 
 type PokemonStatsProps = {
     stats: number[];
-}
+};
 
 const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
     const pokemonStats: Stat[] = [
         {name: 'HP', value: stats[0]},
         {name: 'Attack', value: stats[1]},
         {name: 'Defense', value: stats[2]},
-        {name: 'SpecialAttack', value: stats[3]},
-        {name: 'SpecialDefense', value: stats[4]},
+        {name: 'Special Attack', value: stats[3]},
+        {name: 'Special Defense', value: stats[4]},
         {name: 'Speed', value: stats[5]},
     ];
 
+    const colors: Record<string, string> = {
+        HP: 'red',
+        Attack: 'orange',
+        Defense: 'yellow',
+        'Special Attack': 'green',
+        'Special Defense': 'blue',
+        Speed: 'purple',
+    };
+
     return (
         <div>
-            <ul>
-                {pokemonStats.map((stat) => (
-                    <li key={stat.name}>
-                        {stat.name}: {stat.value}
-                    </li>
-                ))}
-            </ul>
-        </div>
+            <div style={{ textAlign: 'center', marginBottom: '5px' }}>
+                <Typography component="div" sx={{color: '#919191', fontSize: 10}}>
+                Hover over a bar to see the stat value
+             </Typography>
+            </div>
+        <ResponsiveContainer width="100%" height={300}>
+            <BarChart
+                layout="vertical"
+                data={pokemonStats}
+                margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+            >
+                <CartesianGrid strokeDasharray="3 3"/>
+                <XAxis type="number" domain={[0, 252]}/>
+                <YAxis type="category" dataKey="name"/>
+                <Tooltip/>
+                <Bar
+                    dataKey="value"
+                    background={{fill: '#FFA5004C'}}
+                >
+                    {pokemonStats.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={colors[entry.name]}/>
+
+                    ))}
+
+                </Bar>
+            </BarChart>
+        </ResponsiveContainer>
+            </div>
     );
 };
 

@@ -23,8 +23,8 @@ export const SearchContextProvider: React.FC<{ children: ReactNode }> = ({ child
     // Function to handle updates to the search query.
     // It sets the search query state and marks the search query as active.
     const handleSearch = (query: string) => {
-        setSearchQuery(query);
         setIsSearchQuery(true);
+        setSearchQuery(query);
     };
 
     // Render the provider with the context value that includes the search state and the handler functions.

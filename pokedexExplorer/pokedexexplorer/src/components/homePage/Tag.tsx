@@ -57,9 +57,10 @@ const Tag: React.FC<TagProps> = ({label, type}) => {
                 color: '#070707',
                 fontSize: '0.875rem',
                 height: 24,
-                maxWidth: 100,
+                minWidth: 100,
                 borderRadius: '4px',
-                marginRight: '3px'
+                marginRight: '3px',
+                marginBottom: '3px'
             }}
         />
     );

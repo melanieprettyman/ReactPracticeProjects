@@ -7,7 +7,7 @@ import PokemonStatsChart from "./PokemonStatsChart";
 import Tag from "../homePage/Tag";
 import PokemonDescription from "./PokemonDescription";
 import {useQuery} from "@tanstack/react-query";
-import {fetchPokemonDetails} from "../utils/http";
+import {fetchPokemonDetails, getPokemonWeaknesses} from "../utils/http";
 import {useParams} from "react-router";
 
 /**
@@ -55,6 +55,18 @@ const DetailPage: React.FC = () => {
         queryFn: () => fetchPokemonDetails(url)
     });
 
+    // Fetch Pokémon weaknesses
+    const {
+        data: weaknesses,
+        isPending: isWeaknessesPending,
+        isError: isWeaknessesError,
+        error: weaknessesError
+    } = useQuery({
+        queryKey: [`weaknesses${pokemonName}`],
+        queryFn: () => getPokemonWeaknesses(pokemonName || '')
+    });
+    if (isWeaknessesError) return <div>Error: {weaknessesError.message}</div>;
+
     if (isPending) return <div><CircularProgress color="secondary"/></div>;
     if (isError) return <div>Error: {error.message}</div>;
 
@@ -70,40 +82,55 @@ const DetailPage: React.FC = () => {
         moves
     ] = pokemonDetails;
 
+    const filteredWeaknesses = weaknesses?.filter((weakness: string) => !pokemonTypes.includes(weakness));
+
 
     return (
         <div className='detailPage'>
             <NavBar/>
             <Box sx={styles.container}>
                 <Paper sx={styles.paper}>
-                    <Grid container alignItems="center" justifyContent="center" sx={{height: '30%'}}>
+                    <Grid container alignItems="center" justifyContent="center" sx={{height: '20%'}}>
                         <Typography variant="h3">
                             {pokemonName?.toUpperCase()}
-
                         </Typography>
                     </Grid>
 
-                    <Grid container direction='row' sx={{paddingTop: "50px"}}>
+                    <Grid container direction='row'>
                         <Grid sx={styles.leftSideColumn}>
-                            <Stack spacing={2}>
-                                <img src={imageURL || img} className='img'/>
-                                <h2>Stats</h2>
-                                <PokemonStatsChart stats={stats}/>
+                            <Stack spacing={2} alignItems="center">
+                                <img src={imageURL || img} style={{ width: '80%', height: 'auto' }}/>
+                                <Stack spacing={1}>
+                                    <h2>Stats</h2>
+                                    <div style={{marginLeft: '-77px'}}>
+                                        <PokemonStatsChart stats={stats}/>
+                                    </div>
+                                </Stack>
                             </Stack>
                         </Grid>
 
                         <Grid sx={styles.rightSideColumn}>
                             <Grid direction='row'>
-                                <Typography sx={{paddingBottom: '50px'}}></Typography>
-
-                                <PokemonDescription height={height} weight={weight} id={id} abilities={abilities}
-                                                    moves={moves}/>
+                                <PokemonDescription
+                                    height={height}
+                                    weight={weight}
+                                    id={id}
+                                    abilities={abilities}
+                                    moves={moves}
+                                />
 
                                 <Typography variant='h5' sx={{paddingBottom: '10px'}}>
                                     Type
                                 </Typography>
                                 {pokemonTypes.map(type => (
                                     <Tag key={type} label={type} type={type}/>
+                                ))}
+
+                                <Typography variant='h5' sx={{paddingBottom: '10px', paddingTop:'30px'}}>
+                                    Weaknesses
+                                </Typography>
+                                {filteredWeaknesses?.map(weakness => (
+                                    <Tag key={weakness} label={weakness} type={weakness}/>
                                 ))}
                             </Grid>
                         </Grid>
