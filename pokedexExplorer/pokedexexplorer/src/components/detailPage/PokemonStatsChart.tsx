@@ -6,12 +6,11 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend,
     ResponsiveContainer,
     Cell,
-    LabelList
 } from 'recharts';
 import {Typography} from "@mui/material";
+import {useLocation} from "react-router-dom";
 
 type Stat = {
     name: string;
@@ -23,6 +22,11 @@ type PokemonStatsProps = {
 };
 
 const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
+    const location = useLocation();
+    const isComparePage = location.pathname === '/compare';
+
+    const width = isComparePage ? 400 : 500;
+
     const pokemonStats: Stat[] = [
         {name: 'HP', value: stats[0]},
         {name: 'Attack', value: stats[1]},
@@ -42,13 +46,13 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
     };
 
     return (
-        <div>
+        <>
             <div style={{ textAlign: 'center', marginBottom: '5px' }}>
                 <Typography component="div" sx={{color: '#919191', fontSize: 10}}>
                 Hover over a bar to see the stat value
              </Typography>
             </div>
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width={width} height={300}>
             <BarChart
                 layout="vertical"
                 data={pokemonStats}
@@ -61,7 +65,7 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
             >
                 <CartesianGrid strokeDasharray="3 3"/>
                 <XAxis type="number" domain={[0, 252]}/>
-                <YAxis type="category" dataKey="name"/>
+                <YAxis type="category" dataKey="name" />
                 <Tooltip/>
                 <Bar
                     dataKey="value"
@@ -75,7 +79,7 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
                 </Bar>
             </BarChart>
         </ResponsiveContainer>
-            </div>
+            </>
     );
 };
 

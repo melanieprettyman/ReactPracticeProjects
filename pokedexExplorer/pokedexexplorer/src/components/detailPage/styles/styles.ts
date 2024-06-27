@@ -21,7 +21,6 @@ const styles = {
     width:'50%',
     display: 'flex',
     marginLeft: '50px',
-    alignItems: 'center',
   },
 
   rightSideColumn:{
@@ -32,7 +31,7 @@ const styles = {
     padding: 2,
     width: 'fit-content',
     margin: 'auto',
-    backgroundColor: '#e82525',
+    backgroundColor: 'rgba(232,37,37,0.74)',
     color:'white' }
 };
 
