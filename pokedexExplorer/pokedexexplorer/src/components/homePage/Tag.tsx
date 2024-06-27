@@ -59,8 +59,8 @@ const Tag: React.FC<TagProps> = ({label, type}) => {
                 height: 24,
                 minWidth: 100,
                 borderRadius: '4px',
-                marginRight: '3px',
-                marginBottom: '3px'
+                marginRight: '5px',
+                marginBottom: '5px'
             }}
         />
     );
