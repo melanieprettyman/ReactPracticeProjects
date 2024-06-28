@@ -25,12 +25,11 @@ const styles = {
 
   rightSideColumn:{
     width:'40%',
-    marginTop: '100px',
+    marginTop: '35px',
   },
   description:{
     padding: 2,
     width: 'fit-content',
-    margin: 'auto',
     backgroundColor: 'rgba(232,37,37,0.74)',
     color:'white' }
 };

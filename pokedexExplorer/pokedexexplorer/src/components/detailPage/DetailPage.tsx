@@ -99,7 +99,7 @@ const DetailPage: React.FC = () => {
                     <Grid container direction='row'>
                         <Grid sx={styles.leftSideColumn}>
                             <Stack spacing={2} alignItems="center">
-                                <img src={imageURL || img} style={{ width: '80%', height: 'auto' }}/>
+                                <img src={imageURL || img} style={{ width: '70%', height: 'auto' }}/>
                                 <Stack spacing={1}>
                                     <h2>Stats</h2>
                                     <div style={{marginLeft: '-77px'}}>
@@ -119,14 +119,14 @@ const DetailPage: React.FC = () => {
                                     moves={moves}
                                 />
 
-                                <Typography variant='h5' sx={{paddingBottom: '10px'}}>
+                                <Typography variant='h5' sx={{paddingBottom: '5px'}}>
                                     Type
                                 </Typography>
                                 {pokemonTypes.map(type => (
                                     <Tag key={type} label={type} type={type}/>
                                 ))}
 
-                                <Typography variant='h5' sx={{paddingBottom: '10px', paddingTop:'30px'}}>
+                                <Typography variant='h5' sx={{paddingBottom: '5px', paddingTop:'30px'}}>
                                     Weaknesses
                                 </Typography>
                                 {filteredWeaknesses?.map(weakness => (

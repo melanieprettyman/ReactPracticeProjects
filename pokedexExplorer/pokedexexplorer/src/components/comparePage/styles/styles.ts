@@ -31,7 +31,7 @@ const styles = {
           userSelect: 'none'
     },
     comparisonItem: {
-        width: '20%',
+        width: '16.7%',
         height: '100%',
         display: 'flex',
         flexDirection: 'column',

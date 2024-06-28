@@ -85,7 +85,7 @@ const CompareDialog: React.FC<Props> = ({open, handleClose, selected}) => {
                     direction="row"
                     spacing={1}
                     divider={<Divider orientation="vertical" flexItem/>}
-                    sx={{paddingTop: '20px'}}
+                    sx={{paddingTop: '20px', paddingLeft:'5px'}}
                 >
                     {selected?.map((pokemon: Pokemon) => (
                         <ComparisonItem

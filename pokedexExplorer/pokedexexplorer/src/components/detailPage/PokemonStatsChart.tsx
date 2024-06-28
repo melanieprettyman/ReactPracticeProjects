@@ -25,7 +25,7 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
     const location = useLocation();
     const isComparePage = location.pathname === '/compare';
 
-    const width = isComparePage ? 400 : 500;
+    const width = isComparePage ? 300 : 500;
 
     const pokemonStats: Stat[] = [
         {name: 'HP', value: stats[0]},
@@ -52,7 +52,7 @@ const PokemonStats: React.FC<PokemonStatsProps> = ({stats}) => {
                 Hover over a bar to see the stat value
              </Typography>
             </div>
-        <ResponsiveContainer width={width} height={300}>
+        <ResponsiveContainer width={width} height={250}>
             <BarChart
                 layout="vertical"
                 data={pokemonStats}
