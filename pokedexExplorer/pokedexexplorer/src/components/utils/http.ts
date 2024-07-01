@@ -27,10 +27,6 @@ type Genus = {
     };
 };
 
-type SpeciesData = {
-    genera: Genus[];
-};
-
 type PokemonDetails = {
     types: PokemonType[],
     stats: Stat[],
@@ -60,17 +56,6 @@ export type Ability = {
     }
 };
 
-type DescriptionResponse = {
-    descriptions: Description[]
-};
-
-type Description = {
-    description: string,
-    language: {
-        name: string
-    }
-}
-
 type NatureResponse = {
     likes_flavor: {
         name: string | null
@@ -97,7 +82,7 @@ export const fetchPokemons = async (page: number): Promise<Pokemon[]> => {
     return data.results;
 };
 
-//// Function to fetch detailed information about a single Pokémon.
+// Function to fetch detailed information about a single Pokémon.
 export const fetchPokemonDetails = async (url: string): Promise<[string[], string, number[], number, number, Ability[], number, Move[]]> => {
     const response = await fetch(url);
     if (!response.ok) {
@@ -134,7 +119,7 @@ export const fetchPokemonNature = async (id: number): Promise<Nature> => {
     return nature;
 };
 
-// Function to fetch a Pokémon's types.
+// Function to fetch Pokémon's types.
 export const getPokemonTypes = async (pokemonName: string): Promise<string[]> => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
     if (!response.ok) {
