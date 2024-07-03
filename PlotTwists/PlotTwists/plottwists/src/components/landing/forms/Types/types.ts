@@ -29,3 +29,8 @@ export type ForgotPasswordFormProps = {
 export type ForgotPasswordFormValues = {
     email: string;
 };
+
+export type VisibilityProps = {
+    handleClick: () => void,
+    show: boolean
+}

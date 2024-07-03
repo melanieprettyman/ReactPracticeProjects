@@ -10,11 +10,10 @@ import {
     TextField
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {Controller, useForm} from "react-hook-form";
 import styles from "./Styles/styles";
 import {LoginFormProps, LoginFormValues} from "./Types/types";
+import VisibilityButton from "./VisibilityButton";
 
 const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpenForgotPassword}) => {
 
@@ -49,16 +48,6 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
         handleClickOpenForgotPassword();
     };
 
-    const VisibilityBtn = () => {
-        return (
-            <IconButton
-                onClick={handleClickShowPassword}
-                aria-label="Show"
-            >
-                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
-            </IconButton>
-        );
-    };
 
     return (
         <Dialog
@@ -98,14 +87,18 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
                                 <TextField
                                     {...field}
                                     label="Password"
-                                    type={!showPassword ? 'text' : 'password'}
+                                    type={showPassword ? 'text' : 'password'}
                                     error={!!errors.password}
                                     helperText={errors.password ? errors.password.message : ''}
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
                                     InputProps={{
-                                        endAdornment: (<VisibilityBtn />),
-                                    }}
+                                            endAdornment: (
+                                                <VisibilityButton
+                                                    handleClick={handleClickShowPassword}
+                                                    show={showPassword}/>
+                                            ),
+                                        }}
 
                                 />
                             )}
