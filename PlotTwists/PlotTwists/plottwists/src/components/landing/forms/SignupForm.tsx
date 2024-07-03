@@ -16,29 +16,19 @@ import {
     validatePasswordComplexity,
     validatePasswordsMatch,
     validateUsername
-} from "./utils";
+} from "./Utils/utils";
+import styles from "./Styles/styles";
+import {SignupFormProps, SignupFormValues} from "./Types/types";
 
-type LandingFormProps = {
-    open: boolean,
-    handleClose: () => void;
-};
 
-type FormValues = {
-    username: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-    dob: string;
-};
-
-const SignupForm: React.FC<LandingFormProps> = ({open, handleClose}) => {
+const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
     const {
         control,
         handleSubmit,
         formState: {errors},
         watch,
         reset
-    } = useForm<FormValues>({
+    } = useForm<SignupFormValues>({
         defaultValues: {
             username: '',
             email: '',
@@ -48,7 +38,7 @@ const SignupForm: React.FC<LandingFormProps> = ({open, handleClose}) => {
         }
     });
 
-    const onSubmit = (data: FormValues) => {
+    const onSubmit = (data: SignupFormValues) => {
         console.log(data);
         reset();
         handleClose();
@@ -69,11 +59,11 @@ const SignupForm: React.FC<LandingFormProps> = ({open, handleClose}) => {
                     <CloseIcon/>
                 </IconButton>
             </DialogActions>
-            <DialogTitle sx={{textAlign: 'center'}}><b>Sign up</b></DialogTitle>
-            <DialogContent sx={{minHeight: 650,maxHeight:650, maxWidth:500, minWidth: 500}}>
+            <DialogTitle sx={styles.title}><b>Sign up</b></DialogTitle>
+            <DialogContent sx={styles.signupContent}>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <Stack sx={{ paddingTop: 1}}>
-                        <Stack spacing={4} sx={{minHeight: 590,maxHeight:590}}>
+                    <Stack sx={styles.signupStack}>
+                        <Stack spacing={4} sx={styles.signupContainer}>
                         <Controller
                             name="username"
                             control={control}
@@ -158,7 +148,7 @@ const SignupForm: React.FC<LandingFormProps> = ({open, handleClose}) => {
                             )}
                         />
                             </Stack>
-                        <Button type="submit" variant="contained" fullWidth sx={{fontWeight: 'bold' }}>
+                        <Button type="submit" variant="contained" fullWidth sx={styles.button}>
                             Sign up
                         </Button>
                     </Stack>

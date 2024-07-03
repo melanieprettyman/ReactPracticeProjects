@@ -1,5 +1,5 @@
 
-//TODO: ENSURE uniqueness for username and email should be unique across your user database to avoid multiple
+//TODO: CHECK user uniqueness via the username and email which should be unique across user database to avoid multiple
 // accounts for a single user.
 
 // Regex for password complexity

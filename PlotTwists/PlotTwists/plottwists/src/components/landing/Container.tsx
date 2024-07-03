@@ -1,25 +1,20 @@
 //TODO: on a successful login go to homepage
-// Implement forgot password component
+// Send forgot password email
 // Send confirmation email on successful signup
 import React, {useState} from 'react';
 import {AppBar, Button, Toolbar} from "@mui/material";
-import {LANDING_TABS, LANDING_TABS_LABEL} from "./constants";
 import logo from '../../Utils/logo.png';
 import styles from "./styles";
 import {ThemeProvider} from "@mui/material/styles";
 import Theme from "./Theme/Theme";
 import SignupForm from "./forms/SignupForm";
 import LoginForm from "./forms/LoginForm";
+import ForgotPassword from "./forms/ForgotPassword";
 
 const LandingContainer: React.FC = () => {
-    const [selectedTab, setSelectedTab] = useState(LANDING_TABS.LOG_IN);
-
     const [open, setOpen] = useState(true);
     const [openSignup, setOpenSignup] = useState(false);
-
-    const handleChangeTab = (event: React.ChangeEvent<{}>, value: number): void => {
-        setSelectedTab(value);
-    };
+    const [openForgotPassword, setForgotPassword] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -37,6 +32,14 @@ const LandingContainer: React.FC = () => {
         setOpenSignup(false);
     };
 
+    const handleClickOpenForgotPassword = () => {
+        setForgotPassword(true);
+    };
+
+    const handleCloseForgotPassword = () => {
+        setForgotPassword(false);
+    };
+
     return (
         <>
             <AppBar position="fixed" sx={styles.appbar}>
@@ -44,15 +47,16 @@ const LandingContainer: React.FC = () => {
                     <img src={logo} alt="Plot Twists Logo" style={styles.img}/>
                     <div style={{flexGrow: 1}}/>
                     <Button variant="text" sx={styles.tabs} onClick={handleClickOpen} color="primary">
-                        {LANDING_TABS_LABEL.LOG_IN}
+                        Log in
                     </Button>
                     <Button variant="text" sx={styles.tabs} onClick={handleClickOpenSignup} color="primary">
-                        {LANDING_TABS_LABEL.SIGN_UP}
+                        Sign up
                     </Button>
                 </Toolbar>
             </AppBar>
-            <LoginForm open={open} handleClose={handleClose}/>
+            <LoginForm open={open} handleClose={handleClose} handleClickOpenForgotPassword={handleClickOpenForgotPassword} />
             <SignupForm open={openSignup} handleClose={handleCloseSignup}/>
+            <ForgotPassword open={openForgotPassword} handleClose={handleCloseForgotPassword} handleCloseLogin={handleClose}/>
         </>
 
     )

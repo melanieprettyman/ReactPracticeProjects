@@ -1,34 +1,31 @@
-//TODO: Validate user credentials in BE
-
+//TODO: Upon successfully sending a recovery email, show success message to user
 import React from "react";
 import {
     Button,
     Dialog,
     DialogActions,
     DialogContent,
-    DialogTitle, IconButton, Stack,
-    TextField
+    DialogTitle, IconButton, PaperProps, Stack,
+    TextField, Typography
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import {Controller, useForm} from "react-hook-form";
 import styles from "./Styles/styles";
-import {LoginFormProps, LoginFormValues} from "./Types/types";
+import {ForgotPasswordFormProps, ForgotPasswordFormValues} from "./Types/types";
 
-const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpenForgotPassword}) => {
+const ForgotPassword: React.FC<ForgotPasswordFormProps> = ({open, handleClose, handleCloseLogin}) => {
     const {
         control,
         handleSubmit,
         formState: {errors},
-        watch,
         reset
-    } = useForm<LoginFormValues>({
+    } = useForm<ForgotPasswordFormValues>({
         defaultValues: {
             email: '',
-            password: '',
         }
     });
 
-    const onSubmit = (data: LoginFormValues) => {
+    const onSubmit = (data: ForgotPasswordFormValues) => {
         console.log(data);
         reset();
         handleClose();
@@ -37,10 +34,8 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
     const onClose = () => {
         reset();
         handleClose();
-    };
-    const handleOpenForgotForm = ()=>{
-        handleClose();
-        handleClickOpenForgotPassword();
+        handleCloseLogin();
+
     };
 
     return (
@@ -53,14 +48,18 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
                     <CloseIcon/>
                 </IconButton>
             </DialogActions>
-            <DialogTitle sx={styles.title}>Login</DialogTitle>
+            <DialogTitle sx={styles.title}>Lost your
+                password?</DialogTitle>
             <DialogContent sx={styles.loginContent}>
+                <Typography sx={styles.forgotPasswordTxt}>
+                    Type your username or email below and we'll send you instructions on how to reset it.
+                </Typography>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Stack spacing={4} sx={styles.loginStack}>
                         <Controller
                             name="email"
                             control={control}
-                            rules={{required: 'Email is required'}}
+                            rules={{required: 'Username or Email is required'}}
                             render={({field}) => (
                                 <TextField
                                     {...field}
@@ -73,34 +72,11 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
                                 />
                             )}
                         />
-                        <Controller
-                            name="password"
-                            control={control}
-                            rules={{required: 'Password is required'}}
-                            render={({field}) => (
-                                <TextField
-                                    {...field}
-                                    label="Password"
-                                    type="password"
-                                    error={!!errors.password}
-                                    helperText={errors.password ? errors.password.message : ''}
-                                    fullWidth
-                                    InputLabelProps={{shrink: true}}
-                                />
-                            )}
-                        />
                         <DialogActions>
                             <Button type="submit" variant="contained" fullWidth sx={styles.button}>
-                                Log in
+                                Send instructions
                             </Button>
                         </DialogActions>
-                        <Button
-                            variant="text"
-                            sx={styles.forgotPasswordBtn}
-                            onClick={handleOpenForgotForm}
-                        >
-                            Forgot password?
-                        </Button>
                     </Stack>
                 </form>
 
@@ -109,4 +85,4 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
     );
 };
 
-export default LoginForm;
+export default ForgotPassword;
