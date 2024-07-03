@@ -1,6 +1,6 @@
 //TODO: Validate user credentials in BE
 
-import React from "react";
+import React, {useState} from "react";
 import {
     Button,
     Dialog,
@@ -10,16 +10,22 @@ import {
     TextField
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import {Controller, useForm} from "react-hook-form";
 import styles from "./Styles/styles";
 import {LoginFormProps, LoginFormValues} from "./Types/types";
 
 const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpenForgotPassword}) => {
+
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
     const {
         control,
         handleSubmit,
         formState: {errors},
-        watch,
         reset
     } = useForm<LoginFormValues>({
         defaultValues: {
@@ -38,9 +44,20 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
         reset();
         handleClose();
     };
-    const handleOpenForgotForm = ()=>{
+    const handleOpenForgotForm = () => {
         handleClose();
         handleClickOpenForgotPassword();
+    };
+
+    const VisibilityBtn = () => {
+        return (
+            <IconButton
+                onClick={handleClickShowPassword}
+                aria-label="Show"
+            >
+                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
+            </IconButton>
+        );
     };
 
     return (
@@ -81,16 +98,24 @@ const LoginForm: React.FC<LoginFormProps> = ({open, handleClose, handleClickOpen
                                 <TextField
                                     {...field}
                                     label="Password"
-                                    type="password"
+                                    type={!showPassword ? 'text' : 'password'}
                                     error={!!errors.password}
                                     helperText={errors.password ? errors.password.message : ''}
                                     fullWidth
                                     InputLabelProps={{shrink: true}}
+                                    InputProps={{
+                                        endAdornment: (<VisibilityBtn />),
+                                    }}
+
                                 />
                             )}
                         />
                         <DialogActions>
-                            <Button type="submit" variant="contained" fullWidth sx={styles.button}>
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                fullWidth sx={styles.button}
+                            >
                                 Log in
                             </Button>
                         </DialogActions>

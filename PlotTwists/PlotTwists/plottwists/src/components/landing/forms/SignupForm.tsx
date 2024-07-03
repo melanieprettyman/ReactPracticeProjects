@@ -19,9 +19,16 @@ import {
 } from "./Utils/utils";
 import styles from "./Styles/styles";
 import {SignupFormProps, SignupFormValues} from "./Types/types";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
 
 
 const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
+
+    const [showPassword, setShowPassword] = React.useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
     const {
         control,
         handleSubmit,
@@ -51,6 +58,16 @@ const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
 
     const password = watch("password");
 
+    const VisibilityBtn = () => {
+        return (
+            <IconButton
+                onClick={handleClickShowPassword}
+                aria-label="Show"
+            >
+                {showPassword ? <VisibilityOffIcon/> : <VisibilityIcon/>}
+            </IconButton>
+        );
+    };
 
     return (
         <Dialog open={open} onClose={handleClose}>
@@ -104,11 +121,14 @@ const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
                                 <TextField
                                     {...field}
                                     label="New Password"
-                                    type="password"
+                                    type={!showPassword ? 'text' : 'password'}
                                     error={!!errors.password}
                                     helperText={errors.password ? errors.password.message : ''}
                                     fullWidth
                                     InputLabelProps={{ shrink: true }}
+                                    InputProps={{
+                                        endAdornment: (<VisibilityBtn />),
+                                    }}
                                 />
                             )}
                         />
@@ -123,11 +143,14 @@ const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
                                 <TextField
                                     {...field}
                                     label="Confirm Password"
-                                    type="password"
+                                    type={!showPassword ? 'text' : 'password'}
                                     error={!!errors.confirmPassword}
                                     helperText={errors.confirmPassword ? errors.confirmPassword.message : ''}
                                     fullWidth
                                     InputLabelProps={{ shrink: true }}
+                                    InputProps={{
+                                        endAdornment: (<VisibilityBtn />),
+                                    }}
                                 />
                             )}
                         />
