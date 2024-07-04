@@ -2,7 +2,7 @@ const styles = {
     appbar: {
         backgroundColor: "white",
         px: '200px',
-        boxShadow: 'none'
+        boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2)'
     },
     toolbar: {
         justifyContent: 'space-between',

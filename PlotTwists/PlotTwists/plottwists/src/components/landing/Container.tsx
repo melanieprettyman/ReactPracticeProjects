@@ -6,7 +6,7 @@ import {AppBar, Button, Toolbar} from "@mui/material";
 import logo from '../../Utils/logo.png';
 import styles from "./styles";
 import {ThemeProvider} from "@mui/material/styles";
-import Theme from "./Theme/Theme";
+import Theme from "../../Theme/Theme";
 import SignupForm from "./forms/SignupForm";
 import LoginForm from "./forms/LoginForm";
 import ForgotPassword from "./forms/ForgotPassword";

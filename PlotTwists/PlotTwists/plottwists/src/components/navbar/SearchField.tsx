@@ -2,7 +2,7 @@ import { Box, IconButton, InputAdornment, TextField } from "@mui/material";
 import { alpha } from "@mui/material/styles";
 import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import theme from "../../landing/Theme/Theme";
+import theme from "../../Theme/Theme";
 
 type SearchProps = {
     handleSearchIconClick: () => void;

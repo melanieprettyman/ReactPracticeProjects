@@ -1,14 +1,14 @@
 import React from "react";
 import {AppBar, Badge, Box, Button, IconButton, InputBase, Menu, MenuItem, Toolbar} from "@mui/material";
-import styles from "../styles";
-import logo from "../../../Utils/logo.png";
+import styles from "./styles";
+import logo from "../../Utils/logo.png";
 import {styled, ThemeProvider, alpha} from "@mui/material/styles";
-import Theme from "../../landing/Theme/Theme";
+import Theme from "../../Theme/Theme";
 import SearchIcon from '@mui/icons-material/Search';
 import {AccountCircle} from "@mui/icons-material";
-import AccountMenu from "./AccountMenu";
-import GenreMenu from "./GenreMenu";
-import PublishMenu from "./PublishMenu";
+import AccountMenu from "./menus/AccountMenu";
+import GenreMenu from "./menus/GenreMenu";
+import PublishMenu from "./menus/PublishMenu";
 import SearchField from "./SearchField";
 
 
@@ -80,7 +80,7 @@ function Navigation() {
     );
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static" sx={styles.appbar}>
+            <AppBar position="static" sx={styles.appbar} >
                 <Toolbar sx={styles.toolbar}>
                     <img src={logo} alt="Plot Twists Logo" style={styles.img}/>
                     <GenreMenu />
