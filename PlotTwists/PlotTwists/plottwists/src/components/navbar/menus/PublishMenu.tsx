@@ -7,6 +7,7 @@ import Tooltip from '@mui/material/Tooltip';
 import styles from "../styles";
 import {Button} from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 export default function PublishMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -21,7 +22,7 @@ export default function PublishMenu() {
         <React.Fragment>
             <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
                 <Tooltip title="Account settings">
-                   <Button
+                    <Button
                         id="basic-button"
                         aria-controls={open ? 'basic-menu' : undefined}
                         aria-haspopup="true"
@@ -31,6 +32,7 @@ export default function PublishMenu() {
                         color="primary"
                     >
                         Publish
+                        <ArrowDropDownIcon sx={{fontSize: 40}}/>
                     </Button>
                 </Tooltip>
             </Box>

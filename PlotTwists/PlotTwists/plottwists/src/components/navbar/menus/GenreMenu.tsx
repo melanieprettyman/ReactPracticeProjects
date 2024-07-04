@@ -7,6 +7,7 @@ import {Box} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import {AccountCircle} from "@mui/icons-material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 const genre: string[] = [
     "Original", "Adventure", "Fanfiction", "Horror", "Mystery", "Paranormal",
@@ -37,25 +38,26 @@ export default function GenreMenu() {
                         color="primary"
                     >
                         Genre
+                        <ArrowDropDownIcon sx={{fontSize: 40}}/>
                     </Button>
                 </Tooltip>
             </Box>
 
-                <Menu
-                    id="basic-menu"
-                    anchorEl={anchorEl}
-                    open={open}
-                    onClose={handleClose}
-                    MenuListProps={{
-                        'aria-labelledby': 'basic-button',
-                    }}
-                     PaperProps={{
+            <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                    'aria-labelledby': 'basic-button',
+                }}
+                PaperProps={{
                     elevation: 0,
                     sx: {
                         overflow: 'visible',
                         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                         width: 300,
-                        padding:2,
+                        padding: 2,
                         '& .MuiAvatar-root': {
                             width: 200,
                             height: 200,
@@ -79,13 +81,13 @@ export default function GenreMenu() {
                 transformOrigin={{horizontal: 'center', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'center', vertical: 'bottom'}}
 
-                >
-                  <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 1 }}>
+            >
+                <Box sx={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 1}}>
                     {genre.map((genre, index) =>
                         <MenuItem key={index} onClick={handleClose}>{genre}</MenuItem>
                     )}
                 </Box>
-                </Menu>
+            </Menu>
 
         </>
     );
