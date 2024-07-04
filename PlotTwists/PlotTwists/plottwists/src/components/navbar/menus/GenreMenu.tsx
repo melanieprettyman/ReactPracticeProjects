@@ -5,15 +5,9 @@ import MenuItem from '@mui/material/MenuItem';
 import styles from "../styles";
 import {Box} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import {AccountCircle} from "@mui/icons-material";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import {genre} from "../../../Utils/genre";
 
-const genre: string[] = [
-    "Original", "Adventure", "Fanfiction", "Horror", "Mystery", "Paranormal",
-    "Science Fiction", "Thriller", "Contemporary", "Fantasy", "Humor", "New Adult",
-    "Werewolf", "Vampire", "Historical Fiction", "LGBTQ+", "Non-Fiction", "Romance", "Teen Fiction"
-];
 export default function GenreMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
