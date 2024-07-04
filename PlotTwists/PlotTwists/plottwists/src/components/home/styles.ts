@@ -18,8 +18,9 @@ const styles = {
             fontSize: '1.4rem',
             fontWeight: 'bold',
             minHeight: '100px',
-            alignItems: 'flex-end',
-            height: '100%'
+            alignItems: 'center',
+            height: '100%',
+        ml: 2
     },
 };
 
