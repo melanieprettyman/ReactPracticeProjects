@@ -7,10 +7,9 @@ const styles = {
     toolbar: {
         justifyContent: 'space-between',
         alignItems: 'center',
-        minHeight: '100px',
     },
     img: {
-        height: '100px',
+        height: '75px',
         paddingTop: 5
     },
     tabs: {

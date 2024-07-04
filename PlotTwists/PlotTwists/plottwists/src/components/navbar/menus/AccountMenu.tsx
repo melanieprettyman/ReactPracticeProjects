@@ -37,7 +37,7 @@ export default function AccountMenu() {
                         color="primary"
                         sx={styles.tabs}
                     >
-                        <AccountCircle sx={{color: 'darkgrey', fontSize: 50}}/>
+                        <AccountCircle sx={{color: 'darkgrey', fontSize: 40}}/>
                         Username
                     </Button>
                 </Tooltip>
