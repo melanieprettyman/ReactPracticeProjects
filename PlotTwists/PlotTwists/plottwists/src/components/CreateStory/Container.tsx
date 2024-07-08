@@ -25,7 +25,14 @@ const CreateStoryPage: React.FC = () => {
                 <Typography variant="h4" gutterBottom sx={{textAlign: 'center'}}>
                     Story Details
                 </Typography>
-                <Stack direction="row" spacing={2} sx={{width: '100%'}}>
+                <Stack
+                    direction="row"
+                    spacing={6}
+                    sx={{
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
                     <FileUpload/>
                     <StoryDetails/>
                 </Stack>

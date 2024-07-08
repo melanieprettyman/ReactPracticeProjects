@@ -1,20 +1,20 @@
-import {Controller, useForm} from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import React from "react";
 import {
-    Box, Button,
+    Box,
     FormControl,
     FormControlLabel,
-    InputLabel,
     MenuItem,
     Select,
-    Stack, Switch,
+    Stack,
+    Switch,
     TextField,
-    Typography
+    Typography,
 } from "@mui/material";
-import {genre} from "../../Utils/genre";
+import { genre } from "../../Utils/genre";
 
-const StoryDetails: React.FC = ()=>{
-        const { control, handleSubmit, watch } = useForm({
+const StoryDetails: React.FC = () => {
+    const { control, handleSubmit } = useForm({
         defaultValues: {
             genre1: '',
             genre2: '',
@@ -24,70 +24,79 @@ const StoryDetails: React.FC = ()=>{
         }
     });
 
-    const onSubmit = (data:any) => {
+    const onSubmit = (data: any) => {
         console.log(data);
     };
 
     return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate sx={{ mt: 1 }}>
-            <Stack direction="row" spacing={2}>
+            <Stack direction="row" spacing={4}>
+                <Stack>
+                    <Typography variant="h5" sx={{ mb: 2 }}>Genre 1</Typography>
+                    <Controller
+                        name="genre1"
+                        control={control}
+                        render={({ field }) => (
+                            <FormControl fullWidth sx={{ width: 260, mb: 2 }}>
+                                <Select {...field}>
+                                    {genre.map((genre, index) =>
+                                        <MenuItem key={index}>{genre}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
+                        )}
+                    />
+                </Stack>
+                <Stack>
+                    <Typography variant="h5" sx={{ mb: 2 }}>Genre 2 (Optional)</Typography>
+                    <Controller
+                        name="genre2"
+                        control={control}
+                        render={({ field }) => (
+                            <FormControl fullWidth sx={{ width: 260, mb: 2 }}>
+                                <Select {...field}>
+                                    {genre.map((genre, index) =>
+                                        <MenuItem key={index}>{genre}</MenuItem>
+                                    )}
+                                </Select>
+                            </FormControl>
+                        )}
+                    />
+                </Stack>
+            </Stack>
+            <Stack sx={{ mb: 2 , width: 816 }}>
+                <Typography variant="h5">Title</Typography>
                 <Controller
-                    name="genre1"
+                    name="title"
                     control={control}
                     render={({ field }) => (
-                        <FormControl fullWidth>
-                            <InputLabel>Genre 1</InputLabel>
-                            <Select {...field} label="Genre 1">
-                                {genre.map((genre, index) =>
-                                <MenuItem key={index} >{genre}</MenuItem>
-                                )}
-                            </Select>
-                        </FormControl>
-                    )}
-                />
-                <Controller
-                    name="genre2"
-                    control={control}
-                    render={({ field }) => (
-                        <FormControl fullWidth>
-                            <InputLabel>Genre 2 (optional)</InputLabel>
-                            <Select {...field} label="Genre 2 (optional)">
-                                {genre.map((genre, index) =>
-                                <MenuItem key={index} >{genre}</MenuItem>
-                                )}
-                            </Select>
-                        </FormControl>
+                        <TextField
+                            {...field}
+                            margin="normal"
+                            fullWidth
+                            autoFocus
+                        />
                     )}
                 />
             </Stack>
-            <Controller
-                name="title"
-                control={control}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        margin="normal"
-                        fullWidth
-                        label="Title"
-                        autoFocus
-                    />
-                )}
-            />
-            <Controller
-                name="description"
-                control={control}
-                render={({ field }) => (
-                    <TextField
-                        {...field}
-                        margin="normal"
-                        fullWidth
-                        label="Description"
-                        multiline
-                        rows={4}
-                    />
-                )}
-            />
+            <Stack sx={{ mb: 2 , width: 816 }}>
+                <Typography variant="h5">Description</Typography>
+                <Controller
+                    name="description"
+                    control={control}
+                    render={({ field }) => (
+                        <TextField
+                            {...field}
+                            margin="normal"
+                            fullWidth
+                            multiline
+                            rows={12}
+                        />
+                    )}
+                />
+            </Stack>
             <FormControlLabel
+                sx={{ mb: 2 }}
                 control={
                     <Controller
                         name="isMature"
