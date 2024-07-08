@@ -6,12 +6,15 @@ import CreateStoryPage from "./components/CreateStory/Container";
 import Theme from "./Theme/Theme";
 import {ThemeProvider} from "@mui/material/styles";
 import NewPartPage from "./components/NewPart/Container";
+import {DecisionProvider} from "./components/NewPart/Store/Context";
 
 
 function App() {
     return (
         <ThemeProvider theme={Theme}>
-            <NewPartPage/>
+           <DecisionProvider>
+      <NewPartPage />
+    </DecisionProvider>
         </ThemeProvider>
     );
 }
