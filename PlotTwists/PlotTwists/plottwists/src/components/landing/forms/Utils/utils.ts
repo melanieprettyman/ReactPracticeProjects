@@ -11,7 +11,7 @@ const usernameRegex = /^[a-zA-Z0-9_-]+$/;
 export const validateEmail = (value: string): string | boolean => {
     const regex = /^\S+@\S+$/i;
     if (!value.match(regex)) {
-        return 'Invalid email address';
+        return 'Invalid email address.';
     }
     return true;
 };
@@ -25,7 +25,7 @@ export const validatePasswordComplexity = (value: string): string | boolean => {
 
 export const validatePasswordsMatch = (password: string, confirmPassword: string): string | boolean => {
     if (password !== confirmPassword) {
-        return 'Passwords must match';
+        return 'Passwords must match.';
     }
     return true;
 };

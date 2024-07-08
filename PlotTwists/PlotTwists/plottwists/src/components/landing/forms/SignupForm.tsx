@@ -75,7 +75,7 @@ const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
                             <Controller
                                 name="username"
                                 control={control}
-                                rules={{required: 'Username is required', validate: validateUsername}}
+                                rules={{required: 'Username is required.', validate: validateUsername}}
                                 render={({field}) => (
                                     <TextField
                                         {...field}
@@ -91,7 +91,7 @@ const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
                             <Controller
                                 name="email"
                                 control={control}
-                                rules={{required: 'Email is required', validate: validateEmail}}
+                                rules={{required: 'Email is required.', validate: validateEmail}}
                                 render={({field}) => (
                                     <TextField
                                         {...field}
@@ -107,7 +107,7 @@ const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
                             <Controller
                                 name="password"
                                 control={control}
-                                rules={{required: 'Password is required', validate: validatePasswordComplexity}}
+                                rules={{required: 'Password is required.', validate: validatePasswordComplexity}}
                                 render={({field}) => (
                                     <TextField
                                         {...field}
@@ -157,7 +157,7 @@ const SignupForm: React.FC<SignupFormProps> = ({open, handleClose}) => {
                             <Controller
                                 name="dob"
                                 control={control}
-                                rules={{required: 'Date of Birth is required', validate: validateAge}}
+                                rules={{required: 'Date of Birth is required.', validate: validateAge}}
                                 render={({field}) => (
                                     <TextField
                                         {...field}
