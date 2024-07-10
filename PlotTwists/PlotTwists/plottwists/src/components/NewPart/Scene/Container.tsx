@@ -24,13 +24,11 @@ interface Decision {
 
 const Scene: React.FC = () => {
 
- const { decisionNumber, setDecisionNumber } = useDecisionContext();
- const [decisions, setDecisions] = useState<Decision[]>([]);
+    const { decisionNumber, setDecisionNumber } = useDecisionContext();
 
     const handleChange = (event: SelectChangeEvent<number>) => {
-    setDecisionNumber(event.target.value as number);
-        setDecisions(new Array(decisionNumber).fill(null).map((_, idx) => ({id: idx})));
-  };
+        setDecisionNumber(event.target.value as number);
+    };
 
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [fileName, setFileName] = useState<string>('');
@@ -63,7 +61,7 @@ const Scene: React.FC = () => {
                         onChange={handleChange}
                         displayEmpty
                     >
-                        {[0,2, 3, 4, 5].map(num => (
+                        {[0,2, 3, 4].map(num => (
                             <MenuItem key={num} value={num}>{num}</MenuItem>
                         ))}
                     </Select>

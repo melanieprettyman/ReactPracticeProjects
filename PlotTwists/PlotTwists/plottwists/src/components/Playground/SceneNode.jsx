@@ -1,7 +1,7 @@
 import { Handle, Position } from '@xyflow/react';
 import Scene from "../NewPart/Scene/Container";
 
-function TextUpdaterNode({ data }) {
+function SceneNode({ data }) {
 
   return (
     <div className="text-updater-node">
@@ -21,4 +21,4 @@ function TextUpdaterNode({ data }) {
   );
 }
 
-export default TextUpdaterNode;
+export default SceneNode;
