@@ -32,18 +32,6 @@ const Scene: React.FC = () => {
         setDecisions(new Array(decisionNumber).fill(null).map((_, idx) => ({id: idx})));
   };
 
-    const DecisionBranches = () => {
-        return (
-            <Stack direction="column" spacing={2}>
-                {decisions.map((decision, index) => (
-                    <Typography key={index}>
-                        Decision {index + 1}
-                    </Typography>
-                ))}
-            </Stack>
-        );
-    };
-
     const [uploadedFile, setUploadedFile] = useState<File | null>(null);
     const [fileName, setFileName] = useState<string>('');
 

@@ -1,13 +1,13 @@
 .text-updater-node {
-  height: 630px;
-  border: 1px solid #eee;
-  padding: 5px;
-  border-radius: 5px;
-  background: white;
+  position: relative; /* Establish a stacking context */
+  overflow: visible;  /* Ensure no clipping */
+  height: 640px;
+  z-index: 1000; /* Higher z-index to ensure it's on top */
 }
 
 .text-updater-node label {
   display: block;
-  color: #777;
-  font-size: 12px;
+}
+.text-updater-node input, .text-updater-node textarea, .text-updater-node button {
+  z-index: 1001; /* Ensure these are even higher within the node */
 }

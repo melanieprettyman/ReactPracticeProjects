@@ -3,6 +3,17 @@ import Quill from "quill";
 import "quill/dist/quill.snow.css"; // Ensure styles are imported
 
 const TextEditor: React.FC = () => {
+    const handleFocus = (event: { stopPropagation: () => void; }) => {
+        event.stopPropagation();
+    };
+
+    const handleInput = (event: { stopPropagation: () => void; }) => {
+        event.stopPropagation();
+    };
+
+// Add these props to your input elements in TextEditor
+    <input onFocus={handleFocus} onInput={handleInput}/>
+
     const editorContainerRef = useRef<HTMLDivElement>(null);
     const [quill, setQuill] = useState<Quill | null>(null);
 

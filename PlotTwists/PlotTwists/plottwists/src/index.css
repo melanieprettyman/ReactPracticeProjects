@@ -32,3 +32,6 @@ code {
   color: #999;
   text-transform: uppercase;
 }
+.text-editor * {
+  pointer-events: auto; /* Make sure input events are not ignored */
+}

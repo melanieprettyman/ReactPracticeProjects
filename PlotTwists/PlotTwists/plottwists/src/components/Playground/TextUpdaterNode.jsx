@@ -1,13 +1,7 @@
-import { useCallback } from 'react';
 import { Handle, Position } from '@xyflow/react';
 import Scene from "../NewPart/Scene/Container";
 
-const handleStyle = { left: 10 };
-
 function TextUpdaterNode({ data }) {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
 
   return (
     <div className="text-updater-node">
@@ -15,7 +9,7 @@ function TextUpdaterNode({ data }) {
         type="target"
         position={Position.Top}
       />
-      <div>
+      <div className="nodrag">
         <Scene/>
       </div>
       <Handle

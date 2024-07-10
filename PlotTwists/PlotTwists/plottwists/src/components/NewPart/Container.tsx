@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import {AppBar, Box, Button, Container, IconButton, Stack, TextField, Toolbar, Typography} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Scene from "./Scene/Container";
-import DecisionTreeFlow from "./Scene/DecisionTree";
 
 
 const NewPartPage: React.FC = () => {
