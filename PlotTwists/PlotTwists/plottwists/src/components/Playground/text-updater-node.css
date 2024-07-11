@@ -3,6 +3,8 @@
   overflow: visible;  /* Ensure no clipping */
   height: 640px;
   z-index: 1000; /* Higher z-index to ensure it's on top */
+  display: flex;
+
 }
 
 .text-updater-node label {
@@ -10,4 +12,19 @@
 }
 .text-updater-node input, .text-updater-node textarea, .text-updater-node button {
   z-index: 1001; /* Ensure these are even higher within the node */
+}
+.decision-node {
+  position: relative; /* Establish a stacking context */
+  overflow: visible;  /* Ensure no clipping */
+  height: 240px;
+}
+
+.react-flow__edge-path {
+  stroke: #333;
+  stroke-width: 2;
+}
+
+.temp .react-flow__edge-path {
+  stroke: #bbb;
+  stroke-dasharray: 5 5;
 }

@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from "react";
 import Quill from "quill";
-import "quill/dist/quill.snow.css"; // Ensure styles are imported
+import "quill/dist/quill.snow.css";
+import {type} from "node:os"; // Ensure styles are imported
 
 const TextEditor: React.FC = () => {
     const handleFocus = (event: { stopPropagation: () => void; }) => {
@@ -11,41 +12,47 @@ const TextEditor: React.FC = () => {
         event.stopPropagation();
     };
 
-// Add these props to your input elements in TextEditor
-    <input onFocus={handleFocus} onInput={handleInput}/>
+
+    // Add these props to your input elements in TextEditor
+    <input onFocus={handleFocus} onInput={handleInput} />
 
     const editorContainerRef = useRef<HTMLDivElement>(null);
     const [quill, setQuill] = useState<Quill | null>(null);
 
     useEffect(() => {
-            if (editorContainerRef.current) {
-                editorContainerRef.current.innerHTML = ''; // Clears the container to prevent duplicate toolbar
+        // @ts-ignore
+        let newQuill;
+        if (editorContainerRef.current) {
+            editorContainerRef.current.innerHTML = ''; // Clears the container to prevent duplicate toolbar
 
-                const newQuill = new Quill(editorContainerRef.current, {
-                    theme: 'snow',
-                    modules: {
-                        toolbar: [
-                            [{header: [1, 2, false]}],
-                            ['bold', 'italic', 'underline'],
-                            [{list: 'ordered'}, {list: 'bullet'}],
-                        ]
-                    },
-                    placeholder: 'Compose a scene...',
-                });
-                setQuill(newQuill);
+            newQuill = new Quill(editorContainerRef.current, {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{header: [1, 2, false]}],
+                        ['bold', 'italic', 'underline'],
+                        [{list: 'ordered'}, {list: 'bullet'}],
+                    ]
+                },
+                placeholder: 'Compose a scene...',
+            });
+            setQuill(newQuill);
+        }
 
-                return () => {
-                    newQuill.off('text-change');
-                    // @ts-ignore
-                    editorContainerRef.current.innerHTML = ''; // Clear the inner HTML on cleanup
-                    setQuill(null);
-                };
+        return () => {
+            // @ts-ignore
+            if (newQuill) {
+                newQuill.off('text-change');
             }
-        },
-        []); // No dependencies to ensure this runs only once
+            // Protect against null reference if the component unmounts before setup
+            if (editorContainerRef.current) {
+                editorContainerRef.current.innerHTML = ''; // Clear the inner HTML on cleanup
+            }
+            setQuill(null);
+        };
+    }, []);
 
     const html = quill?.getSemanticHTML(); //Get the HTML representation of the editor contents
-
 
     return (
         <div className="text-editor">
