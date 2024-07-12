@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {
     ReactFlow,
     Controls,
@@ -22,7 +22,19 @@ import {useAppContext} from "../../../Store/Context";
 
 
 const initialNodes = [
-    {id: 'node-1', position: {x: 0, y: 0}, type: 'node'},
+    {
+        id: 'node-1',
+        position: {x: 0, y: 0},
+        type: 'node',
+        data: {
+            id:'node-1',
+            label: `Scene ${1}`,
+            title: '',
+            description: '',
+            imageUrl: '',
+            fileName: '',
+        }
+    },
 ];
 
 const nodeTypes = {
@@ -31,7 +43,7 @@ const nodeTypes = {
 };
 
 function Flow() {
-const { nodesInfo, publish } = useAppContext();
+    const {nodesInfo, publish, updateNode} = useAppContext();
     const [sceneCount, setSceneCount] = useState(1);
     const [decCount, setDecCount] = useState(1);
 
@@ -61,26 +73,41 @@ const { nodesInfo, publish } = useAppContext();
     }, [nodes, setEdges]);
 
     const handleAddScene = useCallback(() => {
-        setSceneCount((prevState)=>prevState+1);
+        setSceneCount(prevState => prevState + 1);
+        const nodeId = `node-${nodes.length + 1}`;
         const newNode = {
-            id: `node-${nodes.length + 1}`,
-            type: 'node', // Custom node type
-            position: {x: 700, y: 700},
-            data: {label: `Scene ${sceneCount+1}`}
+            id: nodeId,
+            type: 'node',
+            position: {x: 0, y: 0},
+            data: {
+                id:nodeId,
+                label: `Scene ${sceneCount + 1}`,
+                title: '',
+                description: '',
+                imageUrl: '',
+                fileName: '',
+            }
         };
+        updateNode(nodeId, newNode.data); // Update context with new node data
         reactFlowInstance.addNodes(newNode);
-    }, [nodes.length, reactFlowInstance]);
+    }, [nodes.length, reactFlowInstance, updateNode]);
 
     const handleAddDecision = useCallback(() => {
-         setDecCount((prevState)=>prevState+1);
+        setDecCount(prevState => prevState + 1);
+        const nodeId = `node-${nodes.length + 1}`;
         const newNode = {
-            id: `node-${nodes.length + 1}`,
+            id: nodeId,
             type: 'decisionNode', // Custom node type
             position: {x: 300, y: 200},
-            data: {label: `Decision ${decCount}`}
+            data: {
+                id:nodeId,
+                label: `Decision ${decCount}`,
+                description: '',
+            }
         };
+        updateNode(nodeId, newNode.data); // Update context with new node data
         reactFlowInstance.addNodes(newNode);
-    }, [nodes.length, reactFlowInstance]);
+    }, [nodes.length, reactFlowInstance, updateNode,sceneCount]);
 
     const onNodesDelete = useCallback((deletedNodes) => {
         const deleteRecursively = (nodeId) => {
@@ -100,9 +127,9 @@ const { nodesInfo, publish } = useAppContext();
         });
     }, [edges, setNodes, setEdges]);
 
-     const buildDecisionTree = useCallback(() => {
+    const buildDecisionTree = useCallback(() => {
         const nodesById = reactFlowInstance.getNodes().reduce((acc, node) => {
-            acc[node.id] = { ...node.data, children: [] };
+            acc[node.id] = {...node.data, children: []};
             return acc;
         }, {});
 
@@ -114,33 +141,62 @@ const { nodesInfo, publish } = useAppContext();
 
         // Assuming 'node-1' is the root node
         const rootNode = nodesById['node-1'];
+        console.log('Root Node:', rootNode);
         return rootNode;
     }, [reactFlowInstance]);
 
+    const updateTreeWithNodeInfo = (node, nodesInfo) => {
+        if (!node) return;
 
-   if(publish){
-       const decisionTree = buildDecisionTree();
-        console.log('Decision Tree:', decisionTree);
-        Object.values(nodesInfo).forEach(node => {
-                console.log(`ID: ${node.id}, Type: ${node.type}, Title: ${node.title}, Description: ${node.description}, Image URL: ${node.imageUrl}, File Name: ${node.fileName}`);
-            });
-   }
+
+        const nodeDetails = nodesInfo[node.id];
+
+        console.log('Available keys in nodesInfo:', Object.keys(nodesInfo));
+        console.log('nodeDetails for node', node.id, ':', nodeDetails);
+
+        if (nodeDetails) {
+            node.title = nodeDetails.title || node.title;
+            node.description = nodeDetails.description || node.description;
+            node.imageUrl = nodeDetails.imageUrl || node.imageUrl;
+            node.fileName = nodeDetails.fileName || node.fileName;
+        }
+
+        if (node.children) {
+            node.children.forEach(child => updateTreeWithNodeInfo(child, nodesInfo));
+        }
+    };
+
+    const handlePublish = useCallback(() => {
+        const decisionTree = buildDecisionTree();
+        console.log('Structured Decision Tree:', decisionTree);
+
+        updateTreeWithNodeInfo(decisionTree, nodesInfo); // Update the tree with detailed node data
+        console.log('Updated Decision Tree:', decisionTree);
+
+        // Additional processing or exporting logic here
+    }, [buildDecisionTree, nodesInfo]);
+
+    if (publish) {
+        handlePublish();
+    }
+    ;
+
 
     return (
-        <Box sx={{ display: 'flex', width: '100vw', height: '100vh', m:0, p:0 }}>
-            <Box sx={{ width: 100, backgroundColor: '#f0f0f0', height:240, borderRadius:4, p: 2, m: 0 }} >
-            <IconButton onClick={handleAddScene} size="large">
-                <Stack>
-                    <img src={sceneBtn} alt="Add Scene" style={{ maxWidth: '100%', maxHeight: '100%' }} />
-                   <Typography sx={{fontSize:12}}>Add Scene</Typography>
-                </Stack>
-            </IconButton>
-            <IconButton onClick={handleAddDecision} size="large">
-                <Stack>
-                    <img src={decisionBtn} alt="Add decision" style={{ maxWidth: '100%', maxHeight: '100%' }} />
-                  <Typography sx={{fontSize:12}}>Add Decision</Typography>
-                </Stack>
-            </IconButton>
+        <Box sx={{display: 'flex', width: '100vw', height: '100vh', m: 0, p: 0}}>
+            <Box sx={{width: 100, backgroundColor: '#f0f0f0', height: 240, borderRadius: 4, p: 2, m: 0}}>
+                <IconButton onClick={handleAddScene} size="large">
+                    <Stack>
+                        <img src={sceneBtn} alt="Add Scene" style={{maxWidth: '100%', maxHeight: '100%'}}/>
+                        <Typography sx={{fontSize: 12}}>Add Scene</Typography>
+                    </Stack>
+                </IconButton>
+                <IconButton onClick={handleAddDecision} size="large">
+                    <Stack>
+                        <img src={decisionBtn} alt="Add decision" style={{maxWidth: '100%', maxHeight: '100%'}}/>
+                        <Typography sx={{fontSize: 12}}>Add Decision</Typography>
+                    </Stack>
+                </IconButton>
             </Box>
             <ReactFlow
                 nodes={nodes}
@@ -156,7 +212,7 @@ const { nodesInfo, publish } = useAppContext();
                 maxZoom={4}
                 fitViewOptions={{padding: 2}}
                 onConnect={onConnect}
-                style={{ flex: 1 }}
+                style={{flex: 1}}
             >
                 <MiniMap zoomable pannable/>
                 <Background/>

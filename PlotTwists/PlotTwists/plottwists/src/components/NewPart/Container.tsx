@@ -47,7 +47,7 @@ const NewPartPage: React.FC = () => {
                 </Toolbar>
             </AppBar>
             <Container maxWidth={false} sx={{mt: 2, mb: 2, overflow: 'visible', width: '100%', paddingLeft: 0, paddingRight: 0, marginLeft:0}}>
-                <Stack spacing={3}>
+                <Stack >
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <TextField
                             id="standard-basic"
