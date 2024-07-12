@@ -1,9 +1,12 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
 import {type} from "node:os"; // Ensure styles are imported
 
-const TextEditor: React.FC = () => {
+type Props = {
+    setDescription: (html: string | undefined) => void
+};
+const TextEditor: React.FC<Props> = ({setDescription}) => {
     const handleFocus = (event: { stopPropagation: () => void; }) => {
         event.stopPropagation();
     };
@@ -14,7 +17,7 @@ const TextEditor: React.FC = () => {
 
 
     // Add these props to your input elements in TextEditor
-    <input onFocus={handleFocus} onInput={handleInput} />
+    <input onFocus={handleFocus} onInput={handleInput}/>
 
     const editorContainerRef = useRef<HTMLDivElement>(null);
     const [quill, setQuill] = useState<Quill | null>(null);
@@ -52,7 +55,12 @@ const TextEditor: React.FC = () => {
         };
     }, []);
 
-    const html = quill?.getSemanticHTML(); //Get the HTML representation of the editor contents
+    const html = quill?.getSemanticHTML();
+
+    useEffect(() => {
+        setDescription(html);
+
+    }, [html]);
 
     return (
         <div className="text-editor">

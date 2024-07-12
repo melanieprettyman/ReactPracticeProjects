@@ -6,20 +6,18 @@ import CreateStoryPage from "./components/CreateStory/Container";
 import Theme from "./Theme/Theme";
 import {ThemeProvider} from "@mui/material/styles";
 import NewPartPage from "./components/NewPart/Container";
-import {DecisionProvider} from "./components/NewPart/Store/Context";
-import Flow from "./components/Playground/FlowChart";
+import {ContextProvider} from "./Store/Context";
 
 
 function App() {
     return (
         <ThemeProvider theme={Theme}>
-           <DecisionProvider>
-      <Flow />
-    </DecisionProvider>
+            <ContextProvider>
+                <NewPartPage/>
+            </ContextProvider>
         </ThemeProvider>
     );
 }
-
 
 
 export default App;

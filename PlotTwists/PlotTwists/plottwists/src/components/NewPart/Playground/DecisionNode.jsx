@@ -1,9 +1,22 @@
 import {Handle, Position} from '@xyflow/react';
 import {Paper, Stack, TextField, Typography} from "@mui/material";
-import React from "react";
+import React, {useEffect, useState} from "react";
+import {useAppContext} from "../../../Store/Context";
 
 
-function DecisionNode() {
+function DecisionNode({id}) {
+
+     const { nodesInfo, updateNode } = useAppContext();
+    const node = nodesInfo[id] || { type: 'decision', description: ''};
+
+    const [description, setDescription] = useState(node.description);
+
+    useEffect(() => {
+        // Prepare the updated node data based on type
+        const updatedData = {description};
+        updateNode(id, updatedData);
+    }, [description]);
+
 
     return (
         <div className="decision-node">
@@ -28,6 +41,8 @@ function DecisionNode() {
                                 placeholder="Enter decision here"
                                 fullWidth
                                 sx={{fontSize:18}}
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
                             />
                         </div>
                     </Stack>
