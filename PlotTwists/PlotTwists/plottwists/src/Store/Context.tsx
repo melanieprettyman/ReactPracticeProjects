@@ -31,9 +31,6 @@ export const ContextProvider: React.FC<{children: React.ReactNode}> = ({ childre
 
     const publishData = useCallback(() => {
         setPublish(true);
-        Object.entries(nodesInfo).forEach(([id, data]) => {
-            console.log(`ID: ${id}, Type: ${data.type}, Title: ${data.title}, Description: ${data.description}, Image URL: ${data.imageUrl}, File Name: ${data.fileName}`);
-        });
     }, [nodesInfo]);
 
     return (

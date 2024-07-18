@@ -24,10 +24,10 @@ import {useAppContext} from "../../../Store/Context";
 const initialNodes = [
     {
         id: 'node-1',
-        position: {x: 0, y: 0},
+        position: {x: 570, y: 50},
         type: 'node',
         data: {
-            id:'node-1',
+            id: 'node-1',
             label: `Scene ${1}`,
             title: '',
             description: '',
@@ -66,7 +66,7 @@ function Flow() {
         if ((sourceNode.type === 'node' && targetNode.type !== 'decisionNode') ||
             (sourceNode.type === 'decisionNode' && targetNode.type !== 'node')) {
             console.error('Invalid connection attempt: Connections must alternate between node and decision');
-            return; // Prevent adding the edge
+            return;
         }
 
         setEdges((eds) => addEdge(connection, eds));
@@ -78,9 +78,9 @@ function Flow() {
         const newNode = {
             id: nodeId,
             type: 'node',
-            position: {x: 0, y: 0},
+            position: {x: -600, y: 0},
             data: {
-                id:nodeId,
+                id: nodeId,
                 label: `Scene ${sceneCount + 1}`,
                 title: '',
                 description: '',
@@ -98,16 +98,16 @@ function Flow() {
         const newNode = {
             id: nodeId,
             type: 'decisionNode', // Custom node type
-            position: {x: 300, y: 200},
+            position: {x: -600, y: 700},
             data: {
-                id:nodeId,
+                id: nodeId,
                 label: `Decision ${decCount}`,
                 description: '',
             }
         };
         updateNode(nodeId, newNode.data); // Update context with new node data
         reactFlowInstance.addNodes(newNode);
-    }, [nodes.length, reactFlowInstance, updateNode,sceneCount]);
+    }, [nodes.length, reactFlowInstance, updateNode, sceneCount]);
 
     const onNodesDelete = useCallback((deletedNodes) => {
         const deleteRecursively = (nodeId) => {
@@ -141,18 +141,13 @@ function Flow() {
 
         // Assuming 'node-1' is the root node
         const rootNode = nodesById['node-1'];
-        console.log('Root Node:', rootNode);
         return rootNode;
     }, [reactFlowInstance]);
 
     const updateTreeWithNodeInfo = (node, nodesInfo) => {
         if (!node) return;
 
-
         const nodeDetails = nodesInfo[node.id];
-
-        console.log('Available keys in nodesInfo:', Object.keys(nodesInfo));
-        console.log('nodeDetails for node', node.id, ':', nodeDetails);
 
         if (nodeDetails) {
             node.title = nodeDetails.title || node.title;
@@ -168,12 +163,10 @@ function Flow() {
 
     const handlePublish = useCallback(() => {
         const decisionTree = buildDecisionTree();
-        console.log('Structured Decision Tree:', decisionTree);
 
         updateTreeWithNodeInfo(decisionTree, nodesInfo); // Update the tree with detailed node data
         console.log('Updated Decision Tree:', decisionTree);
 
-        // Additional processing or exporting logic here
     }, [buildDecisionTree, nodesInfo]);
 
     if (publish) {
@@ -205,14 +198,13 @@ function Flow() {
                 onEdgesChange={onEdgesChange}
                 onNodesDelete={onNodesDelete}
                 nodeTypes={nodeTypes}
-                fitView
-                zoomOnScroll={true}
-                zoomOnDoubleClick={true}
-                minZoom={0.2}
-                maxZoom={4}
-                fitViewOptions={{padding: 2}}
                 onConnect={onConnect}
-                style={{flex: 1}}
+                panOnScroll
+                selectionOnDrag
+                fitView // Automatically fits the view to the elements upon initialization
+    fitViewOptions={{
+        padding: 2,  // Adds padding around the fitted view, for example
+    }}
             >
                 <MiniMap zoomable pannable/>
                 <Background/>
@@ -228,3 +220,62 @@ export default () => (
     </ReactFlowProvider>
 );
 
+/**
+ * Updated Decision Tree:
+ * {
+ *     "id": "node-1",
+ *     "label": "Scene 1",
+ *     "title": "1",
+ *     "description": "<p>1</p>",
+ *     "imageUrl": {},
+ *     "fileName": "Screenshot 2024-07-11 at 2.58.47 PM.png",
+ *     "children": [
+ *         {
+ *             "id": "node-2",
+ *             "label": "Decision 1",
+ *             "description": "a",
+ *             "children": []
+ *         },
+ *         {
+ *             "id": "node-3",
+ *             "label": "Decision 2",
+ *             "description": "b",
+ *             "children": [
+ *                 {
+ *                     "id": "node-4",
+ *                     "label": "Scene 2",
+ *                     "title": "2",
+ *                     "description": "<p>2</p>",
+ *                     "imageUrl": "",
+ *                     "fileName": "",
+ *                     "children": [
+ *                         {
+ *                             "id": "node-5",
+ *                             "label": "Decision 3",
+ *                             "description": "2a",
+ *                             "children": [
+ *                                 {
+ *                                     "id": "node-7",
+ *                                     "label": "Scene 3",
+ *                                     "title": "3",
+ *                                     "description": "<p>3</p>",
+ *                                     "imageUrl": "",
+ *                                     "fileName": "",
+ *                                     "children": []
+ *                                 }
+ *                             ]
+ *                         },
+ *                         {
+ *                             "id": "node-6",
+ *                             "label": "Decision 4",
+ *                             "description": "2b",
+ *                             "children": []
+ *                         }
+ *                     ]
+ *                 }
+ *             ]
+ *         }
+ *     ]
+ * }
+ *
+ */

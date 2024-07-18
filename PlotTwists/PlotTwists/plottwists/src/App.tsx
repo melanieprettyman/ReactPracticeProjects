@@ -7,13 +7,13 @@ import Theme from "./Theme/Theme";
 import {ThemeProvider} from "@mui/material/styles";
 import NewPartPage from "./components/NewPart/Container";
 import {ContextProvider} from "./Store/Context";
-
+import PlayStory from "./components/PlayStory";
 
 function App() {
     return (
         <ThemeProvider theme={Theme}>
             <ContextProvider>
-                <NewPartPage/>
+                <PlayStory/>
             </ContextProvider>
         </ThemeProvider>
     );
