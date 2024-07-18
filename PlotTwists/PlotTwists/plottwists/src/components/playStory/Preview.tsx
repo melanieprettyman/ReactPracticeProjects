@@ -1,8 +1,12 @@
 import React from "react";
-import {AppBar, Box, Container, IconButton, Toolbar} from "@mui/material";
+import {AppBar, Box, Container, IconButton, Paper, Rating, Stack, Toolbar, Typography} from "@mui/material";
 import Page from "./Page";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {useNavigate} from "react-router-dom";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import ModeCommentIcon from "@mui/icons-material/ModeComment";
+import Divider from "@mui/material/Divider";
+import PageContent from "./PageContent";
 
 const Preview: React.FC = () => {
     const navigate = useNavigate();  // Initialize navigate function
@@ -29,7 +33,15 @@ const Preview: React.FC = () => {
                 </Toolbar>
             </AppBar>
             <Container sx={{mt: .2, width: '70%', height: '100%'}}>
-                <Page/>
+                <Paper elevation={3} sx={{paddingBottom: 10}}>
+                    <div style={{paddingBottom: 30}}>
+                        <Typography textAlign='center' variant='h4' sx={{paddingTop: 5, paddingBottom: 1}}>
+                            1. Chapter Title
+                        </Typography>
+                        <Divider variant="middle"/>
+                    </div>
+                    <PageContent/>
+                </Paper>
             </Container>
         </Box>
     );
