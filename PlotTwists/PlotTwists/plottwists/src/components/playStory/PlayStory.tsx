@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import {
-    AppBar,
+    AppBar, Avatar,
     Box,
     Button,
     Container,
-    FormControl, MenuItem,
+    FormControl, IconButton, MenuItem, Rating,
     Select, SelectChangeEvent,
     Stack,
     Toolbar,
@@ -12,13 +12,15 @@ import {
 } from "@mui/material";
 import Page from "./Page";
 import img from "./placeholder.png";
+import StoryCommentSection from "./CommentSection";
 
 
 const partsMenu = [
-    { value: 1, label: 'Part 1' },
-    { value: 2, label: 'Part 2' },
-    { value: 3, label: 'Part 3' }
+    {value: 1, label: 'Part 1'},
+    {value: 2, label: 'Part 2'},
+    {value: 3, label: 'Part 3'}
 ];
+
 function PartSelector() {
     const mostRecentPart = partsMenu[partsMenu.length - 1].value.toString();
 
@@ -29,7 +31,7 @@ function PartSelector() {
     };
 
     return (
-        <Box sx={{ minWidth: 120 }}>
+        <Box sx={{minWidth: 120, maxWidth:250}}>
             <FormControl fullWidth>
                 <Select
                     id="demo-simple-select"
@@ -48,6 +50,9 @@ function PartSelector() {
 }
 
 const PlayStory: React.FC = () => {
+
+    const [value, setValue] = React.useState<number | null>(null);
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static" sx={{
@@ -63,11 +68,26 @@ const PlayStory: React.FC = () => {
                          style={{
                              height: 'auto',
                              aspectRatio: '11 / 16',
-                             maxWidth:40,
+                             maxWidth: 50,
+                             paddingTop:10
                          }}/>
-                    <Typography variant='h4' sx={{color: 'black', paddingRight: 2, paddingLeft: 1}}>
-                        Title:
-                    </Typography>
+                    <Stack sx={{paddingTop:1, paddingRight:1}}>
+                        <Typography variant='h4'
+                                    sx={{color: 'black', paddingRight: 2, paddingLeft: 1}}>Title:</Typography>
+                        <Stack direction='row' alignItems='center' justifyContent="center">
+                            <Typography variant='h6'
+                                        sx={{color: 'black', paddingLeft: 1, paddingRight: 1}}>by</Typography>
+                            <Button>
+                                <Avatar
+                                    alt="Remy Sharp"
+                                    src={img}
+                                    sx={{width: 24, height: 24}}
+                                />
+                                <Typography variant='h6'
+                                            sx={{color: 'black', paddingLeft: 1}}>Author</Typography>
+                            </Button>
+                        </Stack>
+                    </Stack>
 
                     <PartSelector/>
 
@@ -75,6 +95,16 @@ const PlayStory: React.FC = () => {
 
                     <Box>
                         <Stack direction="row" spacing={1}>
+                            <Stack direction="row" alignItems="center" spacing={1}>
+                                <Typography variant="body2" sx={{color: "#5B2981ff", fontSize: 18}}>RATE</Typography>
+                                <Rating
+                                    name="simple-controlled"
+                                    value={value}
+                                    onChange={(event, newValue) => {
+                                        setValue(newValue);
+                                    }}
+                                />
+                            </Stack>
                             <Button variant="contained">Save</Button>
                             <Button variant="contained">Restart</Button>
                             <Button variant="contained">Quit</Button>
@@ -84,7 +114,9 @@ const PlayStory: React.FC = () => {
             </AppBar>
             <Container sx={{mt: .2, width: '70%', height: '100%'}}>
                 <Page/>
+                <StoryCommentSection/>
             </Container>
+
 
         </Box>
     );

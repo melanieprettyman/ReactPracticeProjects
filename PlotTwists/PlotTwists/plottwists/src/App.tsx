@@ -7,7 +7,7 @@ import Theme from "./Theme/Theme";
 import {ThemeProvider} from "@mui/material/styles";
 import NewPartPage from "./components/NewPart/Container";
 import {ContextProvider} from "./Store/Context";
-import PlayStory from "./components/PlayStory";
+import PlayStory from "./components/playStory/PlayStory";
 
 function App() {
     return (
