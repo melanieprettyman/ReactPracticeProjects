@@ -2,7 +2,7 @@ import React from 'react'
 import { CommentSection} from 'react-comments-section'
 import 'react-comments-section/dist/index.css'
 
-//TODO: add likes and time stamp and route to user when clicking on avatar 
+//TODO: add likes and time stamp and route to user when clicking on avatar
 
 const StoryCommentSection = () => {
   const data =[
@@ -43,6 +43,7 @@ const StoryCommentSection = () => {
         currentData={(data: any) => {
           console.log('curent data', data)
         }}
+        submitBtnStyle={{ border: '#5B2981ff', backgroundColor: '#5B2981ff' }}
       />
 }
 

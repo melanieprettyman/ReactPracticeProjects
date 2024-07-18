@@ -13,6 +13,7 @@ import {
 import Page from "./Page";
 import img from "./placeholder.png";
 import StoryCommentSection from "./CommentSection";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 
 const partsMenu = [
@@ -31,7 +32,7 @@ function PartSelector() {
     };
 
     return (
-        <Box sx={{minWidth: 120, maxWidth:250}}>
+        <Box sx={{minWidth: 120, maxWidth: 250}}>
             <FormControl fullWidth>
                 <Select
                     id="demo-simple-select"
@@ -64,14 +65,18 @@ const PlayStory: React.FC = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
+                    <IconButton>
+                        <ArrowBackIcon sx={{fontSize: 60, paddingTop: 1, paddingRight: 1}}/>
+                    </IconButton>
+
                     <img src={img} alt='scene picture'
                          style={{
                              height: 'auto',
                              aspectRatio: '11 / 16',
                              maxWidth: 50,
-                             paddingTop:10
+                             paddingTop: 10
                          }}/>
-                    <Stack sx={{paddingTop:1, paddingRight:1}}>
+                    <Stack sx={{paddingTop: 1, paddingRight: 1}}>
                         <Typography variant='h4'
                                     sx={{color: 'black', paddingRight: 2, paddingLeft: 1}}>Title:</Typography>
                         <Stack direction='row' alignItems='center' justifyContent="center">
@@ -113,8 +118,16 @@ const PlayStory: React.FC = () => {
                 </Toolbar>
             </AppBar>
             <Container sx={{mt: .2, width: '70%', height: '100%'}}>
-                <Page/>
-                <StoryCommentSection/>
+                <Stack spacing={3}>
+                    <Page/>
+                    <Button fullWidth variant='contained'
+                            sx={{fontWeight: 900, height: 50, borderRadius: '30px', backgroundColor: 'black', '&:hover': {
+                        bgcolor: '#3d3c3c',
+                    },}}>
+                        Continue to next part
+                    </Button>
+                    <StoryCommentSection/>
+                </Stack>
             </Container>
 
 
