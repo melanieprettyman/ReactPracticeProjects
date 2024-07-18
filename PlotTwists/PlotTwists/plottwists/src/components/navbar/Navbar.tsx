@@ -10,6 +10,7 @@ import AccountMenu from "./menus/AccountMenu";
 import GenreMenu from "./menus/GenreMenu";
 import PublishMenu from "./menus/PublishMenu";
 import SearchField from "./SearchField";
+import {useNavigate} from "react-router-dom";
 
 
 function Navigation() {
@@ -35,6 +36,15 @@ function Navigation() {
     const handleSearchIconClick = () => {
         // Add your search handling logic here
         console.log("Search icon clicked");
+    };
+     let navigate = useNavigate();
+
+    const navigateHome = () => {
+        navigate("/");
+    };
+    const navigateToPopularCollection = () => {
+        // Use a route parameter to pass the genre
+        navigate(`/collection/popular`);
     };
 
     const menuId = 'primary-search-account-menu';
@@ -78,13 +88,15 @@ function Navigation() {
         >
         </Menu>
     );
+
     return (
+
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static" sx={styles.appbar} >
                 <Toolbar sx={styles.toolbar}>
-                    <img src={logo} alt="Plot Twists Logo" style={styles.img}/>
+                    <img src={logo} alt="Plot Twists Logo" style={styles.img} onClick={navigateHome}/>
                     <GenreMenu />
-                    <Button variant="text" sx={styles.tabs} color="primary">
+                    <Button variant="text" sx={styles.tabs} color="primary" onClick={navigateToPopularCollection}>
                         Popular
                     </Button>
                     <SearchField handleSearchIconClick={handleSearchIconClick}/>

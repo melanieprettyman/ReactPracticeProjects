@@ -19,7 +19,7 @@ const Page: React.FC = () => {
                         <Typography variant="body2" sx={{color:"#5c5959"}}>1.8M</Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" spacing={1}>
-                        <Rating name="read-only" value={3.7} readOnly/>
+                        <Rating name="read-only" value={3.7} readOnly  precision={0.5}/>
                         <Typography variant="body2" sx={{color:"#5c5959"}}>3.7</Typography>
                     </Stack>
                     <Stack direction="row" alignItems="center" spacing={1}>

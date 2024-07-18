@@ -3,8 +3,19 @@ import {AppBar, IconButton, Toolbar, Box, Container, Stack, Typography, Button} 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import StoryDetails from './StoryDetails';
 import FileUpload from "./FileUpload";
+import {useNavigate} from "react-router-dom";
 
 const CreateStoryPage: React.FC = () => {
+    const navigate = useNavigate();  // Initialize navigate function
+
+    // Function to handle back navigation
+    const handleBack = () => {
+        navigate(-1);
+    };
+    const handleCreateSeries = () =>{
+         navigate("/add-new-part" );
+    };
+
     return (
         <Box sx={{flexGrow: 1}}>
             <AppBar position="static" sx={{
@@ -16,7 +27,7 @@ const CreateStoryPage: React.FC = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                 }}>
-                    <IconButton>
+                    <IconButton onClick={handleBack}>
                         <ArrowBackIcon sx={{fontSize: 60, paddingTop: 1}}/>
                     </IconButton>
                 </Toolbar>
@@ -36,7 +47,13 @@ const CreateStoryPage: React.FC = () => {
                     <FileUpload/>
                     <StoryDetails/>
                 </Stack>
-                <Button type="submit" fullWidth variant="contained" sx={{mt: 3, mb: 2, width:'10vw', mx: 'auto', display: 'block'}}>
+                <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    sx={{mt: 3, mb: 2, width:'10vw', mx: 'auto', display: 'block'}}
+                    onClick={handleCreateSeries}
+                >
                     Create Series
                 </Button>
             </Container>

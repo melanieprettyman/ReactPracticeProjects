@@ -7,8 +7,17 @@ import {Box} from "@mui/material";
 import Tooltip from "@mui/material/Tooltip";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {genre} from "../../../Utils/genre";
+import {useNavigate} from "react-router-dom";
 
 export default function GenreMenu() {
+     let navigate = useNavigate();
+
+     const navigateToCollection = (genre:string) => {
+        // Use a route parameter to pass the genre
+        navigate(`/collection/${genre.toLowerCase()}`);
+    };
+
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -78,7 +87,7 @@ export default function GenreMenu() {
             >
                 <Box sx={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 1}}>
                     {genre.map((genre, index) =>
-                        <MenuItem key={index} onClick={handleClose}>{genre}</MenuItem>
+                        <MenuItem key={index} onClick={()=>{navigateToCollection(genre)}}>{genre}</MenuItem>
                     )}
                 </Box>
             </Menu>

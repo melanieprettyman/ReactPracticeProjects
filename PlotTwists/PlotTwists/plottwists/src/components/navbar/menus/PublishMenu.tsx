@@ -8,8 +8,15 @@ import styles from "../styles";
 import {Button} from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import {useNavigate} from "react-router-dom";
 
 export default function PublishMenu() {
+    let navigate = useNavigate();
+
+    const navigateToCreateStory = () => {
+        navigate("/create-story");
+    };
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -70,8 +77,8 @@ export default function PublishMenu() {
                 transformOrigin={{horizontal: 'center', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'center', vertical: 'bottom'}}
             >
-                <MenuItem onClick={handleClose}>
-                    <ListItemIcon>
+                <MenuItem onClick={navigateToCreateStory}>
+                    <ListItemIcon >
                         <CreateIcon fontSize="small"/>
                     </ListItemIcon>
                     Create a new story

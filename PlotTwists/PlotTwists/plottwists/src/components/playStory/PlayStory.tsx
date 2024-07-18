@@ -14,6 +14,7 @@ import Page from "./Page";
 import img from "./placeholder.png";
 import StoryCommentSection from "./CommentSection";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import {useNavigate} from "react-router-dom";
 
 
 const partsMenu = [
@@ -51,6 +52,12 @@ function PartSelector() {
 }
 
 const PlayStory: React.FC = () => {
+    const navigate = useNavigate();  // Initialize navigate function
+
+    // Function to handle back navigation
+    const handleBack = () => {
+        navigate(-1);
+    };
 
     const [value, setValue] = React.useState<number | null>(null);
 
@@ -65,7 +72,7 @@ const PlayStory: React.FC = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                 }}>
-                    <IconButton>
+                    <IconButton onClick={handleBack}>
                         <ArrowBackIcon sx={{fontSize: 60, paddingTop: 1, paddingRight: 1}}/>
                     </IconButton>
 

@@ -4,6 +4,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Flow from "./Playground/FlowChart";
 import {useAppContext} from "../../Store/Context";
+import {useNavigate} from "react-router-dom";
 
 
 const NewPartPage: React.FC = () => {
@@ -12,6 +13,17 @@ const NewPartPage: React.FC = () => {
         setTitle(event.target.value);
     };
     const { publishData } = useAppContext();
+
+    const navigate = useNavigate();
+
+    // Function to handle back navigation
+    const handlePreview = () => {
+        navigate("/preview-new-part");
+    };
+
+    const handleBack = () => {
+        navigate(-1);
+    };
 
     return (
         <Box sx={{flexGrow: 1}}>
@@ -24,7 +36,7 @@ const NewPartPage: React.FC = () => {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                 }}>
-                    <IconButton>
+                    <IconButton onClick={handleBack}>
                         <ArrowBackIcon sx={{fontSize: 60, paddingTop: 1}}/>
                     </IconButton>
 
@@ -38,7 +50,7 @@ const NewPartPage: React.FC = () => {
                         <Stack direction="row" spacing={1}>
                             <Button variant="contained" onClick={publishData}>Publish</Button>
                             <Button variant="contained">Draft</Button>
-                            <Button variant="contained">Preview</Button>
+                            <Button variant="contained" onClick={handlePreview}>Preview</Button>
                             <IconButton>
                                 <DeleteIcon/>
                             </IconButton>
