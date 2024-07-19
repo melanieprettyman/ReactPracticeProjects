@@ -12,6 +12,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Preview from "./components/playStory/Preview";
 import CollectionPage from "./components/collectionPage/CollectionPage";
 import StoryDescription from "./components/storyDescription/StoryDescription";
+import Profile from "./components/Profile/Profile";
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
                         <Route path="/collection/:genre" element={<CollectionPage/>}/>
                         <Route path="/details" element={<StoryDescription/>}/>
                         <Route path="/story" element={<PlayStory/>}/>
+                        <Route path="/user" element={<Profile/>}/>
                         {/* Add other routes here */}
                     </Routes>
                 </Router>

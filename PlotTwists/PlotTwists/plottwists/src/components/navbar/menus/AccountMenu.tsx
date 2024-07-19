@@ -12,6 +12,7 @@ import styles from "../styles";
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import {Button, Chip} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import {useNavigate} from "react-router-dom";
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -22,6 +23,14 @@ export default function AccountMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    let navigate = useNavigate();
+
+     const navigateToProfile = () => {
+        // Use a route parameter to pass the genre
+        navigate(`/user`);
+    };
+
     return (
         <React.Fragment>
             <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
@@ -76,7 +85,7 @@ export default function AccountMenu() {
                 transformOrigin={{horizontal: 'center', vertical: 'top'}}
                 anchorOrigin={{horizontal: 'center', vertical: 'bottom'}}
             >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={navigateToProfile}>
                     Profile
                 </MenuItem>
                 <Divider/>
