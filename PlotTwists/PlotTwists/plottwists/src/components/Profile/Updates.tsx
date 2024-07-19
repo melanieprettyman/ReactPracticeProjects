@@ -1,4 +1,4 @@
-import {Avatar, Box, Button, Checkbox, Paper, Stack, TextField, Typography} from '@mui/material'
+import {Avatar, Box, Button, Checkbox, IconButton, Paper, Stack, TextField, Typography} from '@mui/material'
 import React from 'react'
 import img from "../playStory/placeholder.png";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -17,7 +17,10 @@ const Posts: React.FC = () => {
                             A few seconds ago
                         </Typography>
                     </Stack>
-                    <DeleteIcon/>
+                    <IconButton>
+                        <DeleteIcon/>
+
+                    </IconButton>
                 </Stack>
                 <Typography>New updates, make sure to check it out!!!</Typography>
             </Stack>
@@ -54,12 +57,12 @@ const Updates: React.FC = () => {
                 </Stack>
             </Box>
 
-            <Stack spacing={2} sx={{mt:2}}>
+            <Stack spacing={2} sx={{mt: 2}}>
                 <Posts/>
                 <Posts/>
                 <Posts/>
             </Stack>
-            </>
+        </>
     )
 }
 
