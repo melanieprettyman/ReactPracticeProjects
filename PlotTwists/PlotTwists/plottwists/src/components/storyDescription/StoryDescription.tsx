@@ -6,6 +6,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import AddIcon from '@mui/icons-material/Add';
 import {useNavigate} from "react-router-dom";
+import StoryCommentSection from "../playStory/CommentSection";
 
 const StoryDetails: React.FC = () => {
     const navigate = useNavigate();  // Initialize navigate function
@@ -18,7 +19,7 @@ const StoryDetails: React.FC = () => {
         <>
             <Navbar/>
             <Container sx={{mt: 3, width: '50%', height: '100%'}}>
-                <Stack spacing={3}>
+                <Stack spacing={3} sx={{mb:20}}>
                     <Stack direction='row' spacing={3}>
                         <img src={img} alt='scene picture'
                              style={{
@@ -134,6 +135,7 @@ const StoryDetails: React.FC = () => {
                         All Rights Reserved
                     </Typography>
                 </Stack>
+                <StoryCommentSection/>
             </Container>
         </>
     );
