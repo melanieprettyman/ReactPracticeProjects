@@ -11,6 +11,7 @@ import PlayStory from "./components/playStory/PlayStory";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Preview from "./components/playStory/Preview";
 import CollectionPage from "./components/collectionPage/CollectionPage";
+import StoryDescription from "./components/storyDescription/StoryDescription";
 
 
 function App() {
@@ -24,6 +25,8 @@ function App() {
                         <Route path="/add-new-part" element={<NewPartPage/>}/>
                         <Route path="/preview-new-part" element={<Preview/>}/>
                         <Route path="/collection/:genre" element={<CollectionPage/>}/>
+                        <Route path="/details" element={<StoryDescription/>}/>
+                        <Route path="/story" element={<PlayStory/>}/>
                         {/* Add other routes here */}
                     </Routes>
                 </Router>

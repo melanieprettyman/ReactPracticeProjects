@@ -17,6 +17,7 @@ function SortSelector() {
     const sortMenu = [
         {value: 1, label: 'Hot'},
         {value: 2, label: 'New'},
+        {value:3, label:'Completed'}
     ];
     const [sortBy, setSortBy] = useState(sortMenu[0].value.toString());
 
@@ -25,7 +26,7 @@ function SortSelector() {
     };
 
     return (
-        <Box sx={{minWidth: 80}}>
+        <Box sx={{minWidth: 110}}>
             <FormControl fullWidth>
                 <Select
                     id="sortSelector"
@@ -34,7 +35,7 @@ function SortSelector() {
                     variant="standard"
                 >
                     {sortMenu.map(sortMenu =>
-                        <MenuItem key={sortMenu.value} value={sortMenu.value}>
+                        <MenuItem key={sortMenu.value} value={sortMenu.value} sx={{paddingLeft:1}}>
                             {sortMenu.label}
                         </MenuItem>
                     )}
