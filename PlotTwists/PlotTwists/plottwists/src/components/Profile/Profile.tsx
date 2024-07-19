@@ -139,9 +139,9 @@ const Profile: React.FC = () => {
                                 </CustomTabPanel>
 
                                  <CustomTabPanel value={value} index={2}>
-                                     <Paper sx={{padding: 2, width: 720, maxWidth: 'none'}}>
+                                     <Container sx={{padding: 2, width: 720, maxWidth: 'none'}}>
                                         <Updates/>
-                                    </Paper>
+                                    </Container>
                                  </CustomTabPanel>
 
                             </Stack>
