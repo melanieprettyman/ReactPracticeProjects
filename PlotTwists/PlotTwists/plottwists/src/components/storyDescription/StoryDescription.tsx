@@ -15,6 +15,12 @@ const StoryDetails: React.FC = () => {
     const handleNavigationToStory = () => {
         navigate('/story');
     };
+
+    const handleNavigationToProfile = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent button
+        navigate("/user");
+    };
+
     return (
         <>
             <Navbar/>
@@ -89,7 +95,7 @@ const StoryDetails: React.FC = () => {
                     </Stack>
 
                      <Stack direction='row' alignItems='center' >
-                            <Button>
+                            <Button  onClick={(event) => handleNavigationToProfile(event)}>
                                 <Avatar
                                     alt="Remy Sharp"
                                     src={img}

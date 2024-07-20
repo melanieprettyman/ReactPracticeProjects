@@ -13,6 +13,12 @@ const SynopsisCard: React.FC = () => {
     const handleNavigationToDescription = () => {
         navigate("/details");
     };
+
+    const handleNavigationToProfile = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent button
+        navigate("/user");
+    };
+
     return (
         <Grid item xs={12} sm={6} md={4} lg={3}>
             <ButtonBase onClick={handleNavigationToDescription}
@@ -44,17 +50,21 @@ const SynopsisCard: React.FC = () => {
                                 }}>
                                 Delta: A Spy Novel
                             </Typography>
+                            <ButtonBase onClick={(event) => handleNavigationToProfile(event)}
+                                        sx={{textAlign: 'left', justifyContent: 'flex-start', width: '100%'}}>
+                                <Typography
+                                    sx={{
+                                        color: 'black',
+                                        fontSize: 15,
+                                        '&:hover': {
+                                            textDecoration: 'underline'
+                                        }
+                                    }}
 
-                            <Typography
-                                sx={{
-                                    color: 'black',
-                                    fontSize: 15,
-                                    '&:hover': {
-                                        textDecoration: 'underline'
-                                    }
-                                }}>
-                                by Monica
-                            </Typography>
+                                >
+                                    by Monica
+                                </Typography>
+                            </ButtonBase>
 
                             <Stack direction="row" alignItems='center' spacing={2}
                                    sx={{paddingBottom: 1}}>

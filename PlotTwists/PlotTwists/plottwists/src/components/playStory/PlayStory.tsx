@@ -59,6 +59,11 @@ const PlayStory: React.FC = () => {
         navigate(-1);
     };
 
+   const handleNavigationToProfile = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();  // Prevent the event from propagating to the parent button
+        navigate("/user");
+    };
+
     const [value, setValue] = React.useState<number | null>(null);
 
     return (
@@ -89,7 +94,7 @@ const PlayStory: React.FC = () => {
                         <Stack direction='row' alignItems='center' justifyContent="center">
                             <Typography variant='h6'
                                         sx={{color: 'black', paddingLeft: 1, paddingRight: 1}}>by</Typography>
-                            <Button>
+                            <Button onClick={(event) => handleNavigationToProfile(event)}>
                                 <Avatar
                                     alt="Remy Sharp"
                                     src={img}
