@@ -17,6 +17,10 @@ export default function PublishMenu() {
         navigate("/create-story");
     };
 
+    const navigateToMyStories = () => {
+        navigate("/myworks");
+    };
+
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -83,7 +87,7 @@ export default function PublishMenu() {
                     </ListItemIcon>
                     Create a new story
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={navigateToMyStories}>
                     My stories
                 </MenuItem>
             </Menu>

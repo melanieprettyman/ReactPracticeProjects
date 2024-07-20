@@ -13,6 +13,9 @@ import Preview from "./components/playStory/Preview";
 import CollectionPage from "./components/collectionPage/CollectionPage";
 import StoryDescription from "./components/storyDescription/StoryDescription";
 import Profile from "./components/Profile/Profile";
+import MyStories from "./components/myStories/MyStories";
+import EditStoryDetails from "./components/EditStoryDetailsPage/EditStoryDetails";
+import Library from "./components/Library/Library";
 
 
 function App() {
@@ -29,6 +32,9 @@ function App() {
                         <Route path="/details" element={<StoryDescription/>}/>
                         <Route path="/story" element={<PlayStory/>}/>
                         <Route path="/user" element={<Profile/>}/>
+                        <Route path="/myworks" element={<MyStories/>}/>
+                        <Route path="/myworks/editstorydetails" element={<EditStoryDetails/>}/>
+                        <Route path="/library" element={<Library/>}/>
                         {/* Add other routes here */}
                     </Routes>
                 </Router>

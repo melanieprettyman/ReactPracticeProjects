@@ -31,6 +31,11 @@ export default function AccountMenu() {
         navigate(`/user`);
     };
 
+     const navigateToLibrary = () => {
+        // Use a route parameter to pass the genre
+        navigate(`/library`);
+    };
+
     return (
         <React.Fragment>
             <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
@@ -90,7 +95,7 @@ export default function AccountMenu() {
                 </MenuItem>
                 <Divider/>
 
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={navigateToLibrary}>
                     <ListItemIcon>
                         <LocalLibraryIcon fontSize="small"/>
                     </ListItemIcon>
