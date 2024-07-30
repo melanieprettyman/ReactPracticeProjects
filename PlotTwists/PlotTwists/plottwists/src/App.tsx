@@ -16,6 +16,7 @@ import Profile from "./components/Profile/Profile";
 import MyStories from "./components/myStories/MyStories";
 import EditStoryDetails from "./components/EditStoryDetailsPage/EditStoryDetails";
 import Library from "./components/Library/Library";
+import MyProfile from "./components/Profile/MyProfile";
 
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
                         <Route path="/collection/:genre" element={<CollectionPage/>}/>
                         <Route path="/details" element={<StoryDescription/>}/>
                         <Route path="/story" element={<PlayStory/>}/>
-                        <Route path="/user" element={<Profile/>}/>
+                        <Route path="/user" element={<MyProfile/>}/>
                         <Route path="/myworks" element={<MyStories/>}/>
                         <Route path="/myworks/editstorydetails" element={<EditStoryDetails/>}/>
                         <Route path="/library" element={<Library/>}/>

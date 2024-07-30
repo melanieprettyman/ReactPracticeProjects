@@ -14,11 +14,14 @@ import {
     Typography
 } from "@mui/material";
 import img from "../playStory/placeholder.png";
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import CreateIcon from '@mui/icons-material/Create';
 import SynopsisCard from "../collectionPage/SynopsisCard";
 import ProfileCard from "./ProfileCard";
 import Updates from "./Updates";
+import theme from "../../Theme/Theme";
+import MyFollowersDialog from "./MyFollowersDialog";
 
+//TODO: add scroll bars to tabs
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
@@ -41,7 +44,7 @@ function CustomTabPanel(props: TabPanelProps) {
     );
 }
 
-const Profile: React.FC = () => {
+const MyProfile: React.FC = () => {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -54,6 +57,15 @@ const Profile: React.FC = () => {
             'aria-controls': `simple-tabpanel-${index}`,
         };
     }
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
 
 
     return (
@@ -70,8 +82,8 @@ const Profile: React.FC = () => {
                                     sx={{width: 200, height: 200}}
                                 />
                                 <Button variant={"contained"}>
-                                    <PersonAddIcon sx={{paddingRight: 2}}/>
-                                    Follow
+                                    <CreateIcon sx={{paddingRight: 2}}/>
+                                    Edit Profile
                                 </Button>
                             </Stack>
                             <Stack spacing={1} sx={{paddingTop: 2}}>
@@ -84,9 +96,17 @@ const Profile: React.FC = () => {
                                         <Typography sx={{fontWeight: 'bold'}}>1</Typography>
                                         <Typography sx={{fontWeight: 'bold'}}>WORKS</Typography>
                                     </Stack>
-                                    <Stack alignItems={'center'}>
-                                        <Typography sx={{fontWeight: 'bold'}}>1</Typography>
-                                        <Typography sx={{fontWeight: 'bold'}}>FOLLOWERS</Typography>
+                                    <Stack
+                                       sx={{
+                                        '&:hover': {
+                                            color: theme.palette.primary.main
+                                        }
+                                        }}
+                                    >
+                                        <Stack onClick={handleClickOpen} alignItems={'center'}>
+                                            <Typography sx={{fontWeight: 'bold'}}>1</Typography>
+                                            <Typography sx={{fontWeight: 'bold'}}>FOLLOWERS</Typography>
+                                        </Stack>
                                     </Stack>
                                 </Stack>
                                 <Box sx={{borderBottom: 1, borderColor: 'divider', paddingTop: 4}}>
@@ -127,7 +147,7 @@ const Profile: React.FC = () => {
                                     </Typography>
 
                                     <Paper sx={{padding: 2}}>
-                                        <Stack spacing={4} sx={{mb: 2, fontWeight: 'bold'}}>
+                                        <Stack spacing={4} sx={{mb: 2, fontWeight: 'bold', maxHeight:720}}>
                                             <Typography variant={'h5'}>Stories by Username</Typography>
                                             <SynopsisCard/>
                                             <SynopsisCard/>
@@ -135,8 +155,8 @@ const Profile: React.FC = () => {
                                             <SynopsisCard/>
                                             <SynopsisCard/>
                                         </Stack>
-                                        <div style={{ display: 'flex', justifyContent: 'center' ,paddingTop:20}}>
-                                            <Pagination count={10} />
+                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop: 20}}>
+                                            <Pagination count={10}/>
                                         </div>
                                     </Paper>
                                 </CustomTabPanel>
@@ -149,7 +169,7 @@ const Profile: React.FC = () => {
                                             <ProfileCard/>
                                             <ProfileCard/>
                                         </Grid>
-                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop:20}}>
+                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop: 20}}>
                                             <Pagination count={10}/>
                                         </div>
                                     </Paper>
@@ -157,8 +177,8 @@ const Profile: React.FC = () => {
 
                                 <CustomTabPanel value={value} index={2}>
                                     <Container sx={{padding: 2, width: 720, maxWidth: 'none'}}>
-                                        <Updates isMyProfile={false}/>
-                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop:20}}>
+                                        <Updates isMyProfile={true}/>
+                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop: 20}}>
                                             <Pagination count={10}/>
                                         </div>
                                     </Container>
@@ -167,10 +187,11 @@ const Profile: React.FC = () => {
                             </Stack>
                         </Stack>
                     </Stack>
+                     <MyFollowersDialog open={open} handleClose={handleClose}/>
                 </Paper>
             </Container>
         </>
     );
 };
 
-export default Profile;
+export default MyProfile;

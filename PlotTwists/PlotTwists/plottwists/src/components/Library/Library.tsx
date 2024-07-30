@@ -67,31 +67,45 @@ const Library: React.FC = () => {
         <>
             <Navbar/>
             <Container sx={{mt: 4, width: '70%', height: '100%'}}>
-                 <Paper sx={{width: '100%', height: '100%', mb: 4, minHeight: 350, padding:2}}>
-                     <Typography variant={'h4'} sx={{fontWeight:'bold'}}>Library</Typography>
-                        <Box sx={{borderBottom: 1, borderColor: 'divider', paddingTop: 1}}>
-                            <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                                <Tab label="CURRENT READS" {...a11yProps(0)}
-                                     sx={{fontSize: 20, fontWeight: 'bold'}}/>
-                                <Tab label="FINISHED READS" {...a11yProps(1)}
-                                     sx={{fontSize: 20, fontWeight: 'bold'}}/>
-                                 <Tab label="TO READS" {...a11yProps(2)}
-                                     sx={{fontSize: 20, fontWeight: 'bold'}}/>
-                            </Tabs>
-                        </Box>
-                        <CustomTabPanel value={value} index={0}>
-                            <Grid container spacing={2} sx={{mb: 2, padding: 2}} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                                <LibraryTile/>
-                                <LibraryTile/>
-                                <LibraryTile/>
-                                <LibraryTile/>
-                                <LibraryTile/>
-                                <LibraryTile/>
-                                <LibraryTile/>
-                                <LibraryTile/>
-                            </Grid>
-                        </CustomTabPanel>
-                 </Paper>
+                <Paper sx={{width: '100%', height: '100%', mb: 4, minHeight: 350, padding: 2}}>
+                    <Typography variant={'h4'} sx={{fontWeight: 'bold'}}>Library</Typography>
+                    <Box sx={{borderBottom: 1, borderColor: 'divider', paddingTop: 1}}>
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+                            <Tab label="CURRENT READS" {...a11yProps(0)}
+                                 sx={{fontSize: 20, fontWeight: 'bold'}}/>
+                            <Tab label="FINISHED READS" {...a11yProps(1)}
+                                 sx={{fontSize: 20, fontWeight: 'bold'}}/>
+                            <Tab label="TO READS" {...a11yProps(2)}
+                                 sx={{fontSize: 20, fontWeight: 'bold'}}/>
+                        </Tabs>
+                    </Box>
+                    <CustomTabPanel value={value} index={0}>
+                        <Grid container spacing={2} sx={{mb: 2, padding: 2}} columnSpacing={{xs: 1, sm: 2, md: 3}}>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                        </Grid>
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={1}>
+                        <Grid container spacing={2} sx={{mb: 2, padding: 2}} columnSpacing={{xs: 1, sm: 2, md: 3}}>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                        </Grid>
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={2}>
+                        <Grid container spacing={2} sx={{mb: 2, padding: 2}} columnSpacing={{xs: 1, sm: 2, md: 3}}>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                            <LibraryTile/>
+                        </Grid>
+                    </CustomTabPanel>
+                </Paper>
 
             </Container>
         </>
