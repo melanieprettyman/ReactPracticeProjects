@@ -30,7 +30,7 @@ interface TabPanelProps {
     value: number;
 }
 
-function CustomTabPanel(props: TabPanelProps) {
+export function CustomTabPanel(props: TabPanelProps) {
     const {children, value, index, ...other} = props;
 
     return (
@@ -66,7 +66,7 @@ const Library: React.FC = () => {
     return (
         <>
             <Navbar/>
-            <Container sx={{mt: 4, width: '70%', height: '100%'}}>
+            <Container sx={{mt: 4, width: '70%', maxHeight: '70%'}}>
                 <Paper sx={{width: '100%', height: '100%', mb: 4, minHeight: 350, padding: 2}}>
                     <Typography variant={'h4'} sx={{fontWeight: 'bold'}}>Library</Typography>
                     <Box sx={{borderBottom: 1, borderColor: 'divider', paddingTop: 1}}>

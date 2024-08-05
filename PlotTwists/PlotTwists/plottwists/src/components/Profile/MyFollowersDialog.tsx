@@ -53,11 +53,6 @@ const FollowerContainer = () => {
     )
 }
 const MyFollowersDialog: React.FC<Props> = ({open, handleClose}) => {
-    let navigate = useNavigate();
-
-    const handleNavigationToProfile = () => {
-        navigate("/user");
-    };
     return (
         <React.Fragment>
             <BootstrapDialog

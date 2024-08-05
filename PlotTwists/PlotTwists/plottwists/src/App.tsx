@@ -17,6 +17,7 @@ import MyStories from "./components/myStories/MyStories";
 import EditStoryDetails from "./components/EditStoryDetailsPage/EditStoryDetails";
 import Library from "./components/Library/Library";
 import MyProfile from "./components/Profile/MyProfile";
+import Settings from "./components/Settings/Settings";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
                         <Route path="/myworks" element={<MyStories/>}/>
                         <Route path="/myworks/editstorydetails" element={<EditStoryDetails/>}/>
                         <Route path="/library" element={<Library/>}/>
+                        <Route path="/settings" element={<Settings/>}/>
                         {/* Add other routes here */}
                     </Routes>
                 </Router>
