@@ -18,6 +18,7 @@ import EditStoryDetails from "./components/EditStoryDetailsPage/EditStoryDetails
 import Library from "./components/Library/Library";
 import MyProfile from "./components/Profile/MyProfile";
 import Settings from "./components/Settings/Settings";
+import Notifications from "./components/Notifications/Notifications";
 
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
                         <Route path="/myworks/editstorydetails" element={<EditStoryDetails/>}/>
                         <Route path="/library" element={<Library/>}/>
                         <Route path="/settings" element={<Settings/>}/>
-                        {/* Add other routes here */}
+                        <Route path="/notifications" element={<Notifications/>}/>
                     </Routes>
                 </Router>
             </ContextProvider>

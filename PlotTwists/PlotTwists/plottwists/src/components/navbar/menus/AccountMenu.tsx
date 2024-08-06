@@ -27,19 +27,20 @@ export default function AccountMenu() {
     let navigate = useNavigate();
 
      const navigateToProfile = () => {
-        // Use a route parameter to pass the genre
         navigate(`/user`);
     };
 
      const navigateToLibrary = () => {
-        // Use a route parameter to pass the genre
         navigate(`/library`);
     };
 
       const navigateToSettings = () => {
-        // Use a route parameter to pass the genre
         navigate(`/settings`);
     };
+
+      const navigateToNotifications = () =>{
+          navigate('/notifications');
+      }
 
     return (
         <React.Fragment>
@@ -112,7 +113,7 @@ export default function AccountMenu() {
                     </ListItemIcon>
                     Settings
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={navigateToNotifications}>
                     <ListItemIcon>
                         <Chip size="small" label="1" color="primary"/>
                     </ListItemIcon>
