@@ -5,6 +5,7 @@ import LoginForm from "../landing/forms/LoginForm";
 import {Controller, useForm} from "react-hook-form";
 import {validateAge} from "../landing/forms/Utils/utils";
 import {SignupFormValues} from "../landing/forms/Types/types";
+import ChangePassword from "./Forms/ChangePassword";
 
 const Settings: React.FC = () => {
     const {
@@ -17,7 +18,7 @@ const Settings: React.FC = () => {
     });
     const [open, setOpen] = useState(true);
     const [openSignup, setOpenSignup] = useState(false);
-    const [openForgotPassword, setForgotPassword] = useState(false);
+    const [openChangePassword, setChangePassword] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -35,12 +36,12 @@ const Settings: React.FC = () => {
         setOpenSignup(false);
     };
 
-    const handleClickOpenForgotPassword = () => {
-        setForgotPassword(true);
+    const handleClickOpenChangePassword = () => {
+        setChangePassword(true);
     };
 
-    const handleCloseForgotPassword = () => {
-        setForgotPassword(false);
+    const handleCloseChangePassword = () => {
+        setChangePassword(false);
     };
 
     return (
@@ -58,7 +59,7 @@ const Settings: React.FC = () => {
 
                         <Stack direction={'row'} spacing={1} alignItems="center">
                             <Typography sx={{paddingLeft:50, paddingRight:5}}>Password</Typography>
-                            <Button>Change password</Button>
+                            <Button onClick={handleClickOpenChangePassword}>Change password</Button>
                         </Stack>
 
                         <Stack direction={'row'} spacing={1} alignItems="center">
@@ -92,7 +93,7 @@ const Settings: React.FC = () => {
                 </Paper>
                 <Button sx={{color: 'red', fontWeight: 'bold'}}>Close account</Button>
             </Container>
-            <LoginForm open={open} handleClose={handleClose} handleClickOpenForgotPassword={handleClickOpenForgotPassword} />
+            <ChangePassword open={openChangePassword} handleClose={handleCloseChangePassword} />
         </>
     )
 }

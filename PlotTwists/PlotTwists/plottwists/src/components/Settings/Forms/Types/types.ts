@@ -1,23 +1,19 @@
-export type SignupFormProps = {
+export type ChangePasswordFormProps = {
     open: boolean,
     handleClose: () => void;
 };
 
-export type SignupFormValues = {
-    username: string;
-    email: string;
+export type ChangePasswordFormValues = {
     password: string;
-    confirmPassword: string;
-    dob: string;
+    confirmPassword: string
 };
 
-export type LoginFormProps = {
+export type ChangeUsernameFormProps = {
     open: boolean,
     handleClose: () => void,
-    handleClickOpenForgotPassword: () => void,
 }
-export type LoginFormValues = {
-    email: string;
+export type ChangeUsernameFormValues = {
+    username: string;
     password: string;
 };
 

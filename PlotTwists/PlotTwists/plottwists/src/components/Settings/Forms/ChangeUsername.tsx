@@ -19,7 +19,7 @@ import VisibilityButton from "../../landing/forms/VisibilityButton";
 
 
 
-const ChangePassword: React.FC<ChangePasswordFormProps> = ({open, handleClose}) => {
+const ChangeUsername: React.FC<ChangePasswordFormProps> = ({open, handleClose}) => {
 
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = React.useState(false);
@@ -150,4 +150,4 @@ const ChangePassword: React.FC<ChangePasswordFormProps> = ({open, handleClose}) 
     );
 };
 
-export default ChangePassword;
+export default ChangeUsername;
