@@ -1,6 +1,6 @@
 import React from "react";
 import {Box, ButtonBase, Chip, Grid, Paper, Rating, Stack, Typography} from "@mui/material";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';

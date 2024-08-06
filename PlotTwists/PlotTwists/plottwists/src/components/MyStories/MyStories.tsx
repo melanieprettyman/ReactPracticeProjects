@@ -9,7 +9,7 @@ import {
     Tabs,
     Typography
 } from "@mui/material";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import {useNavigate} from "react-router-dom";
 import MyStoryCard from "./MyStoryCard";
 

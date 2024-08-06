@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import {Container, Stack, Typography} from "@mui/material";
 import SynopsisContainer from "./SynopsisContainer";
 import {useParams} from "react-router-dom";

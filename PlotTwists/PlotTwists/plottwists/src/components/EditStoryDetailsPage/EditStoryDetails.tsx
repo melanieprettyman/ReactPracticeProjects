@@ -11,9 +11,9 @@ import {
     Tooltip,
     Typography
 } from "@mui/material";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import {useNavigate} from "react-router-dom";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import FileUpload from "../CreateStory/FileUpload";
 import CreateIcon from '@mui/icons-material/Create';

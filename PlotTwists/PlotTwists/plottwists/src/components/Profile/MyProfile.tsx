@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import {
     Avatar,
     Box,
@@ -13,9 +13,9 @@ import {
     Tabs,
     Typography
 } from "@mui/material";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import CreateIcon from '@mui/icons-material/Create';
-import SynopsisCard from "../collectionPage/SynopsisCard";
+import SynopsisCard from "../CollectionPage/SynopsisCard";
 import ProfileCard from "./ProfileCard";
 import Updates from "./Updates";
 import theme from "../../Theme/Theme";

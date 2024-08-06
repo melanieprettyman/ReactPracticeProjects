@@ -1,7 +1,7 @@
 import React from "react";
 import {Box, ButtonBase, Card, CardContent, CardMedia, Grid, Stack, Typography} from "@mui/material";
 import {useNavigate} from "react-router-dom";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 
 const ProfileCard: React.FC = () => {
     let navigate = useNavigate();

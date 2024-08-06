@@ -1,6 +1,6 @@
 import {Avatar, Box, Button, Checkbox, IconButton, Paper, Stack, TextField, Typography} from '@mui/material'
 import React, { useState } from 'react'
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import Post from "./Post";
 import {bool} from "yup";
 

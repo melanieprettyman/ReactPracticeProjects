@@ -7,7 +7,7 @@ import DialogContent from "@mui/material/DialogContent";
 import Typography from "@mui/material/Typography";
 import {styled} from "@mui/material/styles";
 import {Avatar, Box, Container, Dialog, Stack} from "@mui/material";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import {useNavigate} from "react-router-dom";
 

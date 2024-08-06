@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import {Button, Container, Paper, Stack, TextField, Typography} from "@mui/material";
 import {Controller, useForm} from "react-hook-form";
-import {validateAge} from "../landing/forms/Utils/utils";
-import {SignupFormValues} from "../landing/forms/Types/types";
+import {validateAge} from "../LandingPage/forms/Utils/utils";
+import {SignupFormValues} from "../LandingPage/forms/Types/types";
 import ChangePassword from "./Forms/ChangePassword";
 import ChangeUsername from "./Forms/ChangeUsername";
 import ChangeEmail from "./Forms/ChangeEmail";

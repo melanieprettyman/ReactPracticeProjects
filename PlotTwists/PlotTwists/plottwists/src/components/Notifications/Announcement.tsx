@@ -1,6 +1,6 @@
 import React from "react";
 import {Avatar, Box, Paper, Stack, Typography} from "@mui/material";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import CampaignIcon from '@mui/icons-material/Campaign';
 import {useNavigate} from "react-router-dom";
 

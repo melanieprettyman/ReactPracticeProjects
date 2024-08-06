@@ -11,7 +11,7 @@ import {
     Typography
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {useNavigate} from "react-router-dom";
 

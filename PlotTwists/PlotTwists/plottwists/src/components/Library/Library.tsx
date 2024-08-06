@@ -15,11 +15,11 @@ import {
 } from "@mui/material";
 import {useNavigate} from "react-router-dom";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import img from "../playStory/placeholder.png";
+import img from "../PlayStory/placeholder.png";
 import Divider from "@mui/material/Divider";
 import PartTile from "../CreateStory/PartTile";
 import StoryDetails from "../CreateStory/StoryDetails";
-import Navbar from "../navbar/Navbar";
+import Navbar from "../Navbar/Navbar";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import LibraryTile from "./LibraryTile";

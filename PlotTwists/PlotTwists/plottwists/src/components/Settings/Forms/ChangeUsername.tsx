@@ -15,8 +15,8 @@ import {ChangeUsernameFormProps, ChangeUsernameFormValues} from "./Types/types";
 import styles from "./styles";
 import {
     validatePasswordComplexity, validateUsername,
-} from "../../landing/forms/Utils/utils";
-import VisibilityButton from "../../landing/forms/VisibilityButton";
+} from "../../LandingPage/forms/Utils/utils";
+import VisibilityButton from "../../LandingPage/forms/VisibilityButton";
 
 
 
