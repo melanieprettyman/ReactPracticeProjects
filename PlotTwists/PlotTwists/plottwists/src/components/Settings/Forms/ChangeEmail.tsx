@@ -1,5 +1,3 @@
-//TODO: Check BE for valid username and correct password
-
 import React from "react";
 import {
     Button,
@@ -11,16 +9,17 @@ import {
 } from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import {useForm, Controller} from "react-hook-form";
-import {ChangeUsernameFormProps, ChangeUsernameFormValues} from "./Types/types";
+import {ChangeEmailFormProps, ChangeEmailFormValues, ChangeUsernameFormValues} from "./Types/types";
 import styles from "./styles";
 import {
+    validateEmail,
     validatePasswordComplexity, validateUsername,
 } from "../../landing/forms/Utils/utils";
 import VisibilityButton from "../../landing/forms/VisibilityButton";
 
 
 
-const ChangeUsername: React.FC<ChangeUsernameFormProps> = ({open, handleClose}) => {
+const ChangeUsername: React.FC<ChangeEmailFormProps> = ({open, handleClose}) => {
 
     const [showPassword, setShowPassword] = React.useState(false);
 
@@ -31,14 +30,14 @@ const ChangeUsername: React.FC<ChangeUsernameFormProps> = ({open, handleClose}) 
         handleSubmit,
         formState: {errors},
         reset
-    } = useForm<ChangeUsernameFormValues>({
+    } = useForm<ChangeEmailFormValues>({
         defaultValues: {
-            username:'',
+            email:'',
             password: '',
         }
     });
 
-    const onSubmit = (data: ChangeUsernameFormValues) => {
+    const onSubmit = (data: ChangeEmailFormValues) => {
         console.log(data);
         reset();
         handleClose();
@@ -48,7 +47,6 @@ const ChangeUsername: React.FC<ChangeUsernameFormProps> = ({open, handleClose}) 
         reset();
         handleClose();
     };
-
     return (
         <Dialog open={open} onClose={handleClose}>
             <DialogActions>
@@ -56,22 +54,22 @@ const ChangeUsername: React.FC<ChangeUsernameFormProps> = ({open, handleClose}) 
                     <CloseIcon/>
                 </IconButton>
             </DialogActions>
-            <DialogTitle sx={styles.title}><b>Change Username</b></DialogTitle>
+            <DialogTitle sx={styles.title}><b>Change E-mail</b></DialogTitle>
             <DialogContent sx={styles.changePasswordContent}>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Stack sx={styles.changePasswordStack}>
                         <Stack spacing={4} sx={styles.changePasswordContainer}>
                             <Controller
-                                name="username"
+                                name="email"
                                 control={control}
-                                rules={{required: 'Username is required.', validate: validateUsername}}
+                                rules={{required: 'Email is required.', validate: validateEmail}}
                                 render={({field}) => (
                                     <TextField
                                         {...field}
-                                        label="Username"
-                                        type="text"
-                                        error={!!errors.username}
-                                        helperText={errors.username ? errors.username.message : ''}
+                                        label="New E-mail"
+                                        type="email"
+                                        error={!!errors.email}
+                                        helperText={errors.email ? errors.email.message : ''}
                                         fullWidth
                                         InputLabelProps={{shrink: true}}
                                     />

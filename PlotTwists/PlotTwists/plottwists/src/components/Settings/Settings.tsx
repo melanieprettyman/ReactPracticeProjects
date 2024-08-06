@@ -6,6 +6,8 @@ import {Controller, useForm} from "react-hook-form";
 import {validateAge} from "../landing/forms/Utils/utils";
 import {SignupFormValues} from "../landing/forms/Types/types";
 import ChangePassword from "./Forms/ChangePassword";
+import ChangeUsername from "./Forms/ChangeUsername";
+import ChangeEmail from "./Forms/ChangeEmail";
 
 const Settings: React.FC = () => {
     const {
@@ -16,24 +18,24 @@ const Settings: React.FC = () => {
             dob: ''
         }
     });
-    const [open, setOpen] = useState(true);
-    const [openSignup, setOpenSignup] = useState(false);
+    const [openChangeEmail, setOpenChangeEmail] = useState(false);
+    const [openChangeUsername, setOpenChangeUsername] = useState(false);
     const [openChangePassword, setChangePassword] = useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
+    const handleClickOpenChangeEmail = () => {
+        setOpenChangeEmail(true);
     };
 
-    const handleClose = () => {
-        setOpen(false);
+    const handleCloseChangeEmail = () => {
+        setOpenChangeEmail(false);
     };
 
-    const handleClickOpenSignup = () => {
-        setOpenSignup(true);
+    const handleClickOpenChangeUsername = () => {
+        setOpenChangeUsername(true);
     };
 
-    const handleCloseSignup = () => {
-        setOpenSignup(false);
+    const handleCloseChangeUsername = () => {
+        setOpenChangeUsername(false);
     };
 
     const handleClickOpenChangePassword = () => {
@@ -54,7 +56,7 @@ const Settings: React.FC = () => {
                         <Stack direction={'row'} spacing={1} alignItems="center">
                             <Typography sx={{paddingLeft:50, paddingRight:5}}>Username</Typography>
                             <Typography>@username</Typography>
-                            <Button>Change username</Button>
+                            <Button onClick={handleClickOpenChangeUsername}>Change username</Button>
                         </Stack>
 
                         <Stack direction={'row'} spacing={1} alignItems="center">
@@ -65,7 +67,7 @@ const Settings: React.FC = () => {
                         <Stack direction={'row'} spacing={1} alignItems="center">
                             <Typography sx={{paddingLeft:54, paddingRight:6}}>Email</Typography>
                             <Typography>email@email.com</Typography>
-                            <Button>Change email</Button>
+                            <Button onClick={handleClickOpenChangeEmail}>Change email</Button>
                         </Stack>
 
                         <Stack direction={'row'} spacing={1} alignItems="center">
@@ -94,6 +96,8 @@ const Settings: React.FC = () => {
                 <Button sx={{color: 'red', fontWeight: 'bold'}}>Close account</Button>
             </Container>
             <ChangePassword open={openChangePassword} handleClose={handleCloseChangePassword} />
+            <ChangeUsername open={openChangeUsername} handleClose={handleCloseChangeUsername} />
+            <ChangeEmail open={openChangeEmail} handleClose={handleCloseChangeEmail} />
         </>
     )
 }

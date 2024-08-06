@@ -17,13 +17,13 @@ export type ChangeUsernameFormValues = {
     password: string;
 };
 
-export type ForgotPasswordFormProps = {
+export type ChangeEmailFormProps = {
     open: boolean,
     handleClose: () => void,
-    handleCloseLogin: () => void,
 }
-export type ForgotPasswordFormValues = {
+export type ChangeEmailFormValues = {
     email: string;
+    password:string
 };
 
 export type VisibilityProps = {
