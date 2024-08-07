@@ -4,6 +4,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import StoryDetails from './FormContent/StoryDetails';
 import FileUpload from "./FormContent/FileUpload";
 import {useNavigate} from "react-router-dom";
+import styles from './Styles'
 
 const CreateStoryPage: React.FC = () => {
     const navigate = useNavigate();  // Initialize navigate function
@@ -18,17 +19,10 @@ const CreateStoryPage: React.FC = () => {
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static" sx={{
-                backgroundColor: "white",
-                boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2)',
-                height: 100
-            }}>
-                <Toolbar sx={{
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}>
+            <AppBar position="static" sx={styles.appBar}>
+                <Toolbar sx={styles.toolBar}>
                     <IconButton onClick={handleBack}>
-                        <ArrowBackIcon sx={{fontSize: 60, paddingTop: 1}}/>
+                        <ArrowBackIcon sx={styles.icon}/>
                     </IconButton>
                 </Toolbar>
             </AppBar>
@@ -39,11 +33,7 @@ const CreateStoryPage: React.FC = () => {
                 <Stack
                     direction="row"
                     spacing={6}
-                    sx={{
-                        width: '100%',
-                        justifyContent: 'center',
-                        alignItems: 'center'
-                    }}>
+                    sx={styles.container}>
                     <FileUpload/>
                     <StoryDetails/>
                 </Stack>
@@ -51,7 +41,7 @@ const CreateStoryPage: React.FC = () => {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    sx={{mt: 3, mb: 2, width:'10vw', mx: 'auto', display: 'block'}}
+                    sx={styles.submitBtn}
                     onClick={handleCreateSeries}
                 >
                     Create Series

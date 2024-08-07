@@ -8,6 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {genre} from "../../../Utils/genre";
 import {useNavigate} from "react-router-dom";
+import menuStyles from "./styles";
 
 export default function GenreMenu() {
      let navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function GenreMenu() {
 
     return (
         <>
-            <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
+            <Box sx={menuStyles.dialogue}>
                 <Tooltip title="List of genre">
                     <Button
                         id="basic-button"
@@ -85,7 +86,7 @@ export default function GenreMenu() {
                 anchorOrigin={{horizontal: 'center', vertical: 'bottom'}}
 
             >
-                <Box sx={{display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 1}}>
+                <Box sx={menuStyles.genreContainer}>
                     {genre.map((genre, index) =>
                         <MenuItem key={index} onClick={()=>{navigateToCollection(genre)}}>{genre}</MenuItem>
                     )}

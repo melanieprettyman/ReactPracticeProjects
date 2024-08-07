@@ -12,6 +12,7 @@ import {
     Typography,
 } from "@mui/material";
 import { genre } from "../../../Utils/genre";
+import styles from '../Styles'
 
 const StoryDetails: React.FC = () => {
     const { control, handleSubmit } = useForm({
@@ -37,7 +38,7 @@ const StoryDetails: React.FC = () => {
                         name="genre1"
                         control={control}
                         render={({ field }) => (
-                            <FormControl fullWidth sx={{ width: 260, mb: 2 }}>
+                            <FormControl fullWidth sx={styles.genreSelect}>
                                 <Select {...field}>
                                     {genre.map((genre, index) =>
                                         <MenuItem key={index}>{genre}</MenuItem>
@@ -53,7 +54,7 @@ const StoryDetails: React.FC = () => {
                         name="genre2"
                         control={control}
                         render={({ field }) => (
-                            <FormControl fullWidth sx={{ width: 260, mb: 2 }}>
+                            <FormControl fullWidth sx={styles.genreSelect}>
                                 <Select {...field}>
                                     {genre.map((genre, index) =>
                                         <MenuItem key={index}>{genre}</MenuItem>
@@ -64,7 +65,7 @@ const StoryDetails: React.FC = () => {
                     />
                 </Stack>
             </Stack>
-            <Stack sx={{ mb: 2 , width: 816 }}>
+            <Stack sx={styles.inputField}>
                 <Typography variant="h5">Title</Typography>
                 <Controller
                     name="title"
@@ -79,7 +80,7 @@ const StoryDetails: React.FC = () => {
                     )}
                 />
             </Stack>
-            <Stack sx={{ mb: 2 , width: 816 }}>
+            <Stack sx={styles.inputField}>
                 <Typography variant="h5">Description</Typography>
                 <Controller
                     name="description"

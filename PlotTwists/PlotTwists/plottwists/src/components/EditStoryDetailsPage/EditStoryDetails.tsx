@@ -16,6 +16,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import Divider from "@mui/material/Divider";
 import StoryDetails from "../CreateStory/FormContent/StoryDetails";
 import PartTile from "./PartTile";
+import styles from './styles';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -77,17 +78,10 @@ const EditStoryDetails: React.FC = () => {
 
     return (
         <Box sx={{flexGrow: 1}}>
-            <AppBar position="static" sx={{
-                backgroundColor: "white",
-                boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.2)',
-                height: 100
-            }}>
-                <Toolbar sx={{
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}>
+            <AppBar position="static" sx={styles.appBar}>
+                <Toolbar sx={styles.toolBar}>
                     <IconButton onClick={handleBack}>
-                        <ArrowBackIcon sx={{fontSize: 60, paddingTop: 1}}/>
+                        <ArrowBackIcon sx={styles.backArrow}/>
                     </IconButton>
                     <Box sx={{flexGrow: 1}}></Box>
                     <Button variant={'contained'} sx={{fontWeight: 'bold'}}>
@@ -95,21 +89,21 @@ const EditStoryDetails: React.FC = () => {
                     </Button>
                 </Toolbar>
             </AppBar>
-            <Container sx={{mt: 4, width: '70%', height: '100%'}}>
+            <Container sx={styles.pageContainer}>
                 <Stack direction={'row'} spacing={3}>
                     <ImageWithEditButton initialImgSrc={img}/>
-                    <Paper sx={{width: '100%', height: '100%', mb: 4, minHeight: 350}}>
-                        <Box sx={{borderBottom: 1, borderColor: 'divider', paddingTop: 1}}>
+                    <Paper sx={styles.tabContainer}>
+                        <Box sx={styles.tabContainerBorder}>
                             <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                                 <Tab label="TABLE OF CONTENTS" {...a11yProps(0)}
-                                     sx={{fontSize: 20, fontWeight: 'bold'}}/>
+                                     sx={styles.header}/>
                                 <Tab label="STORY DETAILS" {...a11yProps(1)}
-                                     sx={{fontSize: 20, fontWeight: 'bold'}}/>
+                                     sx={styles.header}/>
                             </Tabs>
                         </Box>
                         <CustomTabPanel value={value} index={0}>
-                            <Stack spacing={4} sx={{mb: 2, padding: 2}}>
-                                <Button variant={'contained'} sx={{fontWeight: 'bold', width: 200}}
+                            <Stack spacing={4} sx={styles.pannel}>
+                                <Button variant={'contained'} sx={styles.newPartBtn}
                                         onClick={navigateToCreateStory}>
                                     + New Part
                                 </Button>
@@ -152,8 +146,8 @@ const ImageWithEditButton = ({initialImgSrc}) => {
     };
 
     return (
-        <Box sx={{position: 'relative', minWidth: 300, maxWidth: 300}}>
-            <img src={imgSrc} alt="scene picture" style={{width: '100%', height: 'auto', aspectRatio: '11 / 16'}}/>
+        <Box sx={styles.imgContainer}>
+            <img src={imgSrc} alt="scene picture" style={styles.imgRatio}/>
             <label htmlFor="image-upload">
                 <input
                     accept="image/*"
@@ -164,19 +158,7 @@ const ImageWithEditButton = ({initialImgSrc}) => {
                 />
                 <IconButton
                     component="span"
-                    sx={{
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        backgroundColor: 'rgba(255,255,255,0.6)',
-                        '&:hover': {
-                            backgroundColor: 'rgba(255,255,255,0.9)',
-                        },
-                        color: 'primary.main',
-                        minHeight: 40,
-                        minWidth: 40,
-                        borderRadius: 0
-                    }}
+                    sx={styles.editImgBtn}
                 >
                     <CreateIcon/>
                     Edit

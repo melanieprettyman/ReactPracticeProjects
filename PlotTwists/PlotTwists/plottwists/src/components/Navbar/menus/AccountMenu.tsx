@@ -13,6 +13,7 @@ import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import {Button, Chip} from "@mui/material";
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import {useNavigate} from "react-router-dom";
+import menuStyles from './styles';
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -44,7 +45,7 @@ export default function AccountMenu() {
 
     return (
         <React.Fragment>
-            <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
+            <Box sx={menuStyles.dialogue}>
                 <Tooltip title="Account settings">
                     <Button
                         onClick={handleClick}
@@ -55,7 +56,7 @@ export default function AccountMenu() {
                         color="primary"
                         sx={styles.tabs}
                     >
-                        <AccountCircle sx={{color: 'darkgrey', fontSize: 40}}/>
+                        <AccountCircle sx={menuStyles.fallbackAvatar}/>
                         Username
                         <ArrowDropDownIcon sx={{ fontSize: 40}}/>
                     </Button>

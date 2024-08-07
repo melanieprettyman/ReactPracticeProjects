@@ -9,6 +9,7 @@ import {Button} from "@mui/material";
 import CreateIcon from '@mui/icons-material/Create';
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import {useNavigate} from "react-router-dom";
+import menuStyles from "./styles";
 
 export default function PublishMenu() {
     let navigate = useNavigate();
@@ -31,7 +32,7 @@ export default function PublishMenu() {
     };
     return (
         <React.Fragment>
-            <Box sx={{display: 'flex', alignItems: 'center', textAlign: 'center'}}>
+            <Box sx={menuStyles.dialogue}>
                 <Tooltip title="Account settings">
                     <Button
                         id="basic-button"

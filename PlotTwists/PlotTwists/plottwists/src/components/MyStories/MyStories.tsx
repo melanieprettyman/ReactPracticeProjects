@@ -12,7 +12,7 @@ import {
 import Navbar from "../Navbar/Navbar";
 import {useNavigate} from "react-router-dom";
 import MyStoryCard from "./MyStoryCard";
-
+import styles from './styles'
 interface TabPanelProps {
     children?: React.ReactNode;
     index: number;
@@ -58,25 +58,24 @@ const MyStories: React.FC = () => {
     return (
         <>
             <Navbar/>
-            <Container sx={{mt: 4, width: '70%', height: '100%'}}>
-                <Paper sx={{width: '100%', height: '100%', mb: 4, minHeight:350}}>
+            <Container sx={styles.pageContainer}>
+                <Paper sx={styles.contentContainer}>
                     <Stack direction={'row'} sx={{padding: 2}}>
-                        <Typography variant={'h4'} sx={{fontWeight: 'bold', flexGrow: 1}}>
+                        <Typography variant={'h4'} sx={styles.header}>
                             My Stories
                         </Typography>
                         <Button variant={'contained'} sx={{fontWeight: 'bold'}} onClick={navigateToCreateStory}>
                             + New Story
                         </Button>
                     </Stack>
-                    <Box sx={{borderBottom: 1, borderColor: 'divider', paddingTop: 1}}>
+                    <Box sx={styles.tabContainer}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                            <Tab label="PUBLISHED" {...a11yProps(0)} sx={{fontSize: 20, fontWeight: 'bold'}}/>
-                            <Tab label="DRAFTS" {...a11yProps(1)}
-                                 sx={{fontSize: 20, fontWeight: 'bold'}}/>
+                            <Tab label="PUBLISHED" {...a11yProps(0)} sx={styles.tabHeader}/>
+                            <Tab label="DRAFTS" {...a11yProps(1)} sx={styles.tabHeader}/>
                         </Tabs>
                     </Box>
                     <CustomTabPanel value={value} index={0}>
-                        <Stack spacing={4} sx={{mb: 2, padding: 2}}>
+                        <Stack spacing={4} sx={styles.panel}>
                             <MyStoryCard/>
                         </Stack>
                     </CustomTabPanel>

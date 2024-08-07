@@ -3,11 +3,9 @@ import {
     ReactFlow,
     Controls,
     Background,
-    applyNodeChanges,
     useEdgesState,
     addEdge,
-    MiniMap,
-    applyEdgeChanges, useReactFlow, ReactFlowProvider, getIncomers, getOutgoers, getConnectedEdges, useNodesState,
+    MiniMap, useReactFlow, ReactFlowProvider,  useNodesState,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
@@ -24,7 +22,7 @@ import {useAppContext} from "../../../Store/Context";
 const initialNodes = [
     {
         id: 'node-1',
-        position: {x: 570, y: 50},
+        position: {x: 0, y: 0},
         type: 'node',
         data: {
             id: 'node-1',
@@ -42,7 +40,7 @@ const nodeTypes = {
     node: Node,
 };
 
-function Flow() {
+function FlowChart() {
     const {nodesInfo, publish, updateNode} = useAppContext();
     const [sceneCount, setSceneCount] = useState(1);
     const [decCount, setDecCount] = useState(1);
@@ -72,42 +70,67 @@ function Flow() {
         setEdges((eds) => addEdge(connection, eds));
     }, [nodes, setEdges]);
 
-    const handleAddScene = useCallback(() => {
-        setSceneCount(prevState => prevState + 1);
-        const nodeId = `node-${nodes.length + 1}`;
+const handleAddScene = useCallback(() => {
+    const newSceneCount = sceneCount + 1;  // Increment scene count first
+    setSceneCount(newSceneCount);
+
+    setNodes(prevNodes => {
+        const lastNode = prevNodes[prevNodes.length - 1];
+        const nodeId = `node-${prevNodes.length + 1}`;
+
         const newNode = {
             id: nodeId,
             type: 'node',
-            position: {x: -600, y: 0},
+            position: {
+                x: lastNode.position.x,
+                y: lastNode.position.y + 400
+            },
             data: {
                 id: nodeId,
-                label: `Scene ${sceneCount + 1}`,
+                label: `Scene ${newSceneCount}`,
                 title: '',
                 description: '',
                 imageUrl: '',
                 fileName: '',
             }
         };
-        updateNode(nodeId, newNode.data); // Update context with new node data
-        reactFlowInstance.addNodes(newNode);
-    }, [nodes.length, reactFlowInstance, updateNode]);
 
-    const handleAddDecision = useCallback(() => {
-        setDecCount(prevState => prevState + 1);
-        const nodeId = `node-${nodes.length + 1}`;
+        updateNode(nodeId, newNode.data);  // Update context with new node data
+        reactFlowInstance.addNodes(newNode);
+
+        return [...prevNodes, newNode];  // Return new nodes array with the newly added node
+    });
+}, [sceneCount, reactFlowInstance, updateNode]);
+
+   const handleAddDecision = () => {
+    const newDecCount = decCount + 1;  // Increment decision count first
+    setDecCount(newDecCount);
+
+    setNodes(prevNodes => {
+        const lastNode = prevNodes[prevNodes.length - 1];  // Access the latest node directly in the update function
+        const nodeId = `node-${prevNodes.length + 1}`;
+
         const newNode = {
             id: nodeId,
-            type: 'decisionNode', // Custom node type
-            position: {x: -600, y: 700},
+            type: 'decisionNode',
+            position: {
+                x: lastNode.position.x,
+                y: lastNode.position.y + 800  // Adjust y position to be below the last node
+            },
             data: {
                 id: nodeId,
-                label: `Decision ${decCount}`,
+                label: `Decision ${newDecCount}`,
                 description: '',
             }
         };
-        updateNode(nodeId, newNode.data); // Update context with new node data
+
+        updateNode(nodeId, newNode.data);  // Update context with new node data
         reactFlowInstance.addNodes(newNode);
-    }, [nodes.length, reactFlowInstance, updateNode, sceneCount]);
+
+        return [...prevNodes, newNode];  // Return new nodes array with the newly added node
+    });
+};
+
 
     const onNodesDelete = useCallback((deletedNodes) => {
         const deleteRecursively = (nodeId) => {
@@ -203,10 +226,10 @@ function Flow() {
                 selectionOnDrag
                 fitView
                 fitViewOptions={{
-                    padding: 2,
-                }}
+                padding: 1.5
+            }}
             >
-                <MiniMap zoomable pannable/>
+                <MiniMap/>
                 <Background/>
                 <Controls/>
             </ReactFlow>
@@ -216,7 +239,7 @@ function Flow() {
 
 export default () => (
     <ReactFlowProvider>
-        <Flow/>
+        <FlowChart/>
     </ReactFlowProvider>
 );
 

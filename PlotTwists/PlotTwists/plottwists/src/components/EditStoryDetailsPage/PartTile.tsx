@@ -15,6 +15,7 @@ import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
+import styles from "./styles";
 
 // @ts-ignore
 const PartTile = ({partId, onDelete}) => {
@@ -36,53 +37,33 @@ const PartTile = ({partId, onDelete}) => {
         <Box sx={{padding: 1}}>
             <Stack direction={'row'} spacing={3}>
                 <Stack spacing={1}>
-                    <Typography
-                        sx={{
-                            fontWeight: 'bold',
-                            color: 'black',
-                            fontSize: 20,
-                        }}>
-                        Untitled Part
-                    </Typography>
+                    <Typography sx={styles.partContainer}>Untitled Part</Typography>
 
                     <Typography color="text.secondary">Updated Jul 08, 2024 11:50 AM</Typography>
 
                     <Stack direction="row" alignItems='center' spacing={2}>
                         <Stack direction="row" alignItems="center" spacing={1}>
-                            <VisibilityIcon sx={{color: "#5c5959", fontSize: 16}}/>
-                            <Typography variant="body2" sx={{color: "#5c5959", fontSize: 14}}>1.8M</Typography>
+                            <VisibilityIcon sx={styles.icon}/>
+                            <Typography variant="body2" sx={styles.subtitle}>1.8M</Typography>
                         </Stack>
                         <Stack direction="row" alignItems="center" spacing={1}>
                             <Rating name="read-only" value={3.7} readOnly size="small" precision={0.5}/>
-                            <Typography variant="body2" sx={{color: "#5c5959", fontSize: 14}}>3.7</Typography>
+                            <Typography variant="body2" sx={styles.subtitle}>3.7</Typography>
                         </Stack>
                         <Stack direction="row" alignItems="center" spacing={1}>
-                            <ModeCommentIcon sx={{color: "#5c5959", fontSize: 16}}/>
-                            <Typography variant="body2" sx={{color: "#5c5959", fontSize: 14}}>36</Typography>
+                            <ModeCommentIcon sx={styles.icon}/>
+                            <Typography variant="body2" sx={styles.subtitle}>36</Typography>
                         </Stack>
                     </Stack>
                 </Stack>
                 <Box sx={{flexGrow: 1}}></Box>
                 <Tooltip title="Edit Part">
-                    <IconButton
-                        sx={{
-                            height: 20,
-                            fontSize: 20,
-                            fontWeight: 'bold'
-                        }}
-                    >
+                    <IconButton sx={styles.partIconBtn}>
                         <CreateIcon/>
                     </IconButton>
                 </Tooltip>
                 <Tooltip title="Delete">
-                    <IconButton
-                        sx={{
-                            height: 20,
-                            fontSize: 20,
-                            fontWeight: 'bold'
-                        }}
-                        onClick={handleClickOpen}
-                    >
+                    <IconButton sx={styles.partIconBtn} onClick={handleClickOpen}>
                         <DeleteIcon/>
                     </IconButton>
                 </Tooltip>
