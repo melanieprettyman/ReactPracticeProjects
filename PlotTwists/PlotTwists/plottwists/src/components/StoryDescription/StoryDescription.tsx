@@ -31,8 +31,8 @@ const StoryDetails: React.FC = () => {
                              style={{
                                  height: 'auto',
                                  aspectRatio: '11 / 16',
-                                 maxWidth: 200,
-                                 minWidth: 200
+                                 maxWidth: 250,
+                                 minWidth: 250
                              }}/>
                         <Stack spacing={4}>
                             <Typography
@@ -40,10 +40,10 @@ const StoryDetails: React.FC = () => {
                                     fontWeight: 600,
                                     color: 'black',
                                     fontSize: 32,
-                                    paddingBottom: 8
                                 }}>
                                 Delta: A Spy Novel
                             </Typography>
+                            <Typography color="text.secondary" sx={{paddingBottom: 8}}>Updated Jul 08, 2024 11:50 AM</Typography>
 
                             <Stack direction="row" alignItems='center' spacing={2} sx={{paddingBottom: 1}}>
                                 <Stack alignItems="center" spacing={1}>

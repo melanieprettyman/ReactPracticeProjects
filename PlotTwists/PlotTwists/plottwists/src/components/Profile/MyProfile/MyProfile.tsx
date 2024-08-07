@@ -146,9 +146,9 @@ const MyProfile: React.FC = () => {
                                         princes.
                                     </Typography>
 
-                                    <Paper sx={{padding: 2}}>
-                                        <Stack spacing={4} sx={{mb: 2, fontWeight: 'bold', maxHeight:720, overflow: 'auto'}}>
-                                            <Typography variant={'h5'}>Stories by Username</Typography>
+                                    <Paper sx={{padding: 2, overflow: 'auto'}}>
+                                         <Typography variant={'h5'} sx={{paddingBottom:2}}>Stories by Username</Typography>
+                                        <Stack spacing={4} sx={{mb: 2, fontWeight: 'bold', maxHeight:720}}>
                                             <SynopsisCard/>
                                             <SynopsisCard/>
                                             <SynopsisCard/>
@@ -158,8 +158,13 @@ const MyProfile: React.FC = () => {
                                     </Paper>
                                 </CustomTabPanel>
                                 <CustomTabPanel value={value} index={1}>
-                                    <Paper sx={{padding: 2, width: 720, maxWidth: 'none'}}>
-                                        <Grid container spacing={2} columnSpacing={{xs: 1, sm: 2, md: 3}} sx={{ maxHeight:720, overflow: 'auto'}}>
+                                    <Paper sx={{padding: 2, width: 720, maxWidth: 'none', overflow: 'auto'}}>
+                                        <Grid container spacing={2} columnSpacing={{xs: 1, sm: 2, md: 3}} sx={{ maxHeight:1016, padding: 1}}>
+                                            <ProfileCard/>
+                                            <ProfileCard/>
+                                            <ProfileCard/>
+                                            <ProfileCard/>
+                                            <ProfileCard/>
                                             <ProfileCard/>
                                             <ProfileCard/>
                                             <ProfileCard/>
@@ -174,7 +179,7 @@ const MyProfile: React.FC = () => {
                                 </CustomTabPanel>
 
                                 <CustomTabPanel value={value} index={2}>
-                                    <Container sx={{padding: 2, width: 720, maxWidth: 'none'}}>
+                                    <Container sx={{padding: 2, width: 720, maxWidth: 'none', minHeight:1016, overflow: 'auto'}}>
                                         <Announcements isMyProfile={true}/>
                                     </Container>
                                 </CustomTabPanel>

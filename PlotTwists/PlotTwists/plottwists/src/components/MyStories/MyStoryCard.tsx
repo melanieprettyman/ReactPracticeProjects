@@ -39,7 +39,7 @@ const MyStoryCard: React.FC = () => {
                         1 - Published Part
                     </Typography>
 
-                    <Typography color="text.secondary">Updates Jul 08, 2024 11:50 AM</Typography>
+                    <Typography color="text.secondary">Updated Jul 08, 2024 11:50 AM</Typography>
 
                     <Stack direction="row" alignItems='center' spacing={2}
                            sx={{paddingBottom: 1}}>

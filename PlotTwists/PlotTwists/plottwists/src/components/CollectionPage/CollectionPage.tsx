@@ -9,8 +9,8 @@ const CollectionPage: React.FC = () => {
     return(
         <>
             <Navbar/>
-            <Container sx={{mt:4, width: '60%', height: '100%'}}>
-                <Stack spacing={3} alignItems='center'>
+            <Container sx={{mt:4, width: '70%', height: '100%'}}>
+                <Stack spacing={3} alignItems='center' sx={{paddingBottom:2}}>
                     <Typography variant='h4'>
                        {genre ? `${genre.charAt(0).toUpperCase() + genre.slice(1)} Stories` : 'Genre Stories'}
                     </Typography>

@@ -11,7 +11,7 @@ const ProfileCard: React.FC = () => {
     };
 
     return (
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
             <ButtonBase onClick={handleNavigationToProfile}
                         sx={{width: '100%', display: 'block', textAlign: 'initial'}}>
                 <Card sx={{ width: '100%', boxShadow: 3}}>

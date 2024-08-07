@@ -29,6 +29,7 @@ const SynopsisCard: React.FC = () => {
                         minHeight: 225,
                         maxWidth: 500,
                         maxHeight: 225,
+                        paddingBottom:2
                     }}
                 >
                     <Stack direction='row' spacing={1}>
@@ -36,7 +37,7 @@ const SynopsisCard: React.FC = () => {
                              style={{
                                  height: 'auto',
                                  aspectRatio: '11 / 16',
-                                 maxWidth: 140,
+                                 maxWidth: 180,
                              }}/>
                         <Stack>
                             <Typography

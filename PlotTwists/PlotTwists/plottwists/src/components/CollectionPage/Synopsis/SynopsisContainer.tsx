@@ -15,8 +15,8 @@ import SynopsisCard from "./SynopsisCard";
 
 function SortSelector() {
     const sortMenu = [
-        {value: 1, label: 'Hot'},
-        {value: 2, label: 'New'},
+        {value: 1, label: 'Views'},
+        {value: 2, label: 'Rating'},
         {value:3, label:'Completed'}
     ];
     const [sortBy, setSortBy] = useState(sortMenu[0].value.toString());
@@ -66,15 +66,15 @@ const SynopsisContainer: React.FC = () => {
                 </AppBar>
                 <Divider variant='middle'/>
 
-                <Box sx={{flexGrow: 1, padding: 4}}>
-                    <Grid container spacing={6}>
-                        {Array.from({length: 20}, (_, index) => (
+                <Paper elevation={0} sx={{flexGrow: 1, padding: 6}}>
+                    <Grid container spacing={6} sx={{maxHeight:1016,overflow:'auto'}}>
+                        {Array.from({length: 40}, (_, index) => (
                             <Grid item key={index}> {/* Make sure to wrap each card in a Grid item if needed */}
                                 <SynopsisCard/>
                             </Grid>
                         ))}
                     </Grid>
-                </Box>
+                </Paper>
             </Paper>
         </Box>
     );
