@@ -1,7 +1,7 @@
 import {Handle, Position} from '@xyflow/react';
 import {Paper, Stack, TextField, Typography} from "@mui/material";
 import React, {useEffect, useState} from "react";
-import {useAppContext} from "../../../Store/Context";
+import {useAppContext} from "../../../../Store/Context";
 
 
 function DecisionNode({id}) {

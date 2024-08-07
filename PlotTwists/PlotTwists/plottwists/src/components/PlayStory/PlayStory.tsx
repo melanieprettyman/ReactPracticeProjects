@@ -10,7 +10,7 @@ import {
     Toolbar,
     Typography
 } from "@mui/material";
-import Page from "./Page";
+import PlayStoryContainer from "./Content/PlayStoryContainer";
 import img from "./placeholder.png";
 import StoryCommentSection from "./CommentSection";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -131,7 +131,7 @@ const PlayStory: React.FC = () => {
             </AppBar>
             <Container sx={{mt: .2, width: '70%', height: '100%'}}>
                 <Stack spacing={3}>
-                    <Page/>
+                    <PlayStoryContainer/>
                     <Button fullWidth variant='contained'
                             sx={{fontWeight: 900, height: 50, borderRadius: '30px', backgroundColor: 'black', '&:hover': {
                         bgcolor: '#3d3c3c',

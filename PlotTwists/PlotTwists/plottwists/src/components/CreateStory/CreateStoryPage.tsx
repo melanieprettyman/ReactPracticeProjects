@@ -1,8 +1,8 @@
 import React from 'react';
 import {AppBar, IconButton, Toolbar, Box, Container, Stack, Typography, Button} from "@mui/material";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import StoryDetails from './StoryDetails';
-import FileUpload from "./FileUpload";
+import StoryDetails from './FormContent/StoryDetails';
+import FileUpload from "./FormContent/FileUpload";
 import {useNavigate} from "react-router-dom";
 
 const CreateStoryPage: React.FC = () => {

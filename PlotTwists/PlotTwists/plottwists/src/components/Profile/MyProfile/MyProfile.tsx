@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Navbar/Navbar";
+import Navbar from "../../Navbar/Navbar";
 import {
     Avatar,
     Box,
@@ -13,12 +13,12 @@ import {
     Tabs,
     Typography
 } from "@mui/material";
-import img from "../PlayStory/placeholder.png";
+import img from "../../PlayStory/placeholder.png";
 import CreateIcon from '@mui/icons-material/Create';
-import SynopsisCard from "../CollectionPage/SynopsisCard";
-import ProfileCard from "./ProfileCard";
-import Updates from "./Updates";
-import theme from "../../Theme/Theme";
+import SynopsisCard from "../../CollectionPage/Synopsis/SynopsisCard";
+import ProfileCard from "../Following/ProfileCard";
+import Announcements from "./Announcements/Announcements";
+import theme from "../../../Theme/Theme";
 import MyFollowersDialog from "./MyFollowersDialog";
 
 //TODO: add scroll bars to tabs
@@ -147,7 +147,7 @@ const MyProfile: React.FC = () => {
                                     </Typography>
 
                                     <Paper sx={{padding: 2}}>
-                                        <Stack spacing={4} sx={{mb: 2, fontWeight: 'bold', maxHeight:720}}>
+                                        <Stack spacing={4} sx={{mb: 2, fontWeight: 'bold', maxHeight:720, overflow: 'auto'}}>
                                             <Typography variant={'h5'}>Stories by Username</Typography>
                                             <SynopsisCard/>
                                             <SynopsisCard/>
@@ -155,32 +155,27 @@ const MyProfile: React.FC = () => {
                                             <SynopsisCard/>
                                             <SynopsisCard/>
                                         </Stack>
-                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop: 20}}>
-                                            <Pagination count={10}/>
-                                        </div>
                                     </Paper>
                                 </CustomTabPanel>
                                 <CustomTabPanel value={value} index={1}>
                                     <Paper sx={{padding: 2, width: 720, maxWidth: 'none'}}>
-                                        <Grid container spacing={2} columnSpacing={{xs: 1, sm: 2, md: 3}}>
+                                        <Grid container spacing={2} columnSpacing={{xs: 1, sm: 2, md: 3}} sx={{ maxHeight:720, overflow: 'auto'}}>
+                                            <ProfileCard/>
+                                            <ProfileCard/>
+                                            <ProfileCard/>
+                                            <ProfileCard/>
                                             <ProfileCard/>
                                             <ProfileCard/>
                                             <ProfileCard/>
                                             <ProfileCard/>
                                             <ProfileCard/>
                                         </Grid>
-                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop: 20}}>
-                                            <Pagination count={10}/>
-                                        </div>
                                     </Paper>
                                 </CustomTabPanel>
 
                                 <CustomTabPanel value={value} index={2}>
                                     <Container sx={{padding: 2, width: 720, maxWidth: 'none'}}>
-                                        <Updates isMyProfile={true}/>
-                                        <div style={{display: 'flex', justifyContent: 'center', paddingTop: 20}}>
-                                            <Pagination count={10}/>
-                                        </div>
+                                        <Announcements isMyProfile={true}/>
                                     </Container>
                                 </CustomTabPanel>
 

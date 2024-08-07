@@ -1,12 +1,12 @@
 import React from "react";
 import {AppBar, Box, Container, IconButton, Paper, Rating, Stack, Toolbar, Typography} from "@mui/material";
-import Page from "./Page";
+import PlayStoryContainer from "./Content/PlayStoryContainer";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {useNavigate} from "react-router-dom";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import ModeCommentIcon from "@mui/icons-material/ModeComment";
 import Divider from "@mui/material/Divider";
-import PageContent from "./PageContent";
+import PlayStoryContent from "./Content/PlayStoryContent";
 
 const Preview: React.FC = () => {
     const navigate = useNavigate();  // Initialize navigate function
@@ -40,7 +40,7 @@ const Preview: React.FC = () => {
                         </Typography>
                         <Divider variant="middle"/>
                     </div>
-                    <PageContent/>
+                    <PlayStoryContent/>
                 </Paper>
             </Container>
         </Box>

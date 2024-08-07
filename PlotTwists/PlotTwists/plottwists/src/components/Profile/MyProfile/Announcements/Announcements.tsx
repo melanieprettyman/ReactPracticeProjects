@@ -1,13 +1,13 @@
 import {Avatar, Box, Button, Checkbox, IconButton, Paper, Stack, TextField, Typography} from '@mui/material'
 import React, { useState } from 'react'
-import img from "../PlayStory/placeholder.png";
+import img from "../../../PlayStory/placeholder.png";
 import Post from "./Post";
 import {bool} from "yup";
 
 type Props = {
     isMyProfile:boolean
 };
-const Updates: React.FC<Props> = ({isMyProfile}) => {
+const Announcements: React.FC<Props> = ({isMyProfile}) => {
     const [postText, setPostText] = useState('');
     const [posts, setPosts] = useState<string[]>([]);
 
@@ -66,7 +66,7 @@ const Updates: React.FC<Props> = ({isMyProfile}) => {
                 <PostInputField/>
             }
 
-            <Stack spacing={2} sx={{ mt: 2 }}>
+            <Stack spacing={2} sx={{ mt: 2,maxHeight:720, overflow: 'auto' }}>
                 {posts.map((post, index) => (
                     <Post key={index} content={post} onDelete={() => handleDeletePost(index)} />
                 ))}
@@ -76,4 +76,4 @@ const Updates: React.FC<Props> = ({isMyProfile}) => {
     )
 }
 
-export default Updates
+export default Announcements

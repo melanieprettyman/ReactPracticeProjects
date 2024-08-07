@@ -4,25 +4,18 @@ import {
     Box,
     Button,
     Container, IconButton,
-    Paper, Rating,
+    Paper,
     Stack,
     Tab,
     Tabs, Toolbar,
-    Tooltip,
-    Typography
 } from "@mui/material";
-import Navbar from "../Navbar/Navbar";
 import {useNavigate} from "react-router-dom";
 import img from "../PlayStory/placeholder.png";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import FileUpload from "../CreateStory/FileUpload";
 import CreateIcon from '@mui/icons-material/Create';
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import ModeCommentIcon from "@mui/icons-material/ModeComment";
-import DeleteIcon from '@mui/icons-material/Delete';
 import Divider from "@mui/material/Divider";
-import StoryDetails from "../CreateStory/StoryDetails";
-import PartTile from "../CreateStory/PartTile";
+import StoryDetails from "../CreateStory/FormContent/StoryDetails";
+import PartTile from "./PartTile";
 
 interface TabPanelProps {
     children?: React.ReactNode;

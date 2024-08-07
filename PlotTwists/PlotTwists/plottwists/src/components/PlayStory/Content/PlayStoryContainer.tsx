@@ -1,12 +1,12 @@
 import React from "react";
-import {Box, Paper, Rating, Stack, Typography} from "@mui/material";
+import {Paper, Rating, Stack, Typography} from "@mui/material";
 import Divider from "@mui/material/Divider";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
-import PageContent from "./PageContent";
+import PlayStoryContent from "./PlayStoryContent";
 
 
-const Page: React.FC = () => {
+const PlayStoryContainer: React.FC = () => {
     return (
         <Paper elevation={3} sx={{paddingBottom: 10}}>
             <div style={{paddingBottom: 30}}>
@@ -29,8 +29,8 @@ const Page: React.FC = () => {
                 </Stack>
                 <Divider variant="middle"/>
             </div>
-            <PageContent/>
+            <PlayStoryContent/>
         </Paper>
     );
 };
-export default Page;
+export default PlayStoryContainer;

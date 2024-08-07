@@ -12,12 +12,12 @@ import {
 
 import '@xyflow/react/dist/style.css';
 
-import './text-updater-node.css';
-import DecisionNode from "./DecisionNode";
-import Node from "../Scene/Node"
+import './Styles/text-updater-node.css';
+import DecisionNode from "./Decision/DecisionNode";
+import Node from "./Scene/Node"
 import {Box, IconButton, Stack, Typography} from "@mui/material";
-import sceneBtn from './addScene.png'
-import decisionBtn from './addDecision.png'
+import sceneBtn from './Styles/addScene.png'
+import decisionBtn from './Styles/addDecision.png'
 import {useAppContext} from "../../../Store/Context";
 
 
@@ -201,10 +201,10 @@ function Flow() {
                 onConnect={onConnect}
                 panOnScroll
                 selectionOnDrag
-                fitView // Automatically fits the view to the elements upon initialization
-    fitViewOptions={{
-        padding: 2,  // Adds padding around the fitted view, for example
-    }}
+                fitView
+                fitViewOptions={{
+                    padding: 2,
+                }}
             >
                 <MiniMap zoomable pannable/>
                 <Background/>

@@ -61,8 +61,8 @@ const MyStoryCard: React.FC = () => {
                 <Button
                     variant="contained"
                     sx={{
-                        height: 60,
-                        fontSize: 20,
+                        height: 50,
+                        fontSize: 16,
                         fontWeight: 'bold'
                     }}
                     onClick={navigateToEditStoryDetails}

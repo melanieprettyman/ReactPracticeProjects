@@ -12,7 +12,7 @@ const announcementString = "Happy Invasion Day! Which also doubles as release da
     "\n" +
     "You can find it on Amazon in ebook, paperback, and hardcover! The link is in the About tab on my profile, or you can just search the title on Amazon. I've also placed the direct link below this paragraph, but I don't think Wattpad activates hyperlinks withi"
 
-const Announcement: React.FC<AnnouncementProps> = ({announcement}) => {
+const NotificationCard: React.FC<AnnouncementProps> = ({announcement}) => {
     const navigate = useNavigate();  // Initialize navigate function
      const handleNavigationToStory = () => {
         navigate('/story');
@@ -67,4 +67,4 @@ const Announcement: React.FC<AnnouncementProps> = ({announcement}) => {
     )
         ;
 };
-export default Announcement;
+export default NotificationCard;

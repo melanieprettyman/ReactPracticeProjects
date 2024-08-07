@@ -11,7 +11,7 @@ import {
     TextField,
     Typography,
 } from "@mui/material";
-import { genre } from "../../Utils/genre";
+import { genre } from "../../../Utils/genre";
 
 const StoryDetails: React.FC = () => {
     const { control, handleSubmit } = useForm({

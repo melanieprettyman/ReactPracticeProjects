@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import {Container, Stack, Typography} from "@mui/material";
-import Announcement from "./Announcement";
+import NotificationCard from "./NotificationCard";
 
 
 const Notifications: React.FC = () => {
@@ -11,8 +11,8 @@ const Notifications: React.FC = () => {
             <Container sx={{mt: 4, width: '70%', maxHeight: '70%'}}>
                 <Typography variant={'h4'} sx={{fontWeight: 'bold', paddingBottom: 2}}>Notifications</Typography>
                 <Stack spacing={2}>
-                    <Announcement announcement={false}/>
-                    <Announcement announcement={true}/>
+                    <NotificationCard announcement={false}/>
+                    <NotificationCard announcement={true}/>
                 </Stack>
             </Container>
         </>

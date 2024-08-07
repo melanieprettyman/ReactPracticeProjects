@@ -15,9 +15,9 @@ import {
 } from "@mui/material";
 import img from "../PlayStory/placeholder.png";
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import SynopsisCard from "../CollectionPage/SynopsisCard";
-import ProfileCard from "./ProfileCard";
-import Updates from "./Updates";
+import SynopsisCard from "../CollectionPage/Synopsis/SynopsisCard";
+import ProfileCard from "./Following/ProfileCard";
+import Announcements from "./MyProfile/Announcements/Announcements";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -157,7 +157,7 @@ const Profile: React.FC = () => {
 
                                 <CustomTabPanel value={value} index={2}>
                                     <Container sx={{padding: 2, width: 720, maxWidth: 'none'}}>
-                                        <Updates isMyProfile={false}/>
+                                        <Announcements isMyProfile={false}/>
                                         <div style={{display: 'flex', justifyContent: 'center', paddingTop:20}}>
                                             <Pagination count={10}/>
                                         </div>

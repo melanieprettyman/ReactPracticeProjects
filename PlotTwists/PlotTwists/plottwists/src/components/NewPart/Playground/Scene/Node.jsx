@@ -10,7 +10,7 @@ import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import CancelIcon from "@mui/icons-material/Cancel";
 import TextEditor from "./TextEditor";
 import {Handle, Position} from '@xyflow/react';
-import {useAppContext} from "../../../Store/Context";
+import {useAppContext} from "../../../../Store/Context";
 
 
 export default function Node({id}) {

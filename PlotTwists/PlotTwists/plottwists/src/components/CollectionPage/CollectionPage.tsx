@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../Navbar/Navbar";
 import {Container, Stack, Typography} from "@mui/material";
-import SynopsisContainer from "./SynopsisContainer";
+import SynopsisContainer from "./Synopsis/SynopsisContainer";
 import {useParams} from "react-router-dom";
 
 const CollectionPage: React.FC = () => {

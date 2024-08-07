@@ -1,24 +1,24 @@
 import React from 'react';
 import './App.css';
-import LandingPage from "./components/LandingPage/Container";
-import Homepage from "./components/Home/Container";
-import CreateStoryPage from "./components/CreateStory/Container";
 import Theme from "./Theme/Theme";
 import {ThemeProvider} from "@mui/material/styles";
-import NewPartPage from "./components/NewPart/Container";
 import {ContextProvider} from "./Store/Context";
-import PlayStory from "./components/PlayStory/PlayStory";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Preview from "./components/PlayStory/Preview";
+import Homepage from "./components/Home/Homepage";
+import CreateStoryPage from "./components/CreateStory/CreateStoryPage";
+import NewPartPage from "./components/NewPart/NewPartPage";
+import Preview from './components/PlayStory/Preview';
 import CollectionPage from "./components/CollectionPage/CollectionPage";
 import StoryDescription from "./components/StoryDescription/StoryDescription";
-import Profile from "./components/Profile/Profile";
+import PlayStory from "./components/PlayStory/PlayStory";
+import MyProfile from "./components/Profile/MyProfile/MyProfile";
 import MyStories from "./components/MyStories/MyStories";
 import EditStoryDetails from "./components/EditStoryDetailsPage/EditStoryDetails";
 import Library from "./components/Library/Library";
-import MyProfile from "./components/Profile/MyProfile";
 import Settings from "./components/Settings/Settings";
 import Notifications from "./components/Notifications/Notifications";
+
+
 
 
 function App() {

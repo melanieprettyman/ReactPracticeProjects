@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Box, Grow, Stack, Typography} from "@mui/material";
-import img from './placeholder.png'
+import img from '../placeholder.png'
 
 
 const longString = "The Lord of the Rings is an epic[1] high fantasy novel[a] by the English author and scholar J. R. R. Tolkien. Set in Middle-earth, the story began as a sequel to Tolkien's 1937 children's book The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling books ever written, with over 150 million copies sold.[2]";
@@ -60,7 +60,7 @@ const tree = {
     ]
 }
 
-const PageContent: React.FC = () => {
+const PlayStoryContent: React.FC = () => {
     const [checked, setChecked] = React.useState(true);
 
     const [currentNode, setCurrentNode] = useState(tree);
@@ -115,4 +115,4 @@ const PageContent: React.FC = () => {
         </Grow>
     );
 };
-export default PageContent;
+export default PlayStoryContent;

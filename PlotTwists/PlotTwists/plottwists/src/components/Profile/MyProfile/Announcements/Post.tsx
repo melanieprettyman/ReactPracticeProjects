@@ -1,6 +1,6 @@
 import React from "react";
 import {Avatar, IconButton, Paper, Stack, Typography} from "@mui/material";
-import img from "../PlayStory/placeholder.png";
+import img from "../../../PlayStory/placeholder.png";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const Post: React.FC<{ content: string, onDelete: () => void }> = ({ content, onDelete }) => {
