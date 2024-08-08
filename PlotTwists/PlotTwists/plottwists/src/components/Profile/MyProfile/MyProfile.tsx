@@ -188,7 +188,7 @@ const MyProfile: React.FC = () => {
                                         <TextField
                                             sx={{
                                                 fontSize: 18, background: 'white', mt: 2,
-                                                mb: 2, minWidth:750
+                                                mb: 2, minWidth: 750
                                             }}
                                             variant="outlined"
                                             margin="normal"
@@ -231,10 +231,10 @@ const MyProfile: React.FC = () => {
                                     )}
 
 
-                                    <Paper sx={{padding: 2, overflow: 'auto'}}>
+                                    <Paper sx={{padding: 2}}>
                                         <Typography variant={'h5'} sx={{paddingBottom: 2}}>Stories by
                                             Username</Typography>
-                                        <Stack spacing={4} sx={{mb: 2, fontWeight: 'bold', maxHeight: 720}}>
+                                        <Stack spacing={4} sx={{fontWeight: 'bold', maxHeight: 720, overflow: 'auto'}}>
                                             <SynopsisCard/>
                                             <SynopsisCard/>
                                             <SynopsisCard/>
@@ -244,36 +244,27 @@ const MyProfile: React.FC = () => {
                                     </Paper>
                                 </CustomTabPanel>
                                 <CustomTabPanel value={value} index={1}>
-                                    <Paper sx={{padding: 2, width: 720, maxWidth: 'none', overflow: 'auto'}}>
-                                        <Grid container spacing={2} columnSpacing={{xs: 1, sm: 2, md: 3}}
-                                              sx={{maxHeight: 1016, padding: 1}}>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
-                                            <ProfileCard/>
+                                    <Paper sx={{ width: 720, maxWidth: 'none', overflow: 'auto'}}>
+                                        <Grid container
+                                              sx={{maxHeight: 1016, overflow: 'auto'}}>
+                                            {Array.from({length: 14}).map((_, index) => (
+                                                <ProfileCard key={index} />
+                                            ))}
                                         </Grid>
                                     </Paper>
                                 </CustomTabPanel>
 
                                 <CustomTabPanel value={value} index={2}>
                                     <Container sx={{
-                                        padding: 2,
                                         width: 720,
                                         maxWidth: 'none',
                                         minHeight: 1016,
                                         overflow: 'auto'
                                     }}>
-                                        <Announcements isMyProfile={true}/>
+                                        <Container sx={{width: 710, minHeight: 1016}}>
+                                            <Announcements isMyProfile={true}/>
+                                        </Container>
+
                                     </Container>
                                 </CustomTabPanel>
 

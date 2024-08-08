@@ -13,7 +13,7 @@ const ProfileCard: React.FC = () => {
     return (
         <Grid item xs={12} sm={4}>
             <ButtonBase onClick={handleNavigationToProfile}
-                        sx={{width: '100%', display: 'block', textAlign: 'initial'}}>
+                        sx={{width: '100%', display: 'block', textAlign: 'initial', p:2}}>
                 <Card sx={{ width: '100%', boxShadow: 3}}>
                     <CardMedia
                         component="img"

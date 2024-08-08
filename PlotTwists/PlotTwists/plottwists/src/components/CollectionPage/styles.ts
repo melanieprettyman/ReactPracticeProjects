@@ -35,7 +35,7 @@ const styles = {
     buttonBase: {
         width: '100%',
         display: 'block',
-        textAlign: 'initial'
+        textAlign: 'initial',
     },
     cardContainer: {
         minWidth: 500,
