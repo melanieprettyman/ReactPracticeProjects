@@ -6,7 +6,6 @@ import {
     Button,
     Container,
     Grid, IconButton,
-    Pagination,
     Paper,
     Stack,
     Tab,
@@ -23,6 +22,7 @@ import MyFollowersDialog from "./MyFollowersDialog";
 import {PhotoCamera} from "@mui/icons-material";
 import ColorLensIcon from '@mui/icons-material/ColorLens';
 import ColorPickerDialog from "./ColorPickerDialog";
+import userEvent from "@testing-library/user-event";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -46,11 +46,41 @@ function CustomTabPanel(props: TabPanelProps) {
     );
 }
 
+const bioStg = " I'm mostly on instagram--where I'm always ready to talk fictional crushes\n" +
+    "                                            and\n" +
+    "                                            nerd\n" +
+    "                                            out over books. (Okay, okay. And I've also been known to share snippets and\n" +
+    "                                            teasers\n" +
+    "                                            from my upcoming novels, if you're into that sort of thing...) Please feel\n" +
+    "                                            free\n" +
+    "                                            to\n" +
+    "                                            chat with me there @KerriManiscalco. I love talking with fellow readers!\n" +
+    "\n" +
+    "\n" +
+    "                                            Kerri Maniscalco grew up in a semi-haunted house outside NYC where her\n" +
+    "                                            fascination\n" +
+    "                                            with gothic settings began. In her spare time she reads everything she can\n" +
+    "                                            get\n" +
+    "                                            her\n" +
+    "                                            hands on, cooks all kinds of food with her family and friends, and drinks\n" +
+    "                                            entirely\n" +
+    "                                            too much tea while discussing life’s finer points with her cats.\n" +
+    "\n" +
+    "                                            She is the #1 NYT and USA Today bestselling author of the STALKING JACK THE\n" +
+    "                                            RIPPER\n" +
+    "                                            quartet, the KINGDOM OF THE WICKED trilogy, and her forthcoming adult debut,\n" +
+    "                                            THRONE\n" +
+    "                                            OF THE FALLEN, set within the KINGDOM OF THE WICKED universe. Two other\n" +
+    "                                            un-named\n" +
+    "                                            titles will also be set within the KOTW world and will follow two different\n" +
+    "                                            princes."
+
 const MyProfile: React.FC = () => {
     const [value, setValue] = useState(0);
     const [editMode, setEditMode] = useState(false);
     const [name, setName] = useState("Kerri Maniscalco");
     const [avatar, setAvatar] = useState(img);
+    const [bio, setBio]=useState(bioStg);
 
     const toggleEditMode = () => {
         setEditMode(!editMode);
@@ -58,6 +88,10 @@ const MyProfile: React.FC = () => {
 
     const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
+    };
+
+     const handleBioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setBio(event.target.value);
     };
 
     const handleAvatarChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -188,45 +222,20 @@ const MyProfile: React.FC = () => {
                                         <TextField
                                             sx={{
                                                 fontSize: 18, background: 'white', mt: 2,
-                                                mb: 2, minWidth: 750
+                                                mb: 2, minWidth: 750, borderRadius:2
                                             }}
                                             variant="outlined"
                                             margin="normal"
                                             fullWidth
                                             multiline
+                                            value={bio}
                                             rows={12}
                                             placeholder={"Help people get to know you..."}
+                                            onChange={handleBioChange}
                                         />
                                     ) : (
-                                        <Typography sx={{fontSize: 18, paddingBottom: 3}}>
-                                            I'm mostly on instagram--where I'm always ready to talk fictional crushes
-                                            and
-                                            nerd
-                                            out over books. (Okay, okay. And I've also been known to share snippets and
-                                            teasers
-                                            from my upcoming novels, if you're into that sort of thing...) Please feel
-                                            free
-                                            to
-                                            chat with me there @KerriManiscalco. I love talking with fellow readers!
-
-
-                                            Kerri Maniscalco grew up in a semi-haunted house outside NYC where her
-                                            fascination
-                                            with gothic settings began. In her spare time she reads everything she can
-                                            get
-                                            her
-                                            hands on, cooks all kinds of food with her family and friends, and drinks
-                                            entirely
-                                            too much tea while discussing life’s finer points with her cats.
-
-                                            She is the #1 NYT and USA Today bestselling author of the STALKING JACK THE
-                                            RIPPER
-                                            quartet, the KINGDOM OF THE WICKED trilogy, and her forthcoming adult debut,
-                                            THRONE
-                                            OF THE FALLEN, set within the KINGDOM OF THE WICKED universe. Two other
-                                            un-named
-                                            titles will also be set within the KOTW world and will follow two different
-                                            princes.
+                                        <Typography sx={{fontSize: 18, paddingBottom: 3, minWidth: 750}}>
+                                            {bio}
                                         </Typography>
                                     )}
 
