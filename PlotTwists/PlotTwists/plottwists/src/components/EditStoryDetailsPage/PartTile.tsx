@@ -16,6 +16,7 @@ import CreateIcon from "@mui/icons-material/Create";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React from "react";
 import styles from "./styles";
+import {useNavigate} from "react-router-dom";
 
 // @ts-ignore
 const PartTile = ({partId, onDelete}) => {
@@ -32,6 +33,10 @@ const PartTile = ({partId, onDelete}) => {
     const handleDelete = () => {
         onDelete(partId);
         handleClose();
+    };
+    let navigate = useNavigate();
+    const navigateToEditStoryPart = () => {
+        navigate("/edit-part");
     };
     return (
         <Box sx={{padding: 1}}>
@@ -58,7 +63,7 @@ const PartTile = ({partId, onDelete}) => {
                 </Stack>
                 <Box sx={{flexGrow: 1}}></Box>
                 <Tooltip title="Edit Part">
-                    <IconButton sx={styles.partIconBtn}>
+                    <IconButton sx={styles.partIconBtn} onClick={navigateToEditStoryPart}>
                         <CreateIcon/>
                     </IconButton>
                 </Tooltip>

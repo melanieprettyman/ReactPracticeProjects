@@ -17,6 +17,7 @@ import EditStoryDetails from "./components/EditStoryDetailsPage/EditStoryDetails
 import Library from "./components/Library/Library";
 import Settings from "./components/Settings/Settings";
 import Notifications from "./components/Notifications/Notifications";
+import EditPart from "./components/NewPart/Playground/EditPart";
 
 
 
@@ -40,6 +41,7 @@ function App() {
                         <Route path="/library" element={<Library/>}/>
                         <Route path="/settings" element={<Settings/>}/>
                         <Route path="/notifications" element={<Notifications/>}/>
+                        <Route path="/edit-part" element={<EditPart/>}/>
                     </Routes>
                 </Router>
             </ContextProvider>

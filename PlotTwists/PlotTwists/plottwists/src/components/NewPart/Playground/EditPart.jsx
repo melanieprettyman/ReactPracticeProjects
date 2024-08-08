@@ -13,12 +13,13 @@ import '@xyflow/react/dist/style.css';
 import './Styles/text-updater-node.css';
 import DecisionNode from "./Decision/DecisionNode";
 import Node from "./Scene/Node"
-import {Box, IconButton, Stack, Typography} from "@mui/material";
+import {Box, Button, IconButton, Stack, Typography} from "@mui/material";
 import sceneBtn from './Styles/addScene.png'
 import decisionBtn from './Styles/addDecision.png'
 import {useAppContext} from "../../../Store/Context";
 
-
+const fakeTreeData = "{\"nodes\":[{\"id\":\"node-1\",\"position\":{\"x\":-204.17014178482066,\"y\":-448.3736447039199},\"type\":\"node\",\"data\":{\"id\":\"node-1\",\"label\":\"Scene 1\",\"title\":\"1\",\"description\":\"<p>1</p>\",\"imageUrl\":{},\"fileName\":\"placeholder.png\"},\"measured\":{\"width\":735,\"height\":640},\"selected\":false,\"dragging\":false},{\"id\":\"node-2\",\"type\":\"decisionNode\",\"position\":{\"x\":-204.17014178482066,\"y\":351.6263552960801},\"data\":{\"id\":\"node-2\",\"label\":\"Decision 2\",\"description\":\"1d\"},\"measured\":{\"width\":337,\"height\":240},\"selected\":false},{\"id\":\"node-3\",\"type\":\"node\",\"position\":{\"x\":-441.7014178482068,\"y\":696.9140950792327},\"data\":{\"id\":\"node-3\",\"label\":\"Scene 2\",\"title\":\"2\",\"description\":\"<p></p>\",\"imageUrl\":{},\"fileName\":\"plottistslogo.png\"},\"measured\":{\"width\":735,\"height\":640},\"selected\":true,\"dragging\":false}],\"edges\":[{\"source\":\"node-1\",\"sourceHandle\":\"a\",\"target\":\"node-2\",\"id\":\"xy-edge__node-1a-node-2\"},{\"source\":\"node-2\",\"sourceHandle\":\"a\",\"target\":\"node-3\",\"id\":\"xy-edge__node-2a-node-3\"}],\"viewport\":{\"x\":744.104687462747,\"y\":19.700005066394787,\"zoom\":0.749375}}";
+//const fakeTreeData = "{\"nodes\":[{\"id\":\"node-1\",\"position\":{\"x\":-108.0900750625521,\"y\":-451.0425354462052},\"type\":\"node\",\"data\":{\"id\":\"node-1\",\"label\":\"Scene 1\",\"title\":\"1\",\"description\":\"<p>1</p>\",\"imageUrl\":{},\"fileName\":\"placeholder.png\"},\"measured\":{\"width\":735,\"height\":640},\"selected\":false,\"dragging\":false},{\"id\":\"node-2\",\"type\":\"decisionNode\",\"position\":{\"x\":-108.0900750625521,\"y\":348.9574645537948},\"data\":{\"id\":\"node-2\",\"label\":\"Decision 2\",\"description\":\"2\"},\"measured\":{\"width\":337,\"height\":240},\"selected\":false},{\"id\":\"node-3\",\"type\":\"decisionNode\",\"position\":{\"x\":290.909090909091,\"y\":356.630525437865},\"data\":{\"id\":\"node-3\",\"label\":\"Decision 3\",\"description\":\"3\"},\"measured\":{\"width\":337,\"height\":240},\"selected\":false,\"dragging\":false},{\"id\":\"node-4\",\"type\":\"node\",\"position\":{\"x\":-286.905754795663,\"y\":745.954962468724},\"data\":{\"id\":\"node-4\",\"label\":\"Scene 2\",\"title\":\"2\",\"description\":\"<p>ndnfcndjdkdjk</p>\",\"imageUrl\":{},\"fileName\":\"placeholder.png\"},\"measured\":{\"width\":735,\"height\":640},\"selected\":false,\"dragging\":false}],\"edges\":[{\"source\":\"node-1\",\"sourceHandle\":\"a\",\"target\":\"node-2\",\"id\":\"xy-edge__node-1a-node-2\"},{\"source\":\"node-1\",\"sourceHandle\":\"a\",\"target\":\"node-3\",\"id\":\"xy-edge__node-1a-node-3\"},{\"source\":\"node-2\",\"sourceHandle\":\"a\",\"target\":\"node-4\",\"id\":\"xy-edge__node-2a-node-4\"}],\"viewport\":{\"x\":739.1046875372529,\"y\":-162.17499222345654,\"zoom\":0.749375}}"
 const initialNodes = [
     {
         id: 'node-1',
@@ -40,7 +41,7 @@ const nodeTypes = {
     node: Node,
 };
 
-function FlowChart() {
+function EditPart() {
     const {nodesInfo, publish, updateNode} = useAppContext();
     const [sceneCount, setSceneCount] = useState(1);
     const [decCount, setDecCount] = useState(1);
@@ -50,33 +51,19 @@ function FlowChart() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState([]);
     const reactFlowInstance = useReactFlow();
+    const { setViewport } = useReactFlow();
 
 
-  const saveFlow = useCallback(() => {
-    if (rfInstance) {
-        // Ensure nodes are updated with the latest info before saving
-        const currentNodes = rfInstance.getNodes().map(node => {
-            const updatedData = nodesInfo[node.id] || {};
-            return {
-                ...node,
-                data: {
-                    ...node.data,
-                    ...updatedData
-                }
-            };
-        });
 
-        // Set the updated nodes back into the React Flow instance
-        rfInstance.setNodes(currentNodes);
 
-        // Serialize and save the updated flow
-        const flow = rfInstance.toObject();
-        console.log("Serialized Flow:", JSON.stringify(flow));
-        // Implement the actual save logic here, e.g., sending to a backend
-    }
-}, [rfInstance, nodesInfo]);
+    const saveFlow = useCallback(() => {
+        if (rfInstance) {
+            const flow = rfInstance.toObject();
+            console.log(JSON.stringify(flow));
+        }
+    }, [rfInstance]);
 
-   const buildDecisionTree = useCallback(() => {
+    const buildDecisionTree = useCallback(() => {
         const nodesById = reactFlowInstance.getNodes().reduce((acc, node) => {
             acc[node.id] = {...node.data, children: []};
             return acc;
@@ -93,32 +80,18 @@ function FlowChart() {
         return rootNode;
     }, [reactFlowInstance]);
 
-// Example usage of saveFlow triggered by a publish action
-const handlePublish = useCallback(() => {
-    try {
-        const decisionTree = buildDecisionTree();
-        console.log('Decision Tree Before Save:', JSON.stringify(decisionTree));
-        saveFlow();
-        updateTreeWithNodeInfo(decisionTree, nodesInfo);
-        console.log('Decision Tree After Save:', JSON.stringify(decisionTree));
-    } catch (error) {
-        console.error('Error during publish:', error);
-    }
-}, [saveFlow, buildDecisionTree, nodesInfo]);
+    const handlePublish = useCallback(async () => { // Make the callback function async
+        try {
+            saveFlow();
 
+            const decisionTree = buildDecisionTree();
+            updateTreeWithNodeInfo(decisionTree, nodesInfo); // Update the tree with detailed node data
+            console.log('Updated Decision Tree:', decisionTree);
+        } catch (error) {
+            console.error('Error publishing:', error);
+        }
+    }, [buildDecisionTree, nodesInfo, saveFlow]); // Include saveFlow in the dependency array if it uses external states or props
 
-
-    // const handlePublish = useCallback(async () => { // Make the callback function async
-    //     try {
-    //         const decisionTree = buildDecisionTree();
-    //         saveFlow();
-    //         updateTreeWithNodeInfo(decisionTree, nodesInfo); // Update the tree with detailed node data
-    //         console.log('Updated Decision Tree:', decisionTree);
-    //     } catch (error) {
-    //         console.error('Error publishing:', error);
-    //     }
-    // }, [buildDecisionTree, nodesInfo, saveFlow]); // Include saveFlow in the dependency array if it uses external states or props
-    //
 
     if (publish) {
         handlePublish();
@@ -244,6 +217,21 @@ const handlePublish = useCallback(() => {
         }
     };
 
+const restore = useCallback(() => {
+    const restoreFlow = async () => {
+      const flow = JSON.parse(fakeTreeData);
+
+      if (flow) {
+        const { x = 0, y = 0, zoom = 1 } = flow.viewport;
+        setNodes(flow.nodes || []);
+        setEdges(flow.edges || []);
+        setViewport({ x, y, zoom });
+      }
+    };
+
+    restoreFlow();
+  }, [setNodes, setViewport]);
+
 
     return (
         <Box sx={{display: 'flex', width: '100vw', height: '100vh', m: 0, p: 0}}>
@@ -260,6 +248,7 @@ const handlePublish = useCallback(() => {
                         <Typography sx={{fontSize: 12}}>Add Decision</Typography>
                     </Stack>
                 </IconButton>
+                <Button onClick={restore}>hi</Button>
             </Box>
             <ReactFlow
                 nodes={nodes}
@@ -287,72 +276,6 @@ const handlePublish = useCallback(() => {
 
 export default () => (
     <ReactFlowProvider>
-        <FlowChart/>
+        <EditPart/>
     </ReactFlowProvider>
 );
-
-/**
- * Updated Decision Tree:
- * {
- *     "id": "node-1",
- *     "label": "Scene 1",
- *     "title": "1",
- *     "description": "<p>1</p>",
- *     "imageUrl": {},
- *     "fileName": "Screenshot 2024-07-11 at 2.58.47 PM.png",
- *     "children": [
- *         {
- *             "id": "node-2",
- *             "label": "Decision 1",
- *             "description": "a",
- *             "children": []
- *         },
- *         {
- *             "id": "node-3",
- *             "label": "Decision 2",
- *             "description": "b",
- *             "children": [
- *                 {
- *                     "id": "node-4",
- *                     "label": "Scene 2",
- *                     "title": "2",
- *                     "description": "<p>2</p>",
- *                     "imageUrl": "",
- *                     "fileName": "",
- *                     "children": [
- *                         {
- *                             "id": "node-5",
- *                             "label": "Decision 3",
- *                             "description": "2a",
- *                             "children": [
- *                                 {
- *                                     "id": "node-7",
- *                                     "label": "Scene 3",
- *                                     "title": "3",
- *                                     "description": "<p>3</p>",
- *                                     "imageUrl": "",
- *                                     "fileName": "",
- *                                     "children": []
- *                                 }
- *                             ]
- *                         },
- *                         {
- *                             "id": "node-6",
- *                             "label": "Decision 4",
- *                             "description": "2b",
- *                             "children": []
- *                         }
- *                     ]
- *                 }
- *             ]
- *         }
- *     ]
- * }
- *
- *
- *
- *
- * Save Flow
- *
- */
-

@@ -183,6 +183,7 @@ const MyProfile: React.FC = () => {
                                         value={name}
                                         onChange={handleNameChange}
                                         fullWidth
+                                        sx={{background: 'rgba(255,255,255,0.42)'}}
                                     />
                                 ) : (
                                     <Typography variant={'h4'} sx={{fontWeight: 'bold'}}>{name}</Typography>
@@ -222,7 +223,7 @@ const MyProfile: React.FC = () => {
                                         {editMode ? (
                                             <TextField
                                                 sx={{
-                                                    fontSize: 18, background: 'white', mt: 2,
+                                                    fontSize: 18, background: 'rgba(255,255,255,0.42)', mt: 2,
                                                     mb: 2, minWidth: 750, borderRadius: 2
                                                 }}
                                                 variant="outlined"
