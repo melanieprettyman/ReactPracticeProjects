@@ -80,7 +80,7 @@ const MyProfile: React.FC = () => {
     const [editMode, setEditMode] = useState(false);
     const [name, setName] = useState("Kerri Maniscalco");
     const [avatar, setAvatar] = useState(img);
-    const [bio, setBio]=useState(bioStg);
+    const [bio, setBio] = useState(bioStg);
 
     const toggleEditMode = () => {
         setEditMode(!editMode);
@@ -90,7 +90,7 @@ const MyProfile: React.FC = () => {
         setName(event.target.value);
     };
 
-     const handleBioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleBioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setBio(event.target.value);
     };
 
@@ -218,46 +218,52 @@ const MyProfile: React.FC = () => {
                                     </Tabs>
                                 </Box>
                                 <CustomTabPanel value={value} index={0}>
-                                    {editMode ? (
-                                        <TextField
-                                            sx={{
-                                                fontSize: 18, background: 'white', mt: 2,
-                                                mb: 2, minWidth: 750, borderRadius:2
-                                            }}
-                                            variant="outlined"
-                                            margin="normal"
-                                            fullWidth
-                                            multiline
-                                            value={bio}
-                                            rows={12}
-                                            placeholder={"Help people get to know you..."}
-                                            onChange={handleBioChange}
-                                        />
-                                    ) : (
-                                        <Typography sx={{fontSize: 18, paddingBottom: 3, minWidth: 750}}>
-                                            {bio}
-                                        </Typography>
-                                    )}
+                                    <Stack spacing={2}>
+                                        {editMode ? (
+                                            <TextField
+                                                sx={{
+                                                    fontSize: 18, background: 'white', mt: 2,
+                                                    mb: 2, minWidth: 750, borderRadius: 2
+                                                }}
+                                                variant="outlined"
+                                                margin="normal"
+                                                fullWidth
+                                                multiline
+                                                value={bio}
+                                                rows={12}
+                                                placeholder={"Help people get to know you..."}
+                                                onChange={handleBioChange}
+                                            />
+                                        ) : (
+                                            <Paper sx={{background: 'rgba(255,255,255,0.42)', padding: 2}} elevation={0}>
+                                                <Typography sx={{fontSize: 18, minWidth: 750}}>
+                                                    {bio}
+                                                </Typography>
+                                            </Paper>
+
+                                        )}
 
 
-                                    <Paper sx={{padding: 2}}>
-                                        <Typography variant={'h5'} sx={{paddingBottom: 2}}>Stories by
-                                            Username</Typography>
-                                        <Stack spacing={4} sx={{fontWeight: 'bold', maxHeight: 720, overflow: 'auto'}}>
-                                            <SynopsisCard/>
-                                            <SynopsisCard/>
-                                            <SynopsisCard/>
-                                            <SynopsisCard/>
-                                            <SynopsisCard/>
-                                        </Stack>
-                                    </Paper>
+                                        <Paper sx={{padding: 2, background: 'rgba(255,255,255,0.42)'}}>
+                                            <Typography variant={'h5'} sx={{paddingBottom: 2}}>Stories by
+                                                Username</Typography>
+                                            <Stack spacing={4}
+                                                   sx={{fontWeight: 'bold', maxHeight: 720, overflow: 'auto'}}>
+                                                <SynopsisCard/>
+                                                <SynopsisCard/>
+                                                <SynopsisCard/>
+                                                <SynopsisCard/>
+                                                <SynopsisCard/>
+                                            </Stack>
+                                        </Paper>
+                                    </Stack>
                                 </CustomTabPanel>
                                 <CustomTabPanel value={value} index={1}>
-                                    <Paper sx={{ width: 720, maxWidth: 'none', overflow: 'auto'}}>
+                                    <Paper sx={{width: 720, maxWidth: 'none', overflow: 'auto', background: 'rgba(255,255,255,0.42)'}}>
                                         <Grid container
                                               sx={{maxHeight: 1016, overflow: 'auto'}}>
                                             {Array.from({length: 14}).map((_, index) => (
-                                                <ProfileCard key={index} />
+                                                <ProfileCard key={index}/>
                                             ))}
                                         </Grid>
                                     </Paper>
