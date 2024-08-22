@@ -30,19 +30,22 @@ export default function Node({id}) {
     }, [title, description, imageUrl, fileName, id, updateNode, node.type]);
 
 
-    const handleFileChange = (event) => {
+   const handleFileChange = (event) => {
         const file = event.target.files ? event.target.files[0] : null;
         if (file) {
-            setImageUrl(file);
+            const newImageUrl = URL.createObjectURL(file);
+            setImageUrl(newImageUrl);
             setFileName(file.name);
+            // Immediately update context with the new file info
+            updateNode(id, { imageUrl: newImageUrl, fileName: file.name });
         }
     };
 
     const removeFile = () => {
-        setImageUrl(null);
+        setImageUrl('');
         setFileName('');
+        updateNode(id, { imageUrl: '', fileName: '' });
     };
-
     return (
         <>
             <div className="text-updater-node">
@@ -102,8 +105,3 @@ export default function Node({id}) {
     );
 };
 
-// <Box sx={{display: 'flex', justifyContent: 'end'}}>
-//                                 <IconButton color="primary" component="label" className="nodrag" >
-//                                     <CloseIcon/>
-//                                 </IconButton>
-//                             </Box>

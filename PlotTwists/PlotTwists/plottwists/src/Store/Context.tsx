@@ -14,16 +14,17 @@ interface ContextType {
     updateNode: (id: string, nodeData: Partial<NodeData>) => void;
     publishData: () => void;
     publish:boolean,
+    setNodesInfo: (nodes: { [id: string]: NodeData }) => void;
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const ContextProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-    const [nodesInfo, setNodes] =useState<{ [id: string]: NodeData }>({});
+    const [nodesInfo, setNodesInfo] =useState<{ [id: string]: NodeData }>({});
     const [publish, setPublish] = useState(false);
 
      const updateNode = useCallback((id: string, nodeData: Partial<NodeData>) => {
-        setNodes(prev => ({
+        setNodesInfo(prev => ({
             ...prev,
             [id]: { ...prev[id], ...nodeData }
         }));
@@ -34,7 +35,7 @@ export const ContextProvider: React.FC<{children: React.ReactNode}> = ({ childre
     }, [nodesInfo]);
 
     return (
-        <Context.Provider value={{ nodesInfo, updateNode, publishData, publish }}>
+        <Context.Provider value={{ nodesInfo, updateNode, publishData, publish , setNodesInfo}}>
             {children}
         </Context.Provider>
     );

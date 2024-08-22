@@ -122,7 +122,6 @@ const handlePublish = useCallback(() => {
 
     if (publish) {
         handlePublish();
-
     };
 
     const onConnect = useCallback((connection) => {
