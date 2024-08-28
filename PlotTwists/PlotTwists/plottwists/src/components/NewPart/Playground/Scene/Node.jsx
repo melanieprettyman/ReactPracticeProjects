@@ -11,6 +11,9 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import TextEditor from "./TextEditor";
 import {Handle, Position} from '@xyflow/react';
 import {useAppContext} from "../../../../Store/Context";
+import Quill from "quill";
+const Delta = Quill.import('delta');
+
 
 
 export default function Node({id}) {
@@ -89,7 +92,10 @@ export default function Node({id}) {
                         </Stack>
                         <Stack spacing={1} className="nodrag">
                             <Typography variant='h5'>Scene Description:</Typography>
-                            <TextEditor setDescription={setDescription}/>
+                            <TextEditor
+                                setDescription={setDescription}
+                                defaultValue={description}
+                            />
                         </Stack>
                     </Stack>
                 </Paper>

@@ -17,7 +17,7 @@ import EditStoryDetails from "./components/EditStoryDetailsPage/EditStoryDetails
 import Library from "./components/Library/Library";
 import Settings from "./components/Settings/Settings";
 import Notifications from "./components/Notifications/Notifications";
-import EditPart from "./components/NewPart/Playground/EditPart";
+import EditPart from "./components/NewPart/Playground/EditFlow";
 
 
 

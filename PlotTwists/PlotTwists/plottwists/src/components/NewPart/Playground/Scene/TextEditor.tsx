@@ -1,12 +1,12 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState} from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
-import {type} from "node:os"; // Ensure styles are imported
 
 type Props = {
-    setDescription: (html: string | undefined) => void
+    setDescription: (html: string | undefined) => void;
+    defaultValue: string | undefined;
 };
-const TextEditor: React.FC<Props> = ({setDescription}) => {
+const TextEditor: React.FC<Props> = ({setDescription, defaultValue}) => {
     const handleFocus = (event: { stopPropagation: () => void; }) => {
         event.stopPropagation();
     };
@@ -21,6 +21,7 @@ const TextEditor: React.FC<Props> = ({setDescription}) => {
 
     const editorContainerRef = useRef<HTMLDivElement>(null);
     const [quill, setQuill] = useState<Quill | null>(null);
+    const defaultValueRef = useRef(defaultValue);
 
     useEffect(() => {
         // @ts-ignore
@@ -40,6 +41,11 @@ const TextEditor: React.FC<Props> = ({setDescription}) => {
                 placeholder: 'Compose a scene...',
             });
             setQuill(newQuill);
+            // Set initial HTML value safely using Quill's API
+            if (defaultValue != null) {
+                newQuill.clipboard.dangerouslyPasteHTML(defaultValue);
+            }
+
         }
 
         return () => {

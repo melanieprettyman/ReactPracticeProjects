@@ -1,5 +1,4 @@
-//TODO; No init node, on-page load input data
-import React, {useCallback, useEffect, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
     ReactFlow,
     Controls,
@@ -26,7 +25,7 @@ const nodeTypes = {
     node: Node,
 };
 
-function EditPart() {
+function EditFlow() {
     const {nodesInfo, publish, updateNode, setNodesInfo} = useAppContext();
     const [sceneCount, setSceneCount] = useState(1);
     const [decCount, setDecCount] = useState(1);
@@ -51,6 +50,7 @@ function EditPart() {
                 imageUrl: node.data.imageUrl,
                 fileName: node.data.fileName
             };
+            console.log(acc);
             return acc;
         }, {});
 
@@ -274,6 +274,6 @@ function EditPart() {
 
 export default () => (
     <ReactFlowProvider>
-        <EditPart/>
+        <EditFlow/>
     </ReactFlowProvider>
 );

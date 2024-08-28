@@ -93,32 +93,15 @@ function FlowChart() {
         return rootNode;
     }, [reactFlowInstance]);
 
-// Example usage of saveFlow triggered by a publish action
 const handlePublish = useCallback(() => {
     try {
         const decisionTree = buildDecisionTree();
-        console.log('Decision Tree Before Save:', JSON.stringify(decisionTree));
         saveFlow();
         updateTreeWithNodeInfo(decisionTree, nodesInfo);
-        console.log('Decision Tree After Save:', JSON.stringify(decisionTree));
     } catch (error) {
         console.error('Error during publish:', error);
     }
 }, [saveFlow, buildDecisionTree, nodesInfo]);
-
-
-
-    // const handlePublish = useCallback(async () => { // Make the callback function async
-    //     try {
-    //         const decisionTree = buildDecisionTree();
-    //         saveFlow();
-    //         updateTreeWithNodeInfo(decisionTree, nodesInfo); // Update the tree with detailed node data
-    //         console.log('Updated Decision Tree:', decisionTree);
-    //     } catch (error) {
-    //         console.error('Error publishing:', error);
-    //     }
-    // }, [buildDecisionTree, nodesInfo, saveFlow]); // Include saveFlow in the dependency array if it uses external states or props
-    //
 
     if (publish) {
         handlePublish();
